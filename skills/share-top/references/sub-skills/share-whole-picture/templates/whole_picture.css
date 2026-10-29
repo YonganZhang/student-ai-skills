@@ -1,0 +1,159 @@
+
+:root{--primary:#2c5aa0;--primary-light:#4a8ad8;--accent:#e74c3c;--success:#27ae60;--warning:#f39c12;--bg:#fafbfc;--card:#fff;--border:#e1e4e8;--text:#24292e;--text-soft:#586069;--hover:#f0f7ff;--tree:#6c3483}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;max-width:1100px;margin:0 auto;padding:24px;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px}
+h1{font-size:1.8em;color:var(--primary);border-bottom:3px solid var(--primary);padding-bottom:10px}
+h2{font-size:1.35em;color:var(--primary);margin-top:36px;padding-left:12px;border-left:5px solid var(--primary)}
+h3{font-size:1.1em;color:#1a3e7a;margin-top:20px}h4{font-size:1em;color:#34495e;margin-top:14px}
+.lede{background:#e8f4ff;border-left:4px solid var(--primary-light);padding:10px 14px;border-radius:4px;margin:8px 0 16px 0;font-size:.95em;color:#1a3e7a}
+.tldr{background:linear-gradient(135deg,#fff8e1 0%,#fef0e6 100%);border:2px solid #ffd180;border-radius:12px;padding:16px 20px;margin:16px 0;font-size:1.02em;line-height:1.8}
+.tldr h3{margin-top:0;color:#c0392b}
+details{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:8px 0}
+details summary{cursor:pointer;font-weight:600;color:var(--primary);padding:6px 0 6px 24px;user-select:none;list-style:none;position:relative;line-height:1.4}
+details summary::before{content:"▶";position:absolute;left:0;top:7px;font-size:13px;transition:transform .25s ease;color:var(--primary-light)}
+details[open] summary::before{transform:rotate(90deg)}
+details summary:hover{background:var(--hover);border-radius:4px}
+details details{margin-left:6px;border-left:2px solid #d0deef;border-radius:4px}
+.controls{position:sticky;top:0;background:var(--card);border-bottom:2px solid var(--primary);padding:10px 0;margin-bottom:20px;z-index:100;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.controls button{background:var(--primary);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;font-size:.9em}
+.controls button.s{background:var(--card);color:var(--primary);border:1px solid var(--primary)}
+.controls a{color:var(--primary);margin-right:12px;text-decoration:none;font-size:.88em;font-weight:500}
+.innovation{background:linear-gradient(135deg,#fff5f0 0%,#fef0e6 100%);border:2px solid #ff9a8b;border-radius:12px;padding:14px 18px;margin:16px 0}
+.innovation h3{color:#c0392b;margin-top:0}
+.motivation{background:#fff8e1;border-left:4px solid #f39c12;padding:10px 14px;margin:8px 0;border-radius:4px}
+.motivation::before{content:"💡 动机 — ";font-weight:700;color:#f39c12}
+.gap{background:#fde9e9;border-left:4px solid #c0392b;padding:10px 14px;margin:8px 0;border-radius:4px}
+.gap::before{content:"🎯 Gap — ";font-weight:700;color:#c0392b}
+.method{background:#e8f5e9;border-left:4px solid var(--success);padding:10px 14px;margin:8px 0;border-radius:4px}
+.method::before{content:"🔧 方法 — ";font-weight:700;color:var(--success)}
+.reference{background:#e3f2fd;border-left:4px solid #1976d2;padding:10px 14px;margin:8px 0;border-radius:4px;font-size:.92em}
+.reference::before{content:"📚 文献 — ";font-weight:700;color:#1976d2}
+.prompt-box{background:#2d3748;color:#e2e8f0;padding:14px;border-radius:6px;font-family:"SF Mono",Monaco,Consolas,monospace;white-space:pre-wrap;font-size:12px;line-height:1.5;max-height:450px;overflow-y:auto;margin:10px 0}
+.data-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;margin:6px 0;display:grid;grid-template-columns:90px 1fr auto;gap:10px;align-items:center}
+.data-card .org{font-weight:700;color:var(--primary);font-size:.92em}
+.data-card a{color:var(--primary);text-decoration:none;padding:4px 10px;background:#e8eef7;border-radius:4px;font-size:.82em;white-space:nowrap}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
+.table-wrap table{width:100%;min-width:480px;border-collapse:collapse;background:var(--card);border-radius:6px;overflow:hidden}
+table th{background:var(--primary);color:#fff;padding:8px 10px;text-align:left;font-weight:600;font-size:.88em}
+table td{padding:7px 10px;border-bottom:1px solid var(--border);font-size:.92em}
+.station{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:6px;padding:10px 14px;margin:10px 0}
+.station h4{margin:0 0 6px 0;color:var(--accent);font-size:.98em}
+.agent-card{background:linear-gradient(135deg,#e8f4ff 0%,#f0e8ff 100%);border-radius:8px;padding:12px;margin:8px 0}
+.agent-card .role{font-weight:700;color:#6c3483;font-size:.9em}
+.alert-info{background:#d1ecf1;border:1px solid #bee5eb;color:#0c5460;padding:10px 14px;border-radius:6px;margin:10px 0;font-size:.92em}
+.alert-warning{background:#fff3cd;border:1px solid #ffeaa7;color:#856404;padding:10px 14px;border-radius:6px;margin:10px 0;font-size:.92em}
+.alert-success{background:#d4edda;border:1px solid #c3e6cb;color:#155724;padding:10px 14px;border-radius:6px;margin:10px 0;font-size:.92em}
+code{background:#f1f3f5;padding:2px 6px;border-radius:3px;font-size:.88em;font-family:"SF Mono",monospace}
+.formula{font-family:"Times New Roman",serif;font-size:1em;background:#f8f9fa;padding:10px 14px;border-radius:6px;margin:8px 0;border-left:3px solid var(--primary)}
+.cn{color:#444;font-weight:500;font-size:.85em}.cn::before{content:"（"}.cn::after{content:"）"}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.74em;font-weight:600;margin-left:4px}
+.badge-good{background:#d4edda;color:#155724}.badge-todo{background:#fff3cd;color:#856404}.badge-stub{background:#f8d7da;color:#721c24}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
+.stat-card .num{font-size:1.6em;font-weight:700;color:var(--primary)}
+.stat-card .label{font-size:.8em;color:var(--text-soft);margin-top:3px}
+.placeholder{background:#f8f9fa;border:2px dashed #cbd5e0;padding:20px;text-align:center;border-radius:8px;color:var(--text-soft);margin:12px 0}
+/* === 二叉树/汇聚树 样式 === */
+.tree-node{background:#fff;border:2px solid var(--tree);border-radius:8px;padding:10px 14px;margin:8px 0;position:relative}
+.tree-node.root{background:linear-gradient(135deg,#fff5e6,#ffd180);border-color:#e67e22;font-weight:700;font-size:1.05em}
+.tree-node.formula-node{background:#e8f4ff;border-color:#1976d2}
+.tree-node.data-source{background:#e8f5e9;border-color:var(--success)}
+.tree-node h4{margin:0 0 4px 0;color:var(--tree);font-size:.98em}
+.tree-node.root h4{color:#c0392b}
+.tree-node .desc{font-size:.88em;color:#555;margin-top:4px}
+.tree-children{margin-left:18px;padding-left:18px;border-left:3px dashed var(--tree);margin-top:6px}
+.tree-children .tree-children{border-left-color:#aab}
+.tree-arrow{display:inline-block;color:var(--tree);font-weight:700;margin:0 6px}
+@media(max-width:760px){
+  body{padding:10px;font-size:14.5px;line-height:1.6}
+  h1{font-size:1.22em;padding-bottom:5px;margin-top:6px}
+  h2{font-size:1.08em;margin-top:22px;padding-left:7px;border-left-width:4px}
+  h3{font-size:.98em;margin-top:14px}
+  h4{font-size:.92em}
+  details{padding:8px 10px;margin:6px 0;border-radius:6px}
+  details summary{padding:4px 0 4px 20px;font-size:.94em}
+  details summary::before{top:5px;font-size:11px}
+  details details{margin-left:4px;padding:6px 8px}
+  .stat-grid{grid-template-columns:repeat(2,1fr);gap:6px}
+  .stat-card{padding:8px;border-radius:6px}
+  .stat-card .num{font-size:1.25em}
+  .stat-card .label{font-size:.7em}
+  .data-card{grid-template-columns:1fr;gap:3px;padding:8px;border-radius:6px}
+  .data-card .org{font-size:.85em}
+  .data-card a{display:inline-block;margin-top:3px;font-size:.75em;padding:3px 8px}
+  .controls{padding:6px 0;gap:4px;margin-bottom:14px}
+  .controls button{padding:5px 8px;font-size:.78em;border-radius:4px}
+  .controls a{font-size:.74em;margin-right:5px}
+  .prompt-box{font-size:10.5px;max-height:300px;padding:10px}
+  .formula{font-size:.88em;padding:8px 10px;overflow-x:auto}
+  .tldr{padding:10px 12px;font-size:.92em;line-height:1.65}
+  .tldr h3{font-size:1em}
+  .lede{padding:8px 10px;font-size:.86em}
+  .motivation,.gap,.method,.reference{padding:8px 10px;font-size:.88em}
+  .innovation{padding:10px 12px;border-radius:8px}
+  .innovation h3{font-size:1em}
+  .alert-info,.alert-warning,.alert-success{padding:8px 10px;font-size:.85em}
+  .tree-children{margin-left:6px;padding-left:8px;border-left-width:2px}
+  .tree-node{padding:7px 9px;margin:5px 0;border-radius:6px;border-width:1.5px}
+  .tree-node h4{font-size:.9em}
+  .tree-node .desc{font-size:.8em}
+  .station{padding:8px 10px;border-radius:6px}
+  .station h4{font-size:.92em}
+  .agent-card{padding:9px 10px}
+  table th,table td{padding:5px 7px;font-size:.78em}
+  img{max-width:100%;height:auto}
+}
+@media(max-width:380px){
+  body{padding:8px}
+  .stat-grid{grid-template-columns:1fr 1fr;gap:4px}
+  .controls{gap:3px}
+  .controls a{margin-right:3px}
+  h1{font-size:1.12em}
+}
+
+/* === 真二叉树 flow-tree === */
+.flow-tree { display: flex; flex-direction: column; gap: 8px; margin: 20px 0; }
+.flow-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: stretch; }
+.flow-card {
+  flex: 1; min-width: 200px; max-width: 320px;
+  background: var(--card); border: 2px solid var(--primary);
+  border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.flow-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.flow-card h4 { margin: 0 0 6px 0; font-size: .95em; }
+.flow-card .desc { font-size: .82em; color: var(--text-soft); margin: 2px 0 6px 0; line-height: 1.4; }
+.flow-card details { margin-top: 6px; border: 0; padding: 0; background: transparent; }
+.flow-card details summary { font-size: .85em; padding: 4px 0 4px 18px; color: var(--primary-light); }
+.flow-card details summary::before { top: 4px; font-size: 10px; }
+.flow-card .meta { font-size: .75em; color: var(--text-soft); margin-top: 6px; padding-top: 6px; border-top: 1px dashed #ddd; }
+.flow-card[data-type="data"] { background: linear-gradient(135deg, #f0fff4, #e8f5e9); border-color: var(--success); }
+.flow-card[data-type="data"] h4 { color: var(--success); }
+.flow-card[data-type="step"] { background: linear-gradient(135deg, #fff5f0, #ffe8d6); border-color: var(--accent); }
+.flow-card[data-type="step"] h4 { color: var(--accent); }
+.flow-card[data-type="formula"] { background: linear-gradient(135deg, #e8f4ff, #d0e8ff); border-color: #1976d2; }
+.flow-card[data-type="formula"] h4 { color: #1976d2; }
+.flow-card[data-type="output"] {
+  background: linear-gradient(135deg, #fff5e6, #ffd180);
+  border-color: #e67e22; border-width: 3px; font-weight: 600;
+  max-width: 380px; flex: 0 1 360px;
+}
+.flow-card[data-type="output"] h4 { color: #c0392b; font-size: 1.15em; }
+.flow-arrow { text-align: center; font-size: 1.6em; color: var(--primary); margin: -2px 0; line-height: 1; }
+.flow-arrow.merge { font-size: 1.2em; color: var(--tree); }
+.flow-row.compact { gap: 6px; }
+.flow-card .formula-inline { font-family: "Times New Roman", serif; background: rgba(255,255,255,0.6); padding: 4px 8px; border-radius: 4px; margin: 4px 0; font-size: .85em; }
+.flow-card img { width: 100%; border-radius: 4px; margin: 4px 0; }
+.flow-card .files { font-family: monospace; font-size: .7em; color: var(--text-soft); background: rgba(0,0,0,0.04); padding: 4px 6px; border-radius: 3px; margin-top: 4px; word-break: break-all; }
+@media(max-width:640px){
+  .flow-row { flex-direction: column; }
+  .flow-card { min-width: 100%; max-width: 100%; }
+  .flow-arrow { font-size: 1.4em; }
+}
+
+
+.case-main, .case-ind { width: 100%; border-collapse: collapse; margin: 10px 0; }
+.case-main th, .case-ind th { background: var(--primary); color: #fff; padding: 8px 10px; text-align: center; font-weight: 600; font-size: .9em; }
+.case-main td, .case-ind td { border: 1px solid #ddd; font-size: .92em; vertical-align: middle; }
+.case-ind td { font-size: .86em; }
+@media(max-width:640px){ .case-main td, .case-ind td { font-size: .76em; padding: 4px; } .case-main th, .case-ind th { font-size: .8em; padding: 5px; } }

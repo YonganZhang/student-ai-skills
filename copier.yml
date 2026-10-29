@@ -1,0 +1,3 @@
+# Copier-specific !include loader; generic YAML safe_load does not support this tag.
+# Optional CLI project generator. Questions and template live in skills/share-agent-cli.
+!include skills/share-agent-cli/assets/python-click/copier.yml

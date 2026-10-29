@@ -1,0 +1,16 @@
+_min_copier_version: "9.18.2"
+_subdirectory: skills/share-agent-cli/assets/python-click/template
+
+command_name:
+  type: str
+  help: 命令名（小写字母、数字、连字符，字母开头）
+  default: example-cli
+  validator: >-
+    {% if not (command_name | regex_search('^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$')) %}
+    命令名须用小写字母、数字、连字符，字母开头；不能含路径或空格。
+    {% endif %}
+
+description:
+  type: str
+  help: 工具用途
+  default: 只读查看路径元信息的 CLI 示例

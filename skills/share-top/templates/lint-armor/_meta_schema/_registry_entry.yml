@@ -1,0 +1,59 @@
+# Schema: _meta/_registry.yml 每个条目
+#
+# 这是代码/工具资产注册表.
+# register.py 只是可选 helper; 不假设自动运行.
+
+required_fields:
+  name:           {type: string, pattern: "^[a-z][a-z0-9_]*$"}  # snake_case
+  module:         {type: string, pattern: "^_(code|pipelines)/"}
+  description:    {type: string, max_length: 200}               # 1 句话, 中文 OK
+  type:                                                          # 函数类型
+    type: enum
+    values: [step, util, algo, llm_call, ci_tool, test]
+
+optional_fields:
+  # 指针字段 (只链接 owner 文档,不复制正文)
+  method:         {type: string}                     # [[wiki/entities/xxx]]
+  tests:          {type: array, items: string}      # [[wiki/tests/t-xxx]]
+  phases:         {type: array, items: string}      # P3.4.c, P5.1 等
+
+  # 元数据
+  callers:        {type: array}                      # 谁调用本函数
+  version:        {type: string}                     # 例 "V2 (2026-04-19)"
+  empirical_evidence: {type: string}                 # 准确度 / Pearson r 等
+
+  # 标记
+  transient:      {type: bool, default: false}      # 临时/测试代码,跳过 lint
+
+# ============================================================
+# pending_migration[] schema (老代码迁移台账, 跟 functions 平级)
+# ============================================================
+pending_migration_entry:
+  required_fields:
+    old_path:                 {type: string}           # 老代码绝对路径 (代码/...)
+    estimated_target:         {type: string}           # 期望 v4 target
+    migration_status:                                  # 真实 4 档枚举
+      type: enum
+      values:
+        - not_started   # target 文件不存在
+        - stub_only     # target 存在但仅 import / re-export, 无实质实现
+        - partial       # 部分函数 migrate 完, 其他 thin call 老 lib
+        - complete      # 老代码可 rm/mv _legacy, V4 无反向引用
+    archival_gate_check:      {type: string}           # 一行 bash, lint L5 跑, exit 0 才允许声明 complete
+  optional_fields:
+    partial_reason:           {type: string}           # status != complete 时说清楚为何还没合
+    lines:                    {type: int}              # 老代码行数 (估)
+    defs:                     {type: int}              # 老代码顶级函数数 (估)
+    notes:                    {type: string}           # 备注
+
+# 示例:
+# - name: compute_trapezoid_giri
+#   module: _code/giri/trapezoid.py
+#   description: "实现 GIRI 官方梯形公式(Cardona 2023)"
+#   type: algo
+#   method: "[[梯形GIRI公式]]"
+#   tests: ["[[t-step4-formula]]"]
+#   phases: ["P3.4.c"]
+#   callers: [step_09_compute_gciri]
+#   version: "V2 (2026-04-19)"
+#   empirical_evidence: "MAE=1.156 / R²=0.9968 (170 国)"

@@ -1,0 +1,93 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "simonw/click-app",
+      "paths": [
+        "{{cookiecutter.hyphenated}}/pyproject.toml",
+        "{{cookiecutter.hyphenated}}/README.md",
+        "{{cookiecutter.hyphenated}}/.github/workflows/test.yml"
+      ],
+      "absorbed_commit": "84298e257d70d461866f0afb5458baa12d99f8f2",
+      "absorbed_at": "2026-10-03",
+      "mode": "semantic",
+      "local_paths": [
+        "assets/python-click/template/pyproject.toml.jinja",
+        "assets/python-click/template/README.md.jinja",
+        "assets/python-click/template/.github/workflows/test.yml"
+      ],
+      "watch": true,
+      "note": "Adapted src layout, escaped TOML metadata, constrained dependencies and CI test/build only; no release/demo account workflows.",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "simonw/click-app",
+      "paths": [
+        "LICENSE"
+      ],
+      "absorbed_commit": "84298e257d70d461866f0afb5458baa12d99f8f2",
+      "absorbed_at": "2026-10-03",
+      "mode": "vendored",
+      "local_paths": [
+        "assets/python-click/template/LICENSE"
+      ],
+      "watch": true,
+      "note": "Apache-2.0 license retained verbatim; attribution in template NOTICE.",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "pallets/click",
+      "paths": [
+        "docs/testing.md",
+        "docs/exceptions.md"
+      ],
+      "absorbed_commit": "06b2a678741131fd577ce170e23e5ca0aeba0309",
+      "absorbed_at": "2026-10-03",
+      "mode": "semantic",
+      "local_paths": [
+        "assets/python-click/template/src/{{ command_name.removesuffix('-cli') | replace('-', '_') }}_cli/cli.py.jinja",
+        "assets/python-click/template/tests/test_cli.py.jinja"
+      ],
+      "watch": true,
+      "note": "Uses public API, not copied library source. Runtime tested Click 8.5.0; reviewed source HEAD is 8.6.0.dev. Explicit stdout/stderr and exit-code consumer tests.",
+      "license": "BSD-3-Clause"
+    },
+    {
+      "repo": "copier-org/copier",
+      "paths": [
+        "docs/creating.md",
+        "docs/configuring.md",
+        "docs/updating.md"
+      ],
+      "absorbed_commit": "38f9bb042f079009e5a52b5f7acf9dba17646690",
+      "absorbed_at": "2026-10-03",
+      "mode": "semantic",
+      "local_paths": [
+        "assets/python-click/copier.yml",
+        "assets/python-click/README.md",
+        "tests/test_copier_template.py"
+      ],
+      "watch": true,
+      "note": "Uses Copier 9.18.2, scoped subdirectory, recorded source/commit, merge preservation and conflict verification; no tasks, extensions or trust flag.",
+      "license": "MIT"
+    },
+    {
+      "repo": "oclif/oclif",
+      "paths": [
+        "README.md",
+        "package.json",
+        "templates/cli/shared/package.json.ejs",
+        "templates/test/command.test.ts.ejs"
+      ],
+      "absorbed_commit": "661eb80ee3ba41bc5aa9e1099f92c1d34c0fca93",
+      "absorbed_at": "2026-10-03",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/upstream-cli-patterns.md"
+      ],
+      "watch": true,
+      "note": "Selection guidance only; generator Node>=22 differs from README and generated scaffold. No TypeScript framework vendored or runtime tested.",
+      "license": "MIT"
+    }
+  ]
+}

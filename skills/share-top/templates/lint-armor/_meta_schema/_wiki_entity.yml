@@ -1,0 +1,29 @@
+# Schema: _wiki-methodology/_wiki/_entities/_<name>.md (方法论实体)
+#
+# 每个方法论实体 markdown 文件应含一个 "🔗 Implementations" section,
+# 列出代码层有哪些函数/模块实现该方法论. Lint L4 校验该 section 跟 registry 一致.
+#
+# 没 Implementations section 的 wiki 实体 = "纯概念" 或 "死方法论候选" (lint L4 报 warning).
+
+required_sections:
+  title:          {pattern: "^# .+", description: "一级标题 = 实体名"}
+  definition:     {pattern: "## 定义", description: "1-3 句话定义"}
+
+optional_sections:
+  implementations:
+    pattern: "^## 🔗 Implementations \\(registry-linked\\)"
+    description: |
+      Lint L4 解析这段, 列出实现本方法论的函数名 (跟 registry.functions[].name 对应).
+      格式:
+
+      ## 🔗 Implementations (registry-linked)
+
+      - `compute_score_from_tier` @ `_code/llm/tier_to_score.py` (P3.5.e)
+      - `build_r1_prompt` @ `_code/llm/prompt_builder.py` (P3.5.b)
+
+      或显式声明 "TODO 待 V28 实现" / "已废弃 V27.3.x" — lint 不报死方法论.
+    parse_rules:
+      - 每行 "- `<func_name>` @ ..." → 对应 registry.functions[].name
+      - 如 section 含 "TODO 待" / "废弃" → 跳 L4 检查
+
+# 示例: 见 _议会制多智能体审议.md / _18-indicator-dual-name-definitions.md / _BMA集成学习.md

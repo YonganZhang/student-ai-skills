@@ -1,0 +1,83 @@
+{
+  "downloaded_at": "2026-10-03",
+  "method": "GitHub codeload tar.gz, pinned SHA; only regular files extracted, symbolic links skipped; no downloaded scripts executed",
+  "sources": [
+    {
+      "repo": "cli-guidelines/cli-guidelines",
+      "commit": "697d6a29fc8c93d3981a755c0c7683507ad39c3e",
+      "license": "CC-BY-SA-4.0",
+      "source_dir": "<workdir>/cli-absorption-20261003/upstream/cli-guidelines",
+      "archive": "<workdir>/cli-absorption-20261003/cli-guidelines-697d6a29fc8c.tar.gz",
+      "archive_sha256": "77fc0570bdc1978a3beaa0603a69e53d4f521a4b589e27787f8431a55e52779f",
+      "regular_files": 23,
+      "skipped_nonregular": [],
+      "download_url": "https://codeload.github.com/cli-guidelines/cli-guidelines/tar.gz/697d6a29fc8c93d3981a755c0c7683507ad39c3e",
+      "disposition": "existing contract sufficient; no text copied"
+    },
+    {
+      "repo": "copier-org/copier",
+      "commit": "38f9bb042f079009e5a52b5f7acf9dba17646690",
+      "license": "MIT",
+      "source_dir": "<workdir>/cli-absorption-20261003/upstream/copier",
+      "archive": "<workdir>/cli-absorption-20261003/copier-38f9bb042f07.tar.gz",
+      "archive_sha256": "bf2d248c9c4ac7fbffbb93cc3976d5b2003ee9b739494bae1b641eaa752ce85e",
+      "regular_files": 184,
+      "skipped_nonregular": [
+        "docs/changelog.md",
+        "docs/contributing.md",
+        "docs/index.md",
+        "tests/demo/symlink.txt"
+      ],
+      "download_url": "https://codeload.github.com/copier-org/copier/tar.gz/38f9bb042f079009e5a52b5f7acf9dba17646690",
+      "disposition": "versioned generation and update used, no source vendoring"
+    },
+    {
+      "repo": "fastapi/typer",
+      "commit": "a80f6e5ecd74f32b983cca336a2f3cba98d9853a",
+      "license": "MIT",
+      "source_dir": "<workdir>/cli-absorption-20261003/upstream/typer",
+      "archive": "<workdir>/cli-absorption-20261003/typer-a80f6e5ecd74.tar.gz",
+      "archive_sha256": "11b239377b6336bb84d3495c20f3e471ee51bfc469ce2e7db9d956b8579b0a50",
+      "regular_files": 775,
+      "skipped_nonregular": [],
+      "download_url": "https://codeload.github.com/fastapi/typer/tar.gz/a80f6e5ecd74f32b983cca336a2f3cba98d9853a",
+      "disposition": "alternative only; no new implementation"
+    },
+    {
+      "repo": "oclif/oclif",
+      "commit": "661eb80ee3ba41bc5aa9e1099f92c1d34c0fca93",
+      "license": "MIT",
+      "source_dir": "<workdir>/cli-absorption-20261003/upstream/oclif",
+      "archive": "<workdir>/cli-absorption-20261003/oclif-661eb80ee3ba.tar.gz",
+      "archive_sha256": "5100f4076a06717125acfe4151b795cf1533000f871140c6f6a40c140c5a852b",
+      "regular_files": 183,
+      "skipped_nonregular": [],
+      "download_url": "https://codeload.github.com/oclif/oclif/tar.gz/661eb80ee3ba41bc5aa9e1099f92c1d34c0fca93",
+      "disposition": "selection guidance corrected; no runtime installation"
+    },
+    {
+      "repo": "pallets/click",
+      "commit": "06b2a678741131fd577ce170e23e5ca0aeba0309",
+      "license": "BSD-3-Clause",
+      "source_dir": "<workdir>/cli-absorption-20261003/upstream/click",
+      "archive": "<workdir>/cli-absorption-20261003/click-06b2a6787411.tar.gz",
+      "archive_sha256": "0419358e63b0d5c22203385b6a53ed063d299c1d90daa8412ffc0fa8b409d3a2",
+      "regular_files": 178,
+      "skipped_nonregular": [],
+      "download_url": "https://codeload.github.com/pallets/click/tar.gz/06b2a678741131fd577ce170e23e5ca0aeba0309",
+      "disposition": "runtime and testing APIs used, no source vendoring"
+    },
+    {
+      "repo": "simonw/click-app",
+      "commit": "84298e257d70d461866f0afb5458baa12d99f8f2",
+      "license": "Apache-2.0",
+      "source_dir": "<workdir>/cli-absorption-20261003/upstream/click-app",
+      "archive": "<workdir>/cli-absorption-20261003/click-app-84298e257d70.tar.gz",
+      "archive_sha256": "6957f7f15fde173621fe003b8bee87a8fe7bb8beeb8d78dd9b10e5ca6e9dda40",
+      "regular_files": 17,
+      "skipped_nonregular": [],
+      "download_url": "https://codeload.github.com/simonw/click-app/tar.gz/84298e257d70d461866f0afb5458baa12d99f8f2",
+      "disposition": "adapted packaging; Apache license retained"
+    }
+  ]
+}

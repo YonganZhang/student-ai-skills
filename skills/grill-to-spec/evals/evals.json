@@ -1,0 +1,23 @@
+{
+  "skill_name": "grill-to-spec",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我想把 refine 做成用户发文字后模型实时改，气泡里弹出 3D Viewer，还能保存版本。先别写代码，盘问我然后写 spec。",
+      "expected_output": "Activates grill-to-spec, inspects project context if available, asks one decision question with a recommended answer, and does not implement code yet.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "grill me on this design and then turn it into a spec: our editor should queue chat edits, preview renders, and let users compare previous versions.",
+      "expected_output": "Interviews one unresolved branch at a time, recommends defaults, covers queueing, preview, versioning, errors, and acceptance criteria.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "基于刚才讨论写一个 PRD，然后拆成能让 agent 做的任务。",
+      "expected_output": "Synthesizes a spec/PRD from existing context, then proposes vertical AFK/HITL slices with dependencies and acceptance checks.",
+      "files": []
+    }
+  ]
+}

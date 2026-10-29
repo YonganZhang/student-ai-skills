@@ -1,0 +1,37 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "lwmxiaobei/xiaobei-skills",
+      "paths": [
+        "codex-image/SKILL.md",
+        "codex-image/LEGAL.md",
+        "codex-image/references/cli.md"
+      ],
+      "absorbed_commit": "a23857890cf7f3a0dafac7d5dc0c16546c19916a",
+      "absorbed_at": "2026-09-06",
+      "mode": "semantic",
+      "local_paths": [
+        "(retired; archive not shipped)"
+      ],
+      "watch": false,
+      "note": "历史订阅客户端资料已退役；当前使用宿主官方内置图片工具。"
+    },
+    {
+      "repo": "Kevinyyy1/image-to-editable-pptx-v2",
+      "paths": [
+        "skill/image-to-editable-pptx/references/qa-contract.md",
+        "skill/image-to-editable-pptx/scripts/qa_summary.py"
+      ],
+      "absorbed_commit": "a474793ad53c82aad375b2cc3f326994f3387ae1",
+      "absorbed_at": "2026-10-01",
+      "mode": "semantic",
+      "local_paths": [
+        "references/cost-bounded-reconstruction.md"
+      ],
+      "watch": true,
+      "license": "MIT",
+      "note": "只吸收精简失败摘要、局部复查、经济模式一轮修正；未复制代码或背景层约束。"
+    }
+  ]
+}

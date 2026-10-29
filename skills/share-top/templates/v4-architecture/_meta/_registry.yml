@@ -1,0 +1,29 @@
+# _meta/_registry.yml — code-domain / entrypoint registry
+project: <CHANGE-ME>
+schema_version: code-domain-v1
+last_synced: null
+
+# Default v4 registry is coarse-grained. Register code domains, public entrypoints,
+# reusable scripts/tools, and cross-domain edges. Do not default to a function ledger.
+
+code_domains:
+  - id: main
+    path: _code
+    type: local_code
+    status: active
+    owner: project
+    codemap: _codemap.md
+    description: "Primary reusable code or project wrapper entrypoints."
+
+entrypoints:
+  - id: project_plan
+    path: _wiki-methodology/_top/_task_plan.md
+    type: plan
+    status: active
+    owner: col2
+    description: "Current phase, next action, blockers and pause list."
+
+cross_domain_edges: []
+
+non_code_assets:
+  registry: _meta/_data_registry.yml

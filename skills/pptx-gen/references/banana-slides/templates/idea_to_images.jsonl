@@ -1,0 +1,1 @@
+{"job_id":"idea-to-images","job_type":"full_generation","creation_type":"idea","idea_prompt":"替换为你的主题","template_style":"高质量商务汇报风格，16:9，信息密度高","language":"zh","export":{"formats":["images"],"filename_prefix":"idea-to-images"},"policy":{"continue_on_error":false,"timeout_sec":1800}}

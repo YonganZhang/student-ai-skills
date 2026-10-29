@@ -1,0 +1,79 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "mattpocock/skills",
+      "paths": [
+        "skills/engineering/to-spec/SKILL.md",
+        "skills/engineering/to-tickets/SKILL.md",
+        "skills/engineering/prototype/SKILL.md"
+      ],
+      "absorbed_commit": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d",
+      "absorbed_at": "2026-10-07",
+      "mode": "semantic",
+      "local_paths": [
+        "SKILL.md",
+        "references/source-map.md",
+        "references/spec-template.md",
+        "references/absorbed/mattpocock-real-engineering.md"
+      ],
+      "watch": true,
+      "note": "2026-06-14 首次吸收时路径为 to-prd / to-issues，上游 2026-07-08 起改名为 to-spec / to-tickets；2026-09-23 对齐路径并选择性吸收 test seam、blocking edges、expand–contract、输出脱敏。2026-10-07 复核：c55ee46 之后这三处只有 GLOSSARY 改名（d80fa0f）；diagnosing-bugs 迁出（本包未包含）。未采纳：to-spec 不访谈直接发布到 issue tracker、prototype 改为保留原型（本地按全局规则删除或吸收结论）。",
+      "license": "MIT"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "paths": [
+        "skills/productivity/grill-me/SKILL.md",
+        "skills/productivity/grilling/SKILL.md",
+        "skills/engineering/grill-with-docs/SKILL.md",
+        "skills/engineering/tdd/SKILL.md",
+        "skills/engineering/tdd/tests.md"
+      ],
+      "absorbed_commit": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d",
+      "absorbed_at": "2026-10-07",
+      "mode": "semantic",
+      "local_paths": [
+        "SKILL.md",
+        "references/source-map.md",
+        "references/absorbed/mattpocock-real-engineering.md"
+      ],
+      "watch": true,
+      "note": "2026-06-14 首次语义吸收（commit 按日期反推为 ffb2fa6）。2026-10-07 同步：grilling 改为按前沿成轮提问，只部分采纳——默认一次一问，互不依赖的小问题可 2–3 个一轮；不采纳 Q1/Q2 编号格式与整轮发问。CONTEXT.md→GLOSSARY.md 改名后两种都读。TDD 吸收约定接缝、同义反复测试、重构移出红绿循环。improve-codebase-architecture 迁出（本包未包含）。",
+      "license": "MIT"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "paths": [
+        "skills/productivity/to-questionnaire/SKILL.md"
+      ],
+      "absorbed_commit": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d",
+      "absorbed_at": "2026-10-07",
+      "mode": "semantic",
+      "local_paths": [
+        "SKILL.md",
+        "references/absorbed/mattpocock-questionnaire.md"
+      ],
+      "watch": true,
+      "note": "作为 grill-to-spec 的问卷出口；不采纳 disable-model-invocation 独立命令形态，落盘位置改为 TOP/wiki 优先。",
+      "license": "MIT"
+    },
+    {
+      "repo": "github/spec-kit",
+      "paths": [
+        "templates/commands/checklist.md",
+        "templates/commands/clarify.md",
+        "templates/spec-template.md"
+      ],
+      "absorbed_commit": "d848fb4e18f44640ad6b42e60a280551ee90cdce",
+      "absorbed_at": "2026-09-14",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/spec-kit-requirements-quality.md"
+      ],
+      "watch": true,
+      "note": "来源链接写在文件末尾",
+      "license": "MIT"
+    }
+  ]
+}

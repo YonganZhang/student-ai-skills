@@ -1,0 +1,95 @@
+<!--
+binary_tree_clickable.html — 二叉树 + 节点 click 跳详情卡 (可复用模板)
+
+用法:
+  1. 替换占位符 {{ROOT_*}} / {{L_*}} / {{R_*}} / {{LL_*}} 等填项目内容
+  2. 7 节点结构: 1 root + 2 mid + 4 leaf, 共 7 details 卡片
+  3. 想加深一层 → 改 4 leaf 为 8 leaf (3 层 → 4 层 binary)
+
+依赖:
+  <head> 含 <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true, securityLevel:'loose'});</script>
+        + CSS (见 binary_tree.css 文件)
+
+适用场景:
+  - 任何研究 / 业务有"目标 → 两条路径 → 各自数据+流程"结构 (研究方法 / 算法 pipeline / 产品决策树)
+  - 用户需要"一眼看结构 + 点击看细节"两层信息密度
+-->
+
+<h2 id="tree">🌳 {{TREE_TITLE}}</h2>
+<p class="lede">⬇️ <strong>真二叉树</strong> (每节点最多 2 个孩子)。{{TREE_INTRO}}。<strong>点击任一节点</strong>跳到下方详情卡。</p>
+
+<details open>
+  <summary><b>📊 展开 / 折叠二叉树图</b></summary>
+
+<div class="mermaid">
+graph TD
+    ROOT["{{ROOT_ICON}} {{ROOT_TITLE}}<br/><i>({{ROOT_HINT}})</i>"]:::output
+
+    ROOT --> L["{{L_ICON}} {{L_TITLE}}<br/><i>({{L_HINT}})</i>"]:::ability
+    ROOT --> R["{{R_ICON}} {{R_TITLE}}<br/><i>({{R_HINT}})</i>"]:::hazard
+
+    L --> LL["{{LL_ICON}} {{LL_TITLE}}<br/><i>({{LL_HINT}})</i>"]:::data
+    L --> LR["{{LR_ICON}} {{LR_TITLE}}<br/><i>({{LR_HINT}})</i>"]:::step
+
+    R --> RL["{{RL_ICON}} {{RL_TITLE}}<br/><i>({{RL_HINT}})</i>"]:::data
+    R --> RR["{{RR_ICON}} {{RR_TITLE}}<br/><i>({{RR_HINT}})</i>"]:::step
+
+    click ROOT "#node-root" "{{ROOT_TOOLTIP}}"
+    click L "#node-l" "{{L_TOOLTIP}}"
+    click R "#node-r" "{{R_TOOLTIP}}"
+    click LL "#node-ll" "{{LL_TOOLTIP}}"
+    click LR "#node-lr" "{{LR_TOOLTIP}}"
+    click RL "#node-rl" "{{RL_TOOLTIP}}"
+    click RR "#node-rr" "{{RR_TOOLTIP}}"
+
+    classDef output fill:#ffebee,stroke:#c62828,stroke-width:3px,color:#b71c1c,font-weight:bold
+    classDef ability fill:#e8f5e9,stroke:#43a047,stroke-width:2px,color:#1b5e20,font-weight:bold
+    classDef hazard fill:#fff3e0,stroke:#fb8c00,stroke-width:2px,color:#e65100,font-weight:bold
+    classDef data fill:#e3f2fd,stroke:#1976d2,stroke-width:1px,color:#0d47a1
+    classDef step fill:#f3e5f5,stroke:#8e24aa,stroke-width:1px,color:#4a148c
+</div>
+
+<p style="text-align:center;margin:10px 0;color:#666;font-size:.9em">
+👆 <strong>点击任一节点</strong>,自动跳到下方对应详情卡; 也可直接展开下方 7 个卡片浏览
+</p>
+</details>
+
+<div class="node-cards">
+
+<details id="node-root">
+  <summary><b>{{ROOT_ICON}} ROOT — {{ROOT_TITLE}}</b></summary>
+  <div style="padding:8px 14px">{{ROOT_DETAIL}}</div>
+</details>
+
+<details id="node-l">
+  <summary><b>{{L_ICON}} {{L_TITLE}}</b></summary>
+  <div style="padding:8px 14px">{{L_DETAIL}}</div>
+</details>
+
+<details id="node-r">
+  <summary><b>{{R_ICON}} {{R_TITLE}}</b></summary>
+  <div style="padding:8px 14px">{{R_DETAIL}}</div>
+</details>
+
+<details id="node-ll">
+  <summary><b>{{LL_ICON}} {{LL_TITLE}}</b></summary>
+  <div style="padding:8px 14px">{{LL_DETAIL}}</div>
+</details>
+
+<details id="node-lr">
+  <summary><b>{{LR_ICON}} {{LR_TITLE}}</b></summary>
+  <div style="padding:8px 14px">{{LR_DETAIL}}</div>
+</details>
+
+<details id="node-rl">
+  <summary><b>{{RL_ICON}} {{RL_TITLE}}</b></summary>
+  <div style="padding:8px 14px">{{RL_DETAIL}}</div>
+</details>
+
+<details id="node-rr">
+  <summary><b>{{RR_ICON}} {{RR_TITLE}}</b></summary>
+  <div style="padding:8px 14px">{{RR_DETAIL}}</div>
+</details>
+
+</div>

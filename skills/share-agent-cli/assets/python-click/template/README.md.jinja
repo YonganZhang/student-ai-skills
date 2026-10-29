@@ -1,0 +1,39 @@
+# {{ command_name }}
+
+{{ description }}
+
+当前业务是只读查询路径元信息。交付前改成实际需求，同步命令、说明与测试。
+
+## 安装与入口
+
+Python 3.10+，依赖 Click。源码在 `src/{{ command_name.removesuffix('-cli') | replace('-', '_') }}_cli/`。
+
+```bash
+uv venv .venv
+uv pip install --python .venv/bin/python -e '.[test]'
+.venv/bin/{{ command_name }} --help
+.venv/bin/{{ command_name }} inspect README.md --json
+.venv/bin/python -m pytest
+```
+
+模块入口：`.venv/bin/python -m {{ command_name.removesuffix('-cli') | replace('-', '_') }}_cli --help`。
+`--version` 来自已安装包的 pyproject 版本，只有一处版本真源。
+
+## 输出与状态
+
+默认一行文字；`--json` 可在子命令前后，成功 stdout 为版本 1 的 `{"schema_version":1,"ok":true,"data":{"path":"...","kind":"file","size_bytes":123}}`，成功 stderr 为空。
+
+失败 stdout 为空，stderr 为错误说明。退出码 0 成功，1 读取或业务失败，2 参数用法错误；help 与 version 为 0。路径以 `-` 开头时用 `inspect -- <路径>`，JSON 开关放在 `--` 前。不交互，不读文件内容，不写业务状态；跟随软链，目录大小是文件系统元信息。
+
+## 打包与维护
+
+```bash
+uv pip install --python .venv/bin/python build
+.venv/bin/python -m build
+```
+
+`dist/` 是可重建的本地包。CI 只运行测试与构建；发布到 PyPI 需按项目安排，模板没有发布工作流。
+
+模板来源和生成答案记录在 `.copier-answers.yml`，应随源码追踪。生成项目有 Git 且改动提交、工作区干净后可按模板手册做 Copier 更新；审 diff、检查冲突并重跑测试再合入。不要用 recopy 覆盖项目改动。
+
+项目骨架参考 simonw/click-app，来源和适配见 NOTICE，模板许可见 LICENSE。

@@ -1,0 +1,271 @@
+#!/usr/bin/env python3
+"""_code/register.py — 函数注册工具
+
+用法:
+  python _code/register.py --scan
+      扫 _code/ + _pipelines/ 下所有 .py,自动 refresh _meta/_registry.yml
+      (每次 commit / lint 时跑)
+
+  python _code/register.py --add <func_name> --module _code/<path>
+      AI 写完新函数后调,手动追加单条
+
+  python _code/register.py --list
+      列出当前 registry 所有 active 函数
+
+设计:
+- AST 解析,无 import runtime,安全
+- 跳过 @transient 装饰的函数(临时/测试)
+- 保留现有 _registry.yml 里的人工字段(method/tests/phases/description),
+  只 refresh 函数清单(name/module/callers)
+- 报告漏注册的 + 注册了但代码已删的
+"""
+import argparse
+import ast
+import sys
+from pathlib import Path
+from typing import Any
+
+try:
+    import yaml
+except ImportError:
+    print("ERROR: 装 pyyaml: pip install pyyaml", file=sys.stderr)
+    sys.exit(1)
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+REGISTRY = REPO_ROOT / "_meta" / "_registry.yml"
+SCAN_DIRS = ["_code", "_pipelines"]
+# CI 工具自身 (meta-level),内部 helper 函数不进 registry
+# (跟 _code/lint.py 的 CI_TOOL_FILES 保持一致)
+CI_TOOL_DIRS = {"_code/migration"}
+CI_TOOL_FILES = {
+    "_code/register.py",
+    "_code/lint.py",
+    "_code/sync_wiki.py",
+    "_code/init_pipeline.py",
+    "_code/init_domain.py",
+}
+
+
+def has_transient_decorator(node: ast.FunctionDef) -> bool:
+    """检查函数是否有 @transient 装饰器(跳过注册)."""
+    for dec in node.decorator_list:
+        if isinstance(dec, ast.Name) and dec.id == "transient":
+            return True
+        if isinstance(dec, ast.Attribute) and dec.attr == "transient":
+            return True
+    return False
+
+
+def scan_module(py_path: Path) -> list[dict[str, Any]]:
+    """AST 扫一个 .py 文件,返回顶层 def 清单(跳过 @transient)."""
+    try:
+        tree = ast.parse(py_path.read_text(encoding="utf-8"))
+    except SyntaxError:
+        return []
+
+    funcs = []
+    for node in tree.body:
+        # 顶层 def(忽略类方法,因为 lint 主要关心独立函数)
+        if isinstance(node, ast.FunctionDef):
+            if node.name.startswith("_"):  # _private 不强制注册
+                continue
+            if has_transient_decorator(node):
+                continue
+            funcs.append(
+                {
+                    "name": node.name,
+                    "module": str(py_path.relative_to(REPO_ROOT)),
+                    "line": node.lineno,
+                    "has_docstring": ast.get_docstring(node) is not None,
+                    "docstring_first_line": (
+                        (ast.get_docstring(node) or "").split("\n")[0].strip()[:120]
+                    ),
+                }
+            )
+    return funcs
+
+
+def scan_all() -> list[dict[str, Any]]:
+    """扫所有 _code/ + _pipelines/ 下的 .py (跳过 CI 工具自身)."""
+    all_funcs = []
+    for top in SCAN_DIRS:
+        top_dir = REPO_ROOT / top
+        if not top_dir.exists():
+            continue
+        for py in top_dir.rglob("*.py"):
+            if "/__pycache__/" in str(py) or "/_legacy/" in str(py):
+                continue
+            rel = str(py.relative_to(REPO_ROOT))
+            if rel in CI_TOOL_FILES:
+                continue
+            if any(rel.startswith(d + "/") for d in CI_TOOL_DIRS):
+                continue
+            all_funcs.extend(scan_module(py))
+    return all_funcs
+
+
+def load_registry() -> dict[str, Any]:
+    """读现有 _registry.yml."""
+    if not REGISTRY.exists():
+        return {"functions": []}
+    data = yaml.safe_load(REGISTRY.read_text(encoding="utf-8")) or {}
+    if "functions" not in data:
+        data["functions"] = []
+    return data
+
+
+def save_registry(data: dict[str, Any]) -> None:
+    """写 _registry.yml,保持人工字段."""
+    REGISTRY.parent.mkdir(parents=True, exist_ok=True)
+    header = (
+        "# _meta/_registry.yml — 代码/工具资产注册表\n"
+        "#\n"
+        "# 可由 _code/register.py --scan 辅助刷新 (函数清单 + module + line + docstring).\n"
+        "# 人工字段(description / method / tests / phases / version / empirical_evidence) 保留.\n"
+        "#\n"
+        "# Schema: _meta/_schema/_registry_entry.yml\n\n"
+    )
+    REGISTRY.write_text(
+        header + yaml.safe_dump(data, allow_unicode=True, sort_keys=False),
+        encoding="utf-8",
+    )
+
+
+def merge_scan_with_registry(scanned: list[dict], registry: dict) -> tuple[dict, list, list]:
+    """合并:保留人工字段,refresh AST 字段.
+
+    Returns:
+        (new_registry, newly_added, orphaned)
+        - newly_added: 代码里有但 registry 没的函数(待人工补 method/tests)
+        - orphaned: registry 里有但代码已删的函数(需要清理)
+    """
+    existing = {f["name"]: f for f in registry.get("functions", [])}
+    scanned_names = {f["name"] for f in scanned}
+
+    new_functions = []
+    newly_added = []
+    orphaned = []
+
+    for s in scanned:
+        if s["name"] in existing:
+            # 更新 AST 字段,保留人工字段
+            merged = dict(existing[s["name"]])
+            merged["module"] = s["module"]
+            merged["line"] = s["line"]
+            if not merged.get("description") and s["docstring_first_line"]:
+                merged["description"] = s["docstring_first_line"]
+            new_functions.append(merged)
+        else:
+            # 新函数,加占位待人工补
+            entry = {
+                "name": s["name"],
+                "module": s["module"],
+                "line": s["line"],
+                "description": s["docstring_first_line"] or "TODO: cc 补充描述",
+                "type": "TODO",  # cc 补:step / util / algo / llm_call / ci_tool / test
+                "method": None,
+                "tests": [],
+                "phases": [],
+            }
+            new_functions.append(entry)
+            newly_added.append(entry)
+
+    for name in existing:
+        if name not in scanned_names:
+            orphaned.append(existing[name])
+
+    registry["functions"] = new_functions
+    return registry, newly_added, orphaned
+
+
+def cmd_scan() -> int:
+    scanned = scan_all()
+    registry = load_registry()
+    new_registry, added, orphaned = merge_scan_with_registry(scanned, registry)
+    save_registry(new_registry)
+
+    print(f"✓ 扫了 {len(scanned)} 个函数")
+    if added:
+        print(f"\n🆕 {len(added)} 个新函数(待人工补 method/tests/phases):")
+        for f in added[:10]:
+            print(f"  + {f['name']} @ {f['module']}:{f['line']}")
+        if len(added) > 10:
+            print(f"  ... (共 {len(added)} 个)")
+    if orphaned:
+        print(f"\n⚠️  {len(orphaned)} 个 orphan(代码已删,registry 里还有):")
+        for f in orphaned[:10]:
+            print(f"  - {f['name']} @ {f.get('module', '?')}")
+    print(f"\n📋 总计 active: {len(new_registry['functions'])}")
+    return 0
+
+
+def cmd_add(name: str, module: str) -> int:
+    registry = load_registry()
+    if any(f["name"] == name for f in registry["functions"]):
+        print(f"⚠️  {name} 已在 registry,跳过")
+        return 0
+    entry = {
+        "name": name,
+        "module": module,
+        "description": "TODO: 补充",
+        "type": "TODO",
+        "method": None,
+        "tests": [],
+        "phases": [],
+    }
+    registry["functions"].append(entry)
+    save_registry(registry)
+    print(f"✓ 加 {name} @ {module}")
+    print("⚠️  请补充 description / method / tests / phases 字段")
+    return 0
+
+
+def cmd_list() -> int:
+    registry = load_registry()
+    funcs = registry.get("functions", [])
+    print(f"📋 Registry: {len(funcs)} 个 active 函数\n")
+    by_module: dict[str, list] = {}
+    for f in funcs:
+        by_module.setdefault(f["module"], []).append(f)
+    for mod, fs in sorted(by_module.items()):
+        print(f"  {mod}:")
+        for f in fs:
+            phase = f.get("phases") or []
+            method = f.get("method") or "—"
+            print(f"    {f['name']:<40s}  phase={phase}  method={method}")
+    return 0
+
+
+def main() -> int:
+    p = argparse.ArgumentParser()
+    sub = p.add_subparsers(dest="cmd")
+    sub.add_parser("scan", help="扫 _code/+_pipelines/ refresh registry")
+    add = sub.add_parser("add", help="手动加一条")
+    add.add_argument("--name", required=True)
+    add.add_argument("--module", required=True)
+    sub.add_parser("list", help="列出 active 函数")
+
+    # 兼容旧 --scan / --add 写法
+    p.add_argument("--scan", action="store_true")
+    p.add_argument("--add", dest="add_name")
+    p.add_argument("--module", dest="add_module")
+    p.add_argument("--list", action="store_true")
+
+    args = p.parse_args()
+    if args.scan or args.cmd == "scan":
+        return cmd_scan()
+    if args.add_name or args.cmd == "add":
+        nm = args.add_name or getattr(args, "name", None)
+        md = args.add_module or getattr(args, "module", None)
+        if not nm or not md:
+            print("ERROR: --add 需要 --module", file=sys.stderr)
+            return 1
+        return cmd_add(nm, md)
+    if args.list or args.cmd == "list":
+        return cmd_list()
+    p.print_help()
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

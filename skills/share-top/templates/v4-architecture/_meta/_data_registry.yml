@@ -1,0 +1,6 @@
+# _meta/_data_registry.yml — 数据资产注册表(单一真源)
+project: <CHANGE-ME>
+schema_version: v4.0
+last_synced: null
+
+assets: []

@@ -1,0 +1,25 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "cursor/plugins",
+      "paths": [
+        "pstack/skills/architect/",
+        "pstack/skills/how/SKILL.md",
+        "pstack/skills/arena/SKILL.md",
+        "pstack/LICENSE"
+      ],
+      "absorbed_commit": "00b14f1df36b32a8dd1529324a3a459f6563b127",
+      "absorbed_at": "2026-10-25",
+      "mode": "semantic",
+      "local_paths": [
+        "SKILL.md.template",
+        "references/absorbed/pstack-architect.md",
+        "LICENSE"
+      ],
+      "watch": true,
+      "license": "MIT",
+      "note": "项目安装时将 SKILL.md.template 改名为 SKILL.md 并更新 local_paths；项目另记安装回执。"
+    }
+  ]
+}

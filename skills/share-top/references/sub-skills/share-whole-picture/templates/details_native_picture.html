@@ -1,0 +1,113 @@
+<!--
+details_native_picture.html — 项目总览 HTML 骨架 (HTML5 原生 details, 零 JS)
+
+选用原因: mermaid click / JS 抽屉 / button onclick 在部分手机 webview 不稳定; HTML5 原生 details 在手机和桌面浏览器都可用
+
+设计原则:
+- 零 JS 依赖 (用户环境的 mermaid CDN / SVG event / JS 抽屉机制都可能挂)
+- HTML5 <details><summary> 浏览器原生折叠
+- 色块按 subgraph 分组 (组名按项目流程定, 如 原始数据 / 预处理 / 主流程 / 后处理)
+- 每节点 8 字段 inline 展开 (不是覆盖, 不是侧窗)
+
+用法:
+1. 收集项目数据 (NODE_DATA dict)
+2. 按 5 组分类
+3. cp 此骨架, 把 {{*_TITLE}} 等占位符填项目内容
+4. 推 pubhtml
+
+每节点必含 8 字段 (固定模板):
+- 🎯 目标 (What) — 一句话作用
+- 💡 动机 (Why) — 为什么这步
+- ⚙️ 原理 (How) — 公式 / 算法 (含 MathJax LaTeX)
+- 📥 输入 — 数据 + 来源
+- 📤 输出 — 数据 + 去向
+- 🔗 上下游 — 哪一步来 / 去哪一步
+- 💻 代码映射 — 真实路径 (_code/.../...)
+- 📍 4 城 case — 项目专属 (e.g. HK/SZ/GZ/London) 或案例数字
+
+适用场景:
+- 任何研究 / 算法项目的方法论可视化
+- 节点数 10-50 (太多拆多个 picture)
+- 用户需要"学习"项目 (不只看流程)
+-->
+
+<h2 id="tree">🌳 {{PROJECT_TITLE}} · 学习版</h2>
+<p class="lede">{{PROJECT_INTRO}}</p>
+
+<div class="picture-info">
+  <p>👇 <b>{{NODE_COUNT}} 节点分 {{GROUP_COUNT}} 组</b>: 点 ▶ 任一节点折叠条直接展开 8 字段详情 (零 JS 依赖, 浏览器原生).</p>
+</div>
+
+<div class="node-cards-native">
+
+  <!-- 组 1: 例如 数据准备 -->
+  <div class="node-group {{G1_CLASS}}">
+    <h3>{{G1_TITLE}}</h3>
+    <details class="node-d" data-key="{{G1N1_KEY}}">
+      <summary><b>{{G1N1_TITLE}}</b></summary>
+      <div class="node-body">
+        <div class="kvf"><b>🎯 目标</b>: {{G1N1_GOAL}}</div>
+        <div class="kvf"><b>💡 动机</b>: {{G1N1_WHY}}</div>
+        <div class="kvf"><b>⚙️ 原理</b>: {{G1N1_HOW}}</div>
+        <div class="kvf"><b>📥 输入</b>: {{G1N1_INPUT}}</div>
+        <div class="kvf"><b>📤 输出</b>: {{G1N1_OUTPUT}}</div>
+        <div class="kvf"><b>🔗 上下游</b>: 上: {{G1N1_PREV}} / 下: {{G1N1_NEXT}}</div>
+        <div class="kvf"><b>💻 代码映射</b>: {{G1N1_CODE}}</div>
+        <div class="kvf"><b>📍 case</b>: {{G1N1_CASE}}</div>
+      </div>
+    </details>
+    <!-- 重复 details 块 for G1N2, G1N3, ... -->
+  </div>
+
+  <!-- 组 2-5: 同样结构 -->
+
+</div>
+
+<style>
+.picture-info {
+  margin: 20px 0; padding: 16px;
+  background: #fff8e8; border: 2px solid #f6b400; border-radius: 10px;
+  color: #a87400;
+}
+.picture-info p { margin: 0; font-weight: 600; }
+
+.node-cards-native { margin: 16px 0; }
+.node-group { margin: 14px 0; padding: 12px 14px; border-radius: 8px; }
+.node-group h3 { color: #4257b6; margin: 14px 0 8px 0; }
+
+/* 5 组色块 (各项目按需调整) */
+.node-group.dataG { background: #e3f2fd33; border-left: 4px solid #1976d2; }
+.node-group.rphG  { background: #fce4ec33; border-left: 4px solid #c2185b; }
+.node-group.llmG  { background: #e8f5e933; border-left: 4px solid #43a047; }
+.node-group.aggG  { background: #fff3e033; border-left: 4px solid #fb8c00; }
+.node-group.fnG   { background: #fafafa66; border-left: 4px solid #9e9e9e; }
+
+.node-d {
+  background: white; border: 1px solid #e3e6f5; border-radius: 8px;
+  padding: 10px 14px; margin: 6px 0;
+  transition: all .2s;
+}
+.node-d:hover { border-color: #4257b6; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+.node-d[open] {
+  background: linear-gradient(180deg, #fffce8, #fff8d0);
+  border-color: #f6b400;
+  box-shadow: 0 2px 12px rgba(246,180,0,.2);
+}
+.node-d summary {
+  cursor: pointer; padding: 4px 0; font-size: .95em;
+  user-select: none;
+}
+.node-d[open] summary {
+  font-weight: 600; color: #a87400;
+  border-bottom: 1px dashed #f6b400;
+  padding-bottom: 8px; margin-bottom: 8px;
+}
+.node-body { padding: 8px 4px; }
+.kvf { margin: 8px 0; line-height: 1.7; color: #444; font-size: .92em; }
+.kvf b { color: #4257b6; }
+.kvf code { background: #f0f4ff; padding: 1px 6px; border-radius: 3px; }
+</style>
+
+<!-- 可选: MathJax 渲染公式 (如详情含 LaTeX) -->
+<script>window.MathJax = {tex: {inlineMath: [['\\(', '\\)']], displayMath: [['$$', '$$']]}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

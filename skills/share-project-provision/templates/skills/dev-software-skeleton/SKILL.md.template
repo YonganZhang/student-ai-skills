@@ -1,0 +1,10 @@
+---
+name: dev-software-skeleton
+description: "设计软件骨架、架构骨架、模块边界、数据结构与接口骨架。用户点名或任务需要先定软件结构时调用；兼容 Potato 模式。不触发：论文提纲、绘图骨架、局部修复。"
+---
+
+# 软件骨架
+
+先读 [设计流程](references/absorbed/pstack-architect.md)，再设计。此模块是 pstack architect 的本地适配，不是完整 poteto-mode。
+
+用户说“先给我看方案”时交付设计后停止；明确授权实现时继续。仅设计请求不扩展成自动实现。

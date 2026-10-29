@@ -1,0 +1,97 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "anthropics/skills",
+      "paths": [
+        "skills/frontend-design/SKILL.md",
+        "skills/frontend-design/LICENSE.txt"
+      ],
+      "absorbed_commit": "41bbe19d1a1a7eaab5e7bb9050a417e5c6cffc8f",
+      "absorbed_at": "2026-09-23",
+      "mode": "semantic",
+      "local_paths": [
+        "templates/skills/frontend-design/SKILL.md.template",
+        "templates/skills/frontend-design/LICENSE.txt"
+      ],
+      "watch": true,
+      "note": "2026-09-23 按上游 9/3 更新（#1713）整体替换；保留本地 description，另增项目设计依据与按需品牌参考指针，正文因此按 semantic 跟踪；未重新同步上游或升级已安装的项目副本。",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "Leonxlnx/taste-skill",
+      "paths": [
+        "skills/taste-skill/SKILL.md",
+        "LICENSE"
+      ],
+      "absorbed_commit": "3c7017d636c3a4aad378433ea6d0cfa6c921da4a",
+      "absorbed_at": "2026-07-10",
+      "mode": "semantic",
+      "local_paths": [
+        "templates/skills/design-taste-frontend/SKILL.md.template",
+        "templates/skills/design-taste-frontend/LICENSE"
+      ],
+      "watch": true,
+      "note": "改过的副本；吸收日期不详，取本机配置仓库首次入库日；commit 按日期反推（gh commits?path=…&until=吸收日）。本地另增项目设计依据与按需品牌参考指针，未升级已安装的项目副本。",
+      "license": "MIT"
+    },
+    {
+      "repo": "pbakaus/impeccable",
+      "paths": [
+        ".claude/skills/impeccable",
+        ".agents/skills/impeccable",
+        "skill/scripts/impeccable",
+        "crates/skills/src/commands.rs"
+      ],
+      "absorbed_commit": "d631a8827f99414d2b6daba4ef08b7f8701751d7",
+      "absorbed_at": "2026-10-10",
+      "mode": "semantic",
+      "local_paths": [
+        "references/modules/impeccable.md",
+        "scripts/install_impeccable.py",
+        "references/modules/impeccable-adapter.md"
+      ],
+      "watch": true,
+      "note": "只吸收项目级安装配方；完整上游分发按固定 Git 对象导出，未全局注册、无 hook/plugin。skill 4.5.2，engine 0.1.14；实际项目版本由安装回执记录。",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "VoltAgent/awesome-design-md",
+      "paths": [
+        "README.md",
+        "LICENSE",
+        "design-md"
+      ],
+      "absorbed_commit": "3b605329240ce735b510037cca322f1831fdd7f8",
+      "absorbed_at": "2026-10-17",
+      "mode": "semantic",
+      "local_paths": [
+        "references/design-reference-library.md"
+      ],
+      "watch": true,
+      "note": "只吸收按需读取与项目适配流程；核验固定版本 README、LICENSE 和 Linear/Notion/Stripe 样例。品牌文档按需获取，未整库复制、未新增技能或自动化、未安装到具体项目。效果需真实页面验证。",
+      "license": "MIT"
+    },
+    {
+      "repo": "cursor/plugins",
+      "paths": [
+        "pstack/skills/architect/",
+        "pstack/skills/how/SKILL.md",
+        "pstack/skills/arena/SKILL.md",
+        "pstack/LICENSE"
+      ],
+      "absorbed_commit": "00b14f1df36b32a8dd1529324a3a459f6563b127",
+      "absorbed_at": "2026-10-25",
+      "mode": "semantic",
+      "local_paths": [
+        "templates/skills/dev-software-skeleton/SKILL.md.template",
+        "templates/skills/dev-software-skeleton/references/absorbed/pstack-architect.md",
+        "templates/skills/dev-software-skeleton/LICENSE",
+        "references/modules/software-skeleton.md"
+      ],
+      "watch": true,
+      "license": "MIT",
+      "note": "按用户授权新增中文软件骨架触发及按任务自动启用；只适配架构设计方法，非完整 pstack。无固定模型、强制子代理、plugin 或 hook；尚未安装到业务项目。"
+    }
+  ]
+}

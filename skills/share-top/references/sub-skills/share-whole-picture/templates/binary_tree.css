@@ -1,0 +1,66 @@
+/* binary_tree.css — 二叉树 + 详情卡专用 CSS (配 binary_tree_clickable.html)
+ *
+ * 视觉特性:
+ * - mermaid 块: 浅色渐变背景 + 阴影 + 节点 hover 高亮
+ * - 详情卡: 桌面 2 列 grid / 手机 1 列
+ * - details[open] 金黄高亮 (用户一眼看到"在看哪个节点")
+ * - anchor scroll-margin-top 防顶栏遮挡
+ */
+
+.mermaid {
+  background: linear-gradient(180deg, #fafbff, #f0f4ff);
+  border: 1px solid #e3e6f5;
+  border-radius: 10px;
+  padding: 20px 12px;
+  margin: 16px auto;
+  box-shadow: 0 2px 8px rgba(60,60,90,.05);
+  text-align: center;
+  overflow-x: auto;
+}
+.mermaid svg { max-width: 100%; height: auto; cursor: pointer; }
+.mermaid svg .node rect, .mermaid svg .node polygon { transition: filter .2s; }
+.mermaid svg .node:hover rect, .mermaid svg .node:hover polygon {
+  filter: drop-shadow(0 0 6px rgba(66,87,182,.45));
+}
+
+.node-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+.node-cards details {
+  background: #fafbff;
+  border: 1px solid #e3e6f5;
+  border-radius: 10px;
+  padding: 10px 16px;
+  scroll-margin-top: 80px;
+  transition: all .25s;
+}
+.node-cards details:hover { border-color: #b0c4ff; box-shadow: 0 1px 4px rgba(60,60,90,.08); }
+.node-cards details[open] {
+  background: linear-gradient(180deg, #fffce8, #fff8d0);
+  border-color: #f6b400;
+  box-shadow: 0 2px 12px rgba(246,180,0,.25);
+}
+.node-cards summary {
+  cursor: pointer;
+  padding: 6px 0;
+  font-size: 1em;
+  user-select: none;
+}
+.node-cards summary:hover { color: #4257b6; }
+.node-cards details[open] summary {
+  font-weight: 600;
+  color: #a87400;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #f6b400;
+  margin-bottom: 6px;
+}
+.node-cards details ul, .node-cards details ol { padding-left: 22px; line-height: 1.7; }
+.node-cards details code { background: #fff; padding: 1px 6px; border-radius: 3px; }
+
+@media (max-width: 640px) {
+  .node-cards { grid-template-columns: 1fr; }
+  .mermaid { padding: 12px 6px; font-size: .85em; }
+}

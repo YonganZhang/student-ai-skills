@@ -1,0 +1,498 @@
+#!/usr/bin/env python3
+"""_code/lint.py v2.1 — v4 架构 lint armor (8 道门 + L5b stub 子门, 一劳永逸)
+
+v2.1 改动 (吸纳 Codex + Gemini review 2026-05-17):
+  - L5b stub_only function 检测 (warn): 函数体仅 pass / NotImplementedError / 空 return → 真合了吗?
+  - L8 archival_gate_check 改纯 Python 白名单 (target_exists / no_reverse_import / no_todo_marker)
+    任意 bash → enum, 防注入 + 跨平台
+
+用法:
+  python _code/lint.py                跑全部 8 道门, 退出码 0/1/2
+  python _code/lint.py --report       同上 + 写 _meta/_dead_*_report.md
+  python _code/lint.py --pre-commit   pre-commit hook 模式
+
+8 道门 (4 原有 + 4 新增, 砍 2 道边际门避免噪音):
+
+  原有 命名 + Registry 层
+  L1: 根目录命名 _ 开头白名单                       block
+  L2: 函数命名 snake_case + 6 verbs                 block
+  L3: 文件名禁版本号 _v1/_final/_backup             block
+  L4: registry ↔ code 双向 (missing / orphan)       warn
+
+  新增 4 道核心防线 (各覆盖一个独立暴露面)
+  L5: phantom_function — registry 引用代码不存在    block   🆕 (代码层假指针)
+  L6: phantom_method — registry method 引 wiki 不存在  block   🆕 (wiki 双链假)
+  L8: false_migration_claim — pending_migration archival_gate_check 真跑  block   🆕 (注册表自检)
+  L9: reverse_legacy_import — 禁 v4 代码反向 sys.path/import 老 代码/ lib   block   🆕 (thin call 防线)
+
+  砍掉的边际门 (理由: 跟现有门重复 / 高噪音):
+  ✂ L7 dead_methodology — wiki entity 0 函数引用. 噪音高 (概念性 entity 如 _GIRI 会误报),
+     可手动 grep / 让人工 review 替代.
+  ✂ L10 hardcoded_legacy_path — 硬编码 "代码/..." 字符串. 跟 L9 重叠 80%,
+     L9 抓 import 语句已足够防止反向引用.
+
+退出码:
+  0 = 全过
+  1 = warning (不 block commit, 红榜提醒)
+  2 = error  (block commit)
+"""
+from __future__ import annotations
+
+import argparse
+import ast
+import datetime
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+try:
+    import yaml
+except ImportError:
+    print("ERROR: 装 pyyaml: pip install pyyaml", file=sys.stderr)
+    sys.exit(1)
+
+sys.path.insert(0, str(Path(__file__).parent))
+from register import REPO_ROOT, scan_all, load_registry  # noqa: E402
+
+ALLOWED_VERBS = {"compute", "load", "save", "validate", "build", "run"}
+FORBIDDEN_FILENAME_PATTERNS = [r"_v\d+\.", r"_final\.", r"_backup\.", r"_old\."]
+
+CI_TOOL_FILES = {
+    "_code/register.py",
+    "_code/lint.py",
+    "_code/sync_wiki.py",
+    "_code/init_pipeline.py",
+    "_code/init_domain.py",
+}
+CI_TOOL_DIRS = {"_code/migration"}
+
+ROOT_WHITELIST = {
+    "AGENTS.md", "CLAUDE.md", "README.md",
+    ".git", ".gitignore", ".gitattributes",
+    ".claude", ".obsidian", ".codex", ".vscode",
+    "_wiki-methodology",
+    # 项目自己的非 `_` 顶层目录（旧版遗留、中文目录等）在这里逐项登记，模板不预置
+}
+
+WIKI_ENTITY_DIR = REPO_ROOT / "_wiki-methodology" / "_wiki" / "_entities"
+SCAN_DIRS_V4 = ["_code", "_pipelines"]  # L9/L10 仅扫 v4 目录
+
+REVERSE_IMPORT_PATTERNS = [
+    re.compile(r"sys\.path\.insert\s*\([^)]*代码"),
+    re.compile(r"^\s*from\s+代码\."),
+    re.compile(r"^\s*import\s+代码\."),
+]
+
+
+def _is_ci_tool(module: str) -> bool:
+    if module in CI_TOOL_FILES:
+        return True
+    return any(module.startswith(d + "/") for d in CI_TOOL_DIRS)
+
+
+def _is_gitignored(path: Path) -> bool:
+    """gitignored 顶层目录跳过 L1 (避免报本地 untracked 数据 / 缓存 / 日志)."""
+    rc = subprocess.call(
+        ["git", "check-ignore", "-q", str(path)],
+        cwd=REPO_ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return rc == 0
+
+
+# ============================================================
+# L1: 根目录命名
+# ============================================================
+def lint_root_naming() -> list[tuple[str, str]]:
+    violations = []
+    for entry in REPO_ROOT.iterdir():
+        name = entry.name
+        if name.startswith("_") or name.startswith(".") or name in ROOT_WHITELIST:
+            continue
+        if _is_gitignored(entry):
+            continue  # gitignored 顶层 (llm_logs / 数据目录) 跳过
+        violations.append(("L1_ROOT_NAMING", f"{name} 不是 _ 开头且不在白名单 — 归档 or 清理?"))
+    return violations
+
+
+# ============================================================
+# L2: 函数命名
+# ============================================================
+def lint_function_names() -> list[tuple[str, str]]:
+    violations = []
+    for f in scan_all():
+        if _is_ci_tool(f["module"]):
+            continue
+        name = f["name"]
+        if name in {"main"}:
+            continue
+        if not re.match(r"^[a-z][a-z0-9_]*$", name):
+            violations.append(("L2_FUNC_NAMING", f"{name} 不是 snake_case @ {f['module']}"))
+            continue
+        verb = name.split("_")[0]
+        if verb not in ALLOWED_VERBS:
+            violations.append(("L2_FUNC_VERB",
+                f"{name} 动词 '{verb}' 不在白名单 {sorted(ALLOWED_VERBS)} @ {f['module']}"))
+    return violations
+
+
+# ============================================================
+# L3: 文件名禁版本号
+# ============================================================
+def lint_filename_versions() -> list[tuple[str, str]]:
+    violations = []
+    for d in SCAN_DIRS_V4:
+        top = REPO_ROOT / d
+        if not top.exists():
+            continue
+        for py in top.rglob("*.py"):
+            if "__pycache__" in py.parts:
+                continue
+            for pat in FORBIDDEN_FILENAME_PATTERNS:
+                if re.search(pat, py.name):
+                    violations.append(("L3_FILE_VERSION",
+                        f"{py.relative_to(REPO_ROOT)} 文件名含版本号 (Git 管历史, 禁止)"))
+                    break
+    return violations
+
+
+# ============================================================
+# L4: registry ↔ code 双向
+# ============================================================
+def lint_registry_consistency() -> tuple[list, list]:
+    errors, warnings = [], []
+    registry = load_registry()
+    reg_names = {f["name"] for f in registry.get("functions", [])}
+    scanned = [f for f in scan_all() if not _is_ci_tool(f["module"])]
+    scanned_names = {f["name"] for f in scanned}
+
+    for name in scanned_names - reg_names:
+        warnings.append(("L4_REGISTRY_MISSING", f"{name} 在代码里但未注册 — 可跑 register.py --scan 辅助更新"))
+    for name in reg_names - scanned_names:
+        warnings.append(("L4_REGISTRY_ORPHAN", f"{name} 在 registry 但代码已删 / migrate 未完成"))
+    for f in registry.get("functions", []):
+        if f.get("type") == "TODO":
+            warnings.append(("L4_REGISTRY_TODO", f"{f['name']} type 未填"))
+    return errors, warnings
+
+
+# ============================================================
+# L5: phantom_function — registry 引用代码不存在
+# ============================================================
+def _is_stub_function(node: ast.FunctionDef) -> bool:
+    """检测函数体是否仅 stub (pass / NotImplementedError / *args **kwargs).
+
+    Codex + Gemini review v2.1 加: 防止"V4 已合"声明背后是空壳函数.
+    """
+    body = [n for n in node.body if not isinstance(n, ast.Expr) or not isinstance(n.value, ast.Constant)]
+    # docstring 不算 (ast.Expr + Constant str)
+    if not body:
+        return True  # 仅 docstring = stub
+    if len(body) == 1:
+        only = body[0]
+        if isinstance(only, ast.Pass):
+            return True
+        if isinstance(only, ast.Raise) and isinstance(only.exc, ast.Call):
+            if isinstance(only.exc.func, ast.Name) and only.exc.func.id == "NotImplementedError":
+                return True
+        if isinstance(only, ast.Return) and only.value is None:
+            return True
+    return False
+
+
+def lint_phantom_function() -> tuple[list, list]:
+    """L5: registry 引用代码不存在 (errors) + L5b stub_only function (warnings, v2.1)."""
+    errors, warnings = [], []
+    registry = load_registry()
+    # pending_migration 的 target module 允许 stub (因为说明未真合, status != complete)
+    migration_partial_modules = set()
+    for item in registry.get("pending_migration", []):
+        target = item.get("estimated_target", "")
+        if item.get("migration_status") in ("not_started", "stub_only", "partial"):
+            for t in target.split(" + "):
+                migration_partial_modules.add(t.strip())
+    for f in registry.get("functions", []):
+        mod_path = REPO_ROOT / f["module"]
+        if not mod_path.is_file():
+            errors.append(("L5_PHANTOM_MODULE",
+                f"{f['name']}: registry module={f['module']} 文件不存在"))
+            continue
+        try:
+            tree = ast.parse(mod_path.read_text(encoding="utf-8"))
+            target_node = next(
+                (n for n in tree.body
+                 if isinstance(n, ast.FunctionDef) and n.name == f["name"]),
+                None,
+            )
+            if target_node is None:
+                errors.append(("L5_PHANTOM_FUNC",
+                    f"{f['name']}: registry 写 module={f['module']}, AST 找不到该函数"))
+                continue
+            # L5b stub_only (v2.1): 只报"声称合好但函数体是 stub"的, 允许 pending_migration 的 stub
+            if _is_stub_function(target_node):
+                if f["module"] not in migration_partial_modules and not f.get("transient"):
+                    warnings.append(("L5b_STUB_ONLY_FUNC",
+                        f"{f['name']} @ {f['module']}:{target_node.lineno} 仅 stub (pass/NotImpl/empty body) — 真合了吗?"))
+        except SyntaxError as e:
+            errors.append(("L5_SYNTAX", f"{f['module']}: SyntaxError ({e})"))
+    return errors, warnings
+
+
+# ============================================================
+# L6: phantom_method — registry method [[_xxx]] → wiki entity 不存在
+# ============================================================
+def lint_phantom_method() -> list[tuple[str, str]]:
+    errors = []
+    registry = load_registry()
+    if not WIKI_ENTITY_DIR.is_dir():
+        return [("L6_NO_WIKI_DIR", f"wiki entity 目录不存在: {WIKI_ENTITY_DIR}")]
+    entity_names = {p.stem for p in WIKI_ENTITY_DIR.glob("*.md")}
+    pattern = re.compile(r"\[\[(_[^\]]+)\]\]")
+    for f in registry.get("functions", []):
+        method = f.get("method")
+        if not method or method == "null":
+            continue
+        for ref in pattern.findall(str(method)):
+            if ref not in entity_names:
+                errors.append(("L6_PHANTOM_METHOD",
+                    f"{f['name']}: method 引 [[{ref}]], 但 _wiki/_entities/{ref}.md 不存在"))
+    return errors
+
+
+# ============================================================
+# L8: false_migration_claim — archival_gate_check 白名单纯 Python (v2.1)
+# ============================================================
+# v2.1 (Codex + Gemini review): 改任意 bash → 白名单枚举 + 纯 Python 实现
+# 安全考虑: pending_migration archival_gate_check 跑任意 bash 可被恶意/笔误注入
+GATE_CHECKERS = {
+    "target_exists": lambda item: _check_target_exists(item),
+    "no_reverse_import": lambda item: _check_no_reverse_import(),
+    "no_todo_marker": lambda item: _check_no_todo_marker(item),
+}
+
+
+def _check_target_exists(item: dict) -> tuple[bool, str]:
+    target = item.get("estimated_target", "")
+    for t in target.split(" + "):
+        t = t.strip()
+        if t and not (REPO_ROOT / t).exists():
+            return False, f"target 文件 {t} 不存在"
+    return True, ""
+
+
+def _check_no_reverse_import() -> tuple[bool, str]:
+    """L9 的复用检测: v4 目录无反向 import."""
+    found = []
+    for top in SCAN_DIRS_V4:
+        top_dir = REPO_ROOT / top
+        if not top_dir.exists():
+            continue
+        for py in top_dir.rglob("*.py"):
+            if "__pycache__" in py.parts:
+                continue
+            try:
+                content = py.read_text(encoding="utf-8")
+            except (UnicodeDecodeError, FileNotFoundError):
+                continue
+            for pat in REVERSE_IMPORT_PATTERNS:
+                if pat.search(content):
+                    found.append(str(py.relative_to(REPO_ROOT)))
+                    break
+    if found:
+        return False, f"v4 反向 import 仍存在于 {found[0]} 等 {len(found)} 文件"
+    return True, ""
+
+
+def _check_no_todo_marker(item: dict) -> tuple[bool, str]:
+    """v4 target 文件不能含 'TODO.*真调 LLM' 类 stub 标记."""
+    target = item.get("estimated_target", "")
+    for t in target.split(" + "):
+        t = t.strip()
+        if not t:
+            continue
+        path = REPO_ROOT / t
+        if path.is_dir():
+            files = list(path.rglob("*.py"))
+        elif path.is_file():
+            files = [path]
+        else:
+            continue
+        marker = re.compile(r"TODO.*真调 LLM|TODO.*P3\.5\.h")
+        for f in files:
+            try:
+                if marker.search(f.read_text(encoding="utf-8")):
+                    return False, f"{f.relative_to(REPO_ROOT)} 含 TODO 标记 (stub thin call)"
+            except (UnicodeDecodeError, FileNotFoundError):
+                continue
+    return True, ""
+
+
+def lint_false_migration_claim() -> list[tuple[str, str]]:
+    errors = []
+    registry = load_registry()
+    for item in registry.get("pending_migration", []):
+        status = item.get("migration_status")
+        check_name = item.get("archival_gate_check")
+        if status not in (None, "not_started", "stub_only", "partial", "complete"):
+            errors.append(("L8_BAD_STATUS",
+                f"{item['old_path']}: migration_status='{status}' 非 4 档枚举"))
+            continue
+        if status == "complete":
+            if not check_name:
+                errors.append(("L8_NO_GATE_CHECK",
+                    f"{item['old_path']}: status=complete 但无 archival_gate_check"))
+                continue
+            # v2.1: 旧字符串 bash 兼容 (warn + 不跑)
+            if not isinstance(check_name, str) or check_name not in GATE_CHECKERS:
+                # 不在白名单: 给清晰报错而不是执行
+                errors.append(("L8_UNSAFE_CHECK",
+                    f"{item['old_path']}: archival_gate_check='{str(check_name)[:50]}' "
+                    f"非白名单 (允许: {sorted(GATE_CHECKERS.keys())})"))
+                continue
+            checker = GATE_CHECKERS[check_name]
+            ok, reason = checker(item)
+            if not ok:
+                errors.append(("L8_GATE_FAIL",
+                    f"{item['old_path']}: archival_gate_check='{check_name}' 失败: {reason}"))
+    return errors
+
+
+# ============================================================
+# L9: reverse_legacy_import
+# ============================================================
+def lint_reverse_legacy_import() -> list[tuple[str, str]]:
+    errors = []
+    for top in SCAN_DIRS_V4:
+        top_dir = REPO_ROOT / top
+        if not top_dir.exists():
+            continue
+        for py in top_dir.rglob("*.py"):
+            if "__pycache__" in py.parts:
+                continue
+            try:
+                content = py.read_text(encoding="utf-8")
+            except (UnicodeDecodeError, FileNotFoundError):
+                continue
+            for lineno, line in enumerate(content.split("\n"), 1):
+                for pat in REVERSE_IMPORT_PATTERNS:
+                    if pat.search(line):
+                        errors.append(("L9_REVERSE_IMPORT",
+                            f"{py.relative_to(REPO_ROOT)}:{lineno} {line.strip()[:80]}"))
+                        break
+    return errors
+
+
+# ============================================================
+# 主入口
+# ============================================================
+GATES = [
+    ("L1 根目录命名", lint_root_naming, "block"),
+    ("L2 函数命名", lint_function_names, "block"),
+    ("L3 文件名禁版本号", lint_filename_versions, "block"),
+    ("L4 registry 一致性", lint_registry_consistency, "warn"),
+    ("L5 phantom_function", lint_phantom_function, "block"),
+    ("L6 phantom_method", lint_phantom_method, "block"),
+    ("L8 false_migration_claim", lint_false_migration_claim, "block"),
+    ("L9 reverse_legacy_import", lint_reverse_legacy_import, "block"),
+]
+
+
+def run_all_gates() -> tuple[list, list, dict]:
+    errors, warnings = [], []
+    by_gate = {}
+    for label, func, severity in GATES:
+        result = func()
+        if isinstance(result, tuple):
+            e, w = result
+            errors.extend(e)
+            warnings.extend(w)
+            by_gate[label] = {"errors": e, "warnings": w}
+        elif severity == "block":
+            errors.extend(result)
+            by_gate[label] = {"errors": result, "warnings": []}
+        else:
+            warnings.extend(result)
+            by_gate[label] = {"errors": [], "warnings": result}
+    return errors, warnings, by_gate
+
+
+def print_summary(by_gate: dict, max_per_gate: int = 5) -> None:
+    for label, payload in by_gate.items():
+        e, w = payload["errors"], payload["warnings"]
+        if not e and not w:
+            print(f"  ✓ {label}")
+            continue
+        for code, msg in e[:max_per_gate]:
+            print(f"  🔴 [{code}] {msg}")
+        for code, msg in w[:max_per_gate]:
+            print(f"  ⚠️  [{code}] {msg}")
+        remaining = max(0, len(e) + len(w) - max_per_gate)
+        if remaining > 0:
+            print(f"  ... ({label}: 共 {len(e)} errors, {len(w)} warnings)")
+
+
+def write_reports(by_gate: dict) -> None:
+    now = datetime.datetime.utcnow().isoformat() + "Z"
+    meta_dir = REPO_ROOT / "_meta"
+    meta_dir.mkdir(exist_ok=True)
+
+    dead_code_lines = [
+        "# 死代码红榜 (auto-generated by _code/lint.py --report)",
+        "",
+        f"> 生成时间: {now}",
+        "> 含义: 候选清除, 用户复核后批量 mv _legacy/ 或 rm",
+        "",
+        "## L4: registry ↔ code 不一致 (warn)",
+        "",
+    ]
+    for code, msg in by_gate.get("L4 registry 一致性", {}).get("warnings", []):
+        dead_code_lines.append(f"- [{code}] {msg}")
+    dead_code_lines += ["", "## L9: 反向 import 老 lib (block)", ""]
+    for code, msg in by_gate.get("L9 reverse_legacy_import", {}).get("errors", []):
+        dead_code_lines.append(f"- 🔴 [{code}] {msg}")
+    (meta_dir / "_dead_code_report.md").write_text("\n".join(dead_code_lines) + "\n", encoding="utf-8")
+
+    dead_method_lines = [
+        "# 死方法论红榜 (auto-generated)",
+        "",
+        f"> 生成时间: {now}",
+        "> 处理: 修 registry method 字段 / mv _wiki/_legacy/ / 加 wiki entity 文件",
+        "",
+        "## L6: phantom_method (registry → wiki entity 不存在, block)",
+        "",
+    ]
+    for code, msg in by_gate.get("L6 phantom_method", {}).get("errors", []):
+        dead_method_lines.append(f"- 🔴 [{code}] {msg}")
+    (meta_dir / "_dead_method_report.md").write_text("\n".join(dead_method_lines) + "\n", encoding="utf-8")
+    print(f"\n📄 红榜: _meta/_dead_code_report.md + _dead_method_report.md")
+
+
+def main() -> int:
+    p = argparse.ArgumentParser()
+    p.add_argument("--report", action="store_true", help="跑完写 _meta/_dead_*_report.md")
+    p.add_argument("--pre-commit", action="store_true", help="pre-commit hook 模式")
+    args = p.parse_args()
+
+    print("🔍 v4 架构 lint armor — 8 道门\n")
+    errors, warnings, by_gate = run_all_gates()
+    print_summary(by_gate)
+
+    print()
+    print("=" * 60)
+    print(f"errors:   {len(errors)}  (block commit)")
+    print(f"warnings: {len(warnings)}  (不 block, 红榜提醒)")
+
+    if args.report:
+        write_reports(by_gate)
+
+    if errors:
+        return 2
+    if warnings:
+        return 1
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

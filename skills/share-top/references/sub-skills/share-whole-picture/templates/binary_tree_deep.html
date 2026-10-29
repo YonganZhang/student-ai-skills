@@ -1,0 +1,129 @@
+<!--
+binary_tree_deep.html — 5 层 27 节点深层二叉树骨架 (旧树形模板, 兼容用)
+
+替代旧 3 层 7 节点版本 (binary_tree_clickable.html)。
+适用: 真实研究/算法项目, 节点数 ≥20, 需要 "代码注册 → 二叉树映射"
+
+5 层结构:
+  Layer 1: ROOT 项目目标 (1 节点)
+  Layer 2: 主分支 L / R (2 节点)
+  Layer 3: 子分支 LL / LR / RL / RR (4 节点)
+  Layer 4: 类别 LLL / LLR / LRL / LRR / RLL / RLR / RRL / RRR (8 节点)
+  Layer 5 叶子: 12 个 (每类 1-2 个, 严格 ≤2 child)
+  共: 1 + 2 + 4 + 8 + 12 = 27 节点
+
+填空规则 (每节点必填 5 字段):
+- *_ICON: emoji
+- *_TITLE: 中文人话 (一句话内, 不用英文代码名)
+- *_HINT: 节点副文本, 提示用户点我看什么
+- *_TOOLTIP: hover 提示
+- *_DETAIL: 详情卡 HTML, 含真实代码路径 + 输入输出 + 公式 + 实测案例
+
+依赖: <head> 含 mermaid CDN + binary_tree.css (见同目录)
+-->
+
+<h2 id="tree">🌳 {{TREE_TITLE}}</h2>
+<p class="lede">⬇️ <strong>5 层 27 节点严格二叉树</strong> (每节点 ≤2 child)。{{TREE_INTRO}}。<strong>点击任一节点</strong>跳详情卡。</p>
+
+<details open>
+  <summary><b>📊 展开 / 折叠完整二叉树 (27 节点)</b></summary>
+
+<div class="mermaid">
+graph TD
+    ROOT["{{ROOT_ICON}} {{ROOT_TITLE}}<br/><i>({{ROOT_HINT}})</i>"]:::output
+
+    %% Layer 2
+    ROOT --> L["{{L_ICON}} {{L_TITLE}}"]:::branchL
+    ROOT --> R["{{R_ICON}} {{R_TITLE}}"]:::branchR
+
+    %% Layer 3
+    L --> LL["{{LL_ICON}} {{LL_TITLE}}"]:::midL
+    L --> LR["{{LR_ICON}} {{LR_TITLE}}"]:::midL
+    R --> RL["{{RL_ICON}} {{RL_TITLE}}"]:::midR
+    R --> RR["{{RR_ICON}} {{RR_TITLE}}"]:::midR
+
+    %% Layer 4
+    LL --> LLL["{{LLL_ICON}} {{LLL_TITLE}}"]:::cat
+    LL --> LLR["{{LLR_ICON}} {{LLR_TITLE}}"]:::cat
+    LR --> LRL["{{LRL_ICON}} {{LRL_TITLE}}"]:::cat
+    LR --> LRR["{{LRR_ICON}} {{LRR_TITLE}}"]:::cat
+    RL --> RLL["{{RLL_ICON}} {{RLL_TITLE}}"]:::cat
+    RL --> RLR["{{RLR_ICON}} {{RLR_TITLE}}"]:::cat
+    RR --> RRL["{{RRL_ICON}} {{RRL_TITLE}}"]:::cat
+    RR --> RRR["{{RRR_ICON}} {{RRR_TITLE}}"]:::cat
+
+    %% Layer 5 (叶子, 12 个)
+    LLL --> LLLA["{{LLLA_TITLE}}"]:::leaf
+    LLL --> LLLB["{{LLLB_TITLE}}"]:::leaf
+    LLR --> LLRA["{{LLRA_TITLE}}"]:::leaf
+    LLR --> LLRB["{{LLRB_TITLE}}"]:::leaf
+    LRL --> LRLA["{{LRLA_TITLE}}"]:::leaf
+    LRL --> LRLB["{{LRLB_TITLE}}"]:::leaf
+    LRR --> LRRA["{{LRRA_TITLE}}"]:::leaf
+    LRR --> LRRB["{{LRRB_TITLE}}"]:::leaf
+    RLL --> RLLA["{{RLLA_TITLE}}"]:::leaf
+    RLL --> RLLB["{{RLLB_TITLE}}"]:::leaf
+    RLR --> RLRA["{{RLRA_TITLE}}"]:::leaf
+    RLR --> RLRB["{{RLRB_TITLE}}"]:::leaf
+    RRL --> RRLA["{{RRLA_TITLE}}"]:::leaf
+    RRL --> RRLB["{{RRLB_TITLE}}"]:::leaf
+    RRR --> RRRA["{{RRRA_TITLE}}"]:::leaf
+    RRR --> RRRB["{{RRRB_TITLE}}"]:::leaf
+
+    %% click directives (27 节点全部跳 anchor)
+    click ROOT "#node-root"
+    click L "#node-l"
+    click R "#node-r"
+    click LL "#node-ll"
+    click LR "#node-lr"
+    click RL "#node-rl"
+    click RR "#node-rr"
+    click LLL "#node-lll"
+    click LLR "#node-llr"
+    click LRL "#node-lrl"
+    click LRR "#node-lrr"
+    click RLL "#node-rll"
+    click RLR "#node-rlr"
+    click RRL "#node-rrl"
+    click RRR "#node-rrr"
+    click LLLA "#leaf-llla"
+    click LLLB "#leaf-lllb"
+    click LLRA "#leaf-llra"
+    click LLRB "#leaf-llrb"
+    click LRLA "#leaf-lrla"
+    click LRLB "#leaf-lrlb"
+    click LRRA "#leaf-lrra"
+    click LRRB "#leaf-lrrb"
+    click RLLA "#leaf-rlla"
+    click RLLB "#leaf-rllb"
+    click RLRA "#leaf-rlra"
+    click RLRB "#leaf-rlrb"
+    click RRLA "#leaf-rrla"
+    click RRLB "#leaf-rrlb"
+    click RRRA "#leaf-rrra"
+    click RRRB "#leaf-rrrb"
+
+    classDef output fill:#ffebee,stroke:#c62828,stroke-width:3px,color:#b71c1c,font-weight:bold
+    classDef branchL fill:#e8f5e9,stroke:#43a047,stroke-width:2px,color:#1b5e20,font-weight:bold
+    classDef branchR fill:#fff3e0,stroke:#fb8c00,stroke-width:2px,color:#e65100,font-weight:bold
+    classDef midL fill:#c8e6c9,stroke:#388e3c,color:#1b5e20
+    classDef midR fill:#ffe0b2,stroke:#ef6c00,color:#e65100
+    classDef cat fill:#e3f2fd,stroke:#1976d2,color:#0d47a1
+    classDef leaf fill:#fafafa,stroke:#757575,color:#212121,font-size:11px
+</div>
+
+<p style="text-align:center;margin:10px 0;color:#666;font-size:.9em">
+👆 <strong>5 层 27 节点</strong> · 严格每节点 ≤2 child · 点击节点跳下方详情卡
+</p>
+</details>
+
+<div class="node-cards">
+<!-- 27 个 <details id="node-XXX"> / <details id="leaf-XXX"> 详情卡, 每卡:
+     - 简介 (一句话中文人话)
+     - 真实代码路径 (e.g. _pipelines/00_data_prep/step_05.py)
+     - 输入 / 输出
+     - 公式 (如有) — LaTeX 或纯文本
+     - 实测案例 / 精度 (如有)
+     - 已知 bug / 注意事项 (如有)
+-->
+</div>

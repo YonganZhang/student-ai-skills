@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# `plan`: short, text-first front end of the TOP plan CLI (share-top). Install: ln -s <this file> ~/bin/plan
+here="$(dirname "$(readlink -f "$0")")"
+exec /usr/bin/python3 "$here/top_plan_cli.py" "$@"

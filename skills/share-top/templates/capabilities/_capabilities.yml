@@ -1,0 +1,28 @@
+# COL5 · 能力清单
+#
+# 登记「能按需产出主线所需资源的东西」。资产是名词，能力是动词。
+#
+# 🔴 收录判据：主线里存在一个「没有它就要说做不了」的问题，而它能解决。
+#    通用工具链（编译器、常见库、编辑器）不进 —— 它们不解决"做不了"。
+#    主线换了要跟着删；这不是装机清单。
+#
+# 🔴 不变量：说「缺 X / 做不了 / 没有条件」之前先查本文件。
+#    若有能力能产出 X，报「需要多久 / 多少算力」，不报「做不了」。
+#
+# 规范：~/.claude/skills/share-top/references/capability-inventory.md
+
+capabilities:
+  - id: <短标识>
+    what: <一句话:它是什么>
+    produces: <能按需产出什么。要具体到可验收的东西, 不要写"数据">
+    unit_cost: <实测的单位成本, 如 "250 秒/样本" "3 元/千次">
+    cost_measured: true | false      # false 时下游必须把成本标注为 uncertain
+    available: ok | degraded | broken
+    checked_on: YYYY-MM-DD           # 可用性是会过期的
+    entry: <怎么调用:脚本路径 / 命令 / 服务地址>
+    blocks_without_it: <没有它, 主线的哪个问题会变成"做不了">
+
+# 主线变更时的复查:
+#   1) 每条是否 produces / unit_cost / available 三项齐全
+#   2) 在计划与发现文档里搜「做不了 / 缺 / 没有条件 / 无法」, 逐条确认是真边界还是漏登记
+#   3) 旧主线专属的能力是否已移除

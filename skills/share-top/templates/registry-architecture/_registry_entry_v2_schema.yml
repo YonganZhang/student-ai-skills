@@ -1,0 +1,97 @@
+# Schema: _meta/_registry.yml 每条 entry (v8.4 卡片化 — 注册架构哲学 v1)
+#
+# 规范源: _top/_external_reviews/_unified_fixes/v9_registry_architecture_philosophy.md
+# 反哺路径 (用户拍板 B): 本项目实战验证后反哺 ~/.claude/skills/share-top/
+# 跨项目复用范围 (用户拍板 C): research + software 全部
+
+# === 唯一键 (R10 Codex 盲点修): registry key = module:name 不只 name ===
+# 防同名函数 (如多 module 都有 main) 互相覆盖
+primary_key: "module + ':' + name"
+
+required_fields_v2:
+  # === 核心 4 字段 (兼容旧 schema) ===
+  name:           {type: string, pattern: "^[a-z_][a-z0-9_]*$"}
+  type:           {type: enum, values: [function, class, data, endpoint, handler, engine, step, util, algo, llm_call, ci_tool, test]}
+  module:         {type: string, pattern: "^_(code|pipelines|tests)/"}
+  line:           {type: int, min: 1}
+
+  # === 新加 4 字段 (v8.4 卡片化 — 原则 1) ===
+  why:            {type: string, max_length: 150, description: "一句话 motivation, cc 5 秒读懂为什么需要"}
+  status:                                              # 原则 4 状态机严格 (Gemini R09 提的 wip 关键)
+    type: enum
+    values: [stub, wip, active, deprecated, archived]
+    description: |
+      stub:       占位/起步, 还没真实现
+      wip:        实现中, 代码有但**没接入主流程**
+      active:     接入主流程跑通 + 有 caller + 有 commit hash
+      deprecated: 功能弃用, 留兼容
+      archived:   归档 (不删除, 标已废)
+    transitions: ["stub→wip", "wip→active", "wip→archived", "active→deprecated", "active→wip", "deprecated→archived"]
+  introduced_in:  {type: string, description: "哪个 phase 加的 (e.g. P5.3-E)"}
+  wired_up_in:                                         # 原则 3 接线证据 — status=active 必须非空
+    type: string_or_null
+    description: "commit hash 接入主流程, null=未接入. lint 强制 status=active 时必须非空"
+
+optional_fields:
+  consumed_by_manual:                                  # 原则 3 接入证据
+    type: array
+    items: {type: object, properties: {path: string, reason: string}}
+  affects_when_broken: {type: array, items: string}    # 防御性, 高风险才填
+  depends_on:          {type: array, items: string}    # 读什么真源
+  expected_lifecycle:  {type: array, items: string}    # 原则 7 废除路径
+  superseded_by:       {type: string_or_null}
+  tags:                {type: array, items: string}    # 原则 5 可索引
+
+  # === 兼容旧字段 ===
+  description:    {type: string, max_length: 200}
+  method:         {type: string}
+  tests:          {type: array, items: string}
+  phases:         {type: array, items: string}
+  callers:        {type: array}
+  version:        {type: string}
+  transient:      {type: bool, default: false}
+
+derived_fields:                                        # 机器派生, 进 _registry_resolved.yml
+  consumed_by_auto:    {type: array, generated_by: "register.py --infer (ast.parse + grep)"}
+  consumed_by_resolved: {type: array, generated_by: "merge(auto, manual)"}
+  # === R10 Codex 盲点修: 证据新鲜度 ===
+  last_verified:       {type: date}
+  verified_by:         {type: enum, values: [ast_parse, grep, manual, ci_hook, test_run]}
+  verification_method: {type: string, description: "具体怎么验证的, e.g. 'grep \\b{name}\\b 在 _code/_pipelines/'"}
+  # === R11 Gemini 盲点修: 物理对齐 ===
+  wired_up_in_physical: {type: bool, description: "wired_up_in 指向位置是否真存在 + 被调用 (lint hook 物理读代码验证)"}
+  # === verification 状态 ===
+  verification:
+    type: object
+    properties:
+      status_ok:           {type: bool}
+      active_has_callers:  {type: bool}
+      tests_found:         {type: bool}
+      wired_up_physical:   {type: bool}    # R11 新加: 物理对齐确认
+
+lint_rules:                                            # 原则 9 DoD 真证据
+  - rule: new_function_must_fill_v2
+    enforce: "新 entry 必须含 name/type/module/line/why/status/introduced_in"
+  - rule: status_active_must_have_wired_up
+    enforce: "status=active 时 wired_up_in 非空 + consumed_by_manual 非空"
+    rationale: "防 v7.4 R07 commit edc8c88 半成品再发生 (Phase 6a 端点加了但 launcher fetch 漏)"
+  - rule: orphan_quarantine
+    enforce: "status=active && consumed_by_auto 空 && 非当前 phase → 30 天必转 deprecated 或补 manual"
+    severity: warn
+  # === R10+R11 共识新加: 状态机跃迁合法性 lint ===
+  - rule: state_transition_validity
+    enforce: "禁止 stub→active 无 wired_up_in 直跳 / 禁止 active→stub (走 wip) / archived 不许回 active"
+    rationale: "两份审议共识 — 状态机注释不够, 必须落 lint 强制"
+  # === R10+R11 共识: deprecated 必须有继任者 ===
+  - rule: deprecated_must_have_successor
+    enforce: "status=deprecated 时 superseded_by 或 removal_reason 二选一必填"
+    rationale: "防管杀不管埋 — 弃用没说后续怎么办"
+  # === R11 Gemini 盲点修: 物理对齐 ===
+  - rule: wired_up_physical_alignment
+    enforce: "lint hook 真去代码库 grep wired_up_in 指向的 commit/file, 验证调用真存在"
+    severity: warn  # 离线 lint 跑慢, 默认 warn 不阻塞 commit, weekly CI 强制
+    rationale: "防 wired_up_in 字段填了但物理代码已删 (R11 Gemini 盲点)"
+  # === R10 Codex 盲点修: 同名函数冲突 ===
+  - rule: unique_by_module_name
+    enforce: "registry primary_key = module + ':' + name, 不允许 module 内同名 (但跨 module 可同名)"
+    rationale: "防多 module 都有 main 函数互相覆盖 (R10 Codex 盲点)"

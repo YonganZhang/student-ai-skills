@@ -1,0 +1,1 @@
+{"job_id":"export-images","job_type":"export_only","project_id":"替换为 Banana project_id","export":{"formats":["images"],"filename_prefix":"export-images"},"policy":{"continue_on_error":false,"timeout_sec":900}}

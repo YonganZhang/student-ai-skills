@@ -1,0 +1,69 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "mattpocock/skills",
+      "paths": [
+        "skills/productivity/handoff/SKILL.md"
+      ],
+      "absorbed_commit": "c55ee46073ed923f86ce59a5eb3b6d895095d1b7",
+      "absorbed_at": "2026-09-23",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/mattpocock-handoff.md",
+        "references/absorbed/mattpocock-LICENSE.txt"
+      ],
+      "watch": true,
+      "note": "2026-09-23 复核上游三次修订后语义对齐；不采纳“只存 OS 临时目录”；skills/in-progress/claude-handoff 未吸收",
+      "license": "MIT"
+    },
+    {
+      "repo": "github/spec-kit",
+      "paths": [
+        "templates/commands/analyze.md",
+        "templates/commands/converge.md"
+      ],
+      "absorbed_commit": "d848fb4e18f44640ad6b42e60a280551ee90cdce",
+      "absorbed_at": "2026-09-14",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/spec-kit-coverage.md"
+      ],
+      "watch": true,
+      "note": "",
+      "license": "MIT"
+    },
+    {
+      "repo": "OthmanAdi/planning-with-files",
+      "paths": [
+        "skills/planning-with-files/SKILL.md",
+        "skills/planning-with-files/templates/task_plan.md",
+        "skills/planning-with-files/scripts/check-complete.sh",
+        "skills/planning-with-files/scripts/gate-stop.sh",
+        "skills/planning-with-files/scripts/inject-plan.py",
+        "hooks/hooks.json",
+        "hooks/codex-hooks.json",
+        "docs/workflow.md",
+        "docs/cache-safe-diagram.md",
+        "skills/i18n/planning-with-files-zh/templates/task_plan.md"
+      ],
+      "absorbed_commit": "4d24d9a8a2baa55a15e7f8f9ec6da8d19793ee8c",
+      "absorbed_at": "2026-09-26",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/planning-with-files.md",
+        "references/absorbed/planning-with-files-LICENSE.txt",
+        "scripts/top_plan.py",
+        "scripts/sixone-cli.py",
+        "scripts/top-session-hint.py",
+        "templates/minimal/_wiki-methodology/_top/_task_plan.md",
+        "SKILL.md",
+        "references/plan-writing.md",
+        "scripts/top_common.py"
+      ],
+      "watch": true,
+      "note": "2026-09-26 复核到 v3.20.8（3b7690e 之后 12 个提交均为 Cursor/Gemini/PowerShell 适配与 check-complete 无计划静默，不吸收），补吸收“计划即目录”（Goal / 当前 / ### 阶段 + 勾选步骤 / 关键问题 / 决定 / 错误）与 smart injection 的核心字段：目录格式计划、plan phase/goal/migrate、每轮提示只给核心、卡片默认只显示核心。吸收：阶段式计划模板（阶段=父任务、单一下一步）、plan insert/replan（改计划并给 change_summary）、3 次失败协议（第 3 条 fail 笔记 escalate）、不重复失败动作、2-Action Rule、每轮一行带下一步与 24h 内失败、PreCompact/SessionStart(compact) 恢复卡、可选完成门（top.stopGate，只提醒不拦截）。刻意不吸收：计划文件默认不进 Git（我们计划随提交入库）、每次工具调用注入计划（token 成本）、.planning 多计划与 PLAN_ID 选择（我们是项目级单计划 + CAS）、attestation 锁定（Git + CAS 已可追溯，重锁负担大）、Stop 硬拦截与防失控计数（hook 不拦截）、session-catchup 读会话记录（隐私；漏记由 Git 发现）、/plan-goal /plan-loop 与多宿主适配。无原样照搬的代码文件，对照表见 references/absorbed/planning-with-files.md。",
+      "license": "MIT"
+    }
+  ]
+}

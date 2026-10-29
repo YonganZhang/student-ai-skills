@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "title": "方法框架：原方法与扩展接入",
+  "caption": "布局示例，按真实方法修改；图中的计算关系不代表已经运行或验证。",
+  "sources": ["_wiki-methodology/_wiki/_methods/method.md"],
+  "nodes": [
+    {"id": "input", "label": "共同输入\n定义、范围与版本", "role": "input", "bounds": [60, 160, 360, 110]},
+    {"id": "core", "label": "原有计算\n保留原方法与来源", "role": "core", "bounds": [550, 160, 360, 110]},
+    {"id": "output", "label": "核心输出\n明确评价对象与尺度", "role": "output", "bounds": [1040, 160, 360, 110]},
+    {"id": "extension", "label": "新增过程\n有依据的模块与接口", "role": "extension", "bounds": [60, 410, 360, 110]},
+    {"id": "reference", "label": "独立参照\n同对象的比较方法", "role": "reference", "bounds": [550, 410, 360, 110]},
+    {"id": "candidate", "label": "接入候选\n需要定义或标定的转换", "role": "pending", "bounds": [1040, 410, 360, 110]}
+  ],
+  "edges": [
+    {"id": "input_core", "source": "input", "target": "core", "label": "原输入", "kind": "flow"},
+    {"id": "core_output", "source": "core", "target": "output", "label": "计算结果", "kind": "flow"},
+    {"id": "input_extension", "source": "input", "target": "extension", "label": "共享输入", "kind": "flow", "ports": [0.5, 1, 0.5, 0]},
+    {"id": "extension_reference", "source": "extension", "target": "reference", "label": "同对象结果", "kind": "flow"},
+    {"id": "output_candidate", "source": "output", "target": "candidate", "label": "原方法约束", "kind": "reference", "ports": [0.5, 1, 0.5, 0]},
+    {"id": "extension_candidate", "source": "extension", "target": "candidate", "label": "待确定的接入", "kind": "pending", "ports": [0.5, 1, 0.5, 1], "via": [[240, 600], [1220, 600]]}
+  ]
+}

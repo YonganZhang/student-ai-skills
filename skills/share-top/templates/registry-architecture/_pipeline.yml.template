@@ -1,0 +1,17 @@
+# _pipelines/_<name>.yml — 一条"线" (有序扣子串) · 跨项目模板
+#
+# 线 = 顺序 + 依赖; 扣子真源在 _meta/_registry.yml (函数 docstring 写时标记派生)。
+# 本文件只 `ref` 引用扣子 id, 不复制入口/描述 (避免第二真源)。
+# 跑: python _code/run_pipeline.py <name> [--validate|--from <step>]
+
+pipeline: <name>                      # 必填: 用户喊它的命令名
+desc: "一行: 给谁用 / 产出什么"        # 必填注释
+status: wip                           # active|wip|deprecated|archived
+lock_dirs: []                         # 可选: 禁止任何步骤改写的数据真源目录 (LOCK 保护)
+data_roots: [_outputs, _figures]      # 可选: needs/produces 搜索根 (默认 _outputs/_figures/derived)
+
+steps:
+  - id: <local_alias>                 # 线内别名
+    ref: <registry_id>                # 指向 registry 扣子 (如 module_stem.func)
+    needs: [<input_file>]             # 依赖输入 (上游 produces 或外部源)
+    success: { outputs_exist: [<output_file>] }   # 跑完必须新生成的产物

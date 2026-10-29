@@ -1,0 +1,45 @@
+{
+  "kind": "manual_semantic_replay_not_accuracy_score",
+  "cases": [
+    {
+      "request": "给新PDF建立可重复OCR接口",
+      "expected": "dev-find-wheels",
+      "avoid": "从零写OCR网络"
+    },
+    {
+      "request": "做视频理解先比较成熟SDK",
+      "expected": "dev-find-wheels",
+      "avoid": "自写视频模型"
+    },
+    {
+      "request": "摄像头人脸识别先找包",
+      "expected": "dev-find-wheels",
+      "avoid": "未经选择部署新主栈"
+    },
+    {
+      "request": "把现有已选ms-swift配方换数据",
+      "expected": "reuse_existing",
+      "avoid": "重复要求选型"
+    },
+    {
+      "request": "修正README一个拼写",
+      "expected": "direct_edit",
+      "avoid": "全面选型"
+    },
+    {
+      "request": "解释LoRA是什么",
+      "expected": "direct_explanation",
+      "avoid": "安装依赖"
+    },
+    {
+      "request": "研究一个明确指定的新损失",
+      "expected": "native_extension_with_controls",
+      "avoid": "禁止算法研究"
+    },
+    {
+      "request": "已选OCR可处理同类新PDF，是否重新比较三家？",
+      "expected": "reuse_existing_without_research_or_comparison_table",
+      "avoid": "read_all_references_or_repeat_selection"
+    }
+  ]
+}

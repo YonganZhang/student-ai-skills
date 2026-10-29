@@ -1,0 +1,36 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "github/spec-kit",
+      "paths": [
+        "templates/commands/converge.md"
+      ],
+      "absorbed_commit": "d848fb4e18f44640ad6b42e60a280551ee90cdce",
+      "absorbed_at": "2026-09-14",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/spec-kit-convergence.md"
+      ],
+      "watch": true,
+      "note": "",
+      "license": "MIT"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "paths": [
+        "skills/engineering/code-review/SKILL.md"
+      ],
+      "absorbed_commit": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d",
+      "absorbed_at": "2026-10-07",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/mattpocock-two-axis-review.md",
+        "SKILL.md"
+      ],
+      "watch": true,
+      "note": "不采纳 issue tracker 与 setup-matt-pocock-skills 依赖，需求来源改为 TOP/wiki/specs。",
+      "license": "MIT"
+    }
+  ]
+}

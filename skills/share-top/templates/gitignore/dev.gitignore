@@ -1,0 +1,70 @@
+# ===================== 公共段（科研/开发通用） =====================
+# 原则：写出来的（代码、配置、论文、TOP 记录）进 Git；机器算出来的不进，只追踪"配方"
+# （脚本 + 配置 + _meta/_data_registry.yml 登记）；环境、缓存、凭证永不进。
+# 自查：python3 ~/.claude/skills/share-top/scripts/sixone-cli.py track <仓库> --markdown
+
+# --- 凭证：进了历史就只能轮换密钥。示例配置写成 .env.example 提交 ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+credentials.json
+
+# --- 环境 / 缓存：可由依赖清单重建；追踪 pyproject.toml / requirements*.txt / uv.lock / package.json 等配方 ---
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[co]
+*.egg-info/
+.eggs/
+.tox/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.julia_depot/
+.cache/
+.gradle/
+.serena/
+.playwright-cli/
+.codegraph/
+.worktrees/
+
+# --- 系统垃圾 ---
+.DS_Store
+Thumbs.db
+
+# --- 临时与测试证据：_tmp 是中间态；_artifacts 是截图/录像/trace，结论写进 TOP 记录即可 ---
+/_tmp/*
+!/_tmp/_readme.md
+**/_artifacts/
+
+# --- 模型权重：追踪训练脚本 + 配置 + 权重在哪（登记到 data registry），不追踪权重本身 ---
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+
+# ===================== 开发段 =====================
+# --- 构建产物与覆盖率：由构建脚本/CI 重建，追踪构建配置即可 ---
+/dist/
+/build/
+/coverage/
+/htmlcov/
+.next/
+.nuxt/
+
+# --- 测试证据（截图/录像/trace）：公共段 **/_artifacts/ 已覆盖，这里显式写出便于检索 ---
+/_tests/_artifacts/
+
+# --- 测试 fixtures 是写出来的输入，保持追踪（即使是小的二进制/权重） ---
+!**/fixtures/**/*.pt
+!**/fixtures/**/*.pth
+!**/fixtures/**/*.ckpt
+!**/fixtures/**/*.safetensors
+!**/fixtures/**/*.onnx

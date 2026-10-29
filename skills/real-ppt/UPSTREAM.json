@@ -1,0 +1,16 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "JetBrains/skills",
+      "paths": ["slides/SKILL.md"],
+      "absorbed_commit": "985a353f81a79d5c6c2823fe80caf8bb06e96263",
+      "absorbed_at": "2026-09-27",
+      "mode": "semantic",
+      "local_paths": ["references/authoring-and-qa.md"],
+      "watch": true,
+      "note": "Adapted the editable PptxGenJS and render/overflow/font QA workflow. Did not vendor upstream scripts; local skill splits image-PPT and scientific-figure responsibilities.",
+      "license": "Apache-2.0"
+    }
+  ]
+}

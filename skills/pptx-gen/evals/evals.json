@@ -1,0 +1,113 @@
+{
+  "skill_name": "pptx-gen",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "用我的ChatGPT订阅做一页完整PPT图片。",
+      "expected_output": "Loads content-pptx-gen plus image workflow/design; checks available official image tool; generates a complete white-background, substantive slide, visually checks it and records actual tool and size. If capability is missing, reports the gap and preserves prompts instead of drawing via code.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "把这些图片放进PPT，写好备注发给我。",
+      "expected_output": "Creates a PPTX with one whole-slide image and speaker notes per page, reopens and validates image/notes mapping, delivers PPTX.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "改这个PPT里的可编辑文字。",
+      "expected_output": "Routes to real-ppt; does not flatten editable objects.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "按之前的反馈把不好的旧页改好，补足研究目标和研究内容。",
+      "expected_output": "Checks requested pages, regenerates incorrect pages, explicitly labels research goals/content, and returns full revised deck.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "只要PPT图片，不要PPT文件。",
+      "expected_output": "Generates complete slide images with built-in tool and delivers requested PNGs; packaging reports true size, does not claim 4K from prompt alone.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "内置图片工具限流了，继续做PPT。",
+      "expected_output": "Preserves progress and reports limit; no automatic FAL or unofficial OAuth fallback.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "你要用技能生成PPT图片，做一页介绍这个方法，然后放进PPT。",
+      "expected_output": "Selects content-pptx-gen before coding; reads image workflow and design; whole-slide image generation with white background and substantive explanation, then PPTX and notes. Does not substitute content-real-ppt or HTML screenshots.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "你是DeepSeek，用PPT图片生成技能做汇报。这次工具只有skill、read_image和bash。",
+      "expected_output": "Loads content-pptx-gen despite missing image tool, distinguishes reading from generation; preserves content/prompts/notes and reports image generation unavailable; no fabricated success, HTML/PptxGenJS substitute, paid fallback or unapproved delegation.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "这张生成出来的PPT图是黑底，但我没要求黑底，先修好再装PPT。",
+      "expected_output": "Inspects the actual image and regenerates/edits through the selected image tool to default white; verifies the result before assembly. Merely saying the prompt requested white does not pass.",
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "这套PPT参考图是黑金风格，只借它的构图，帮我生图。",
+      "expected_output": "Keeps default white background, borrows layout only; does not inherit dark canvas from the reference.",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "这次我明确要深蓝背景的图片型幻灯片。",
+      "expected_output": "Uses content-pptx-gen and user-requested dark blue background; does not force white default.",
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "在PPT里画流程图，框线和文字都要能编辑。",
+      "expected_output": "Routes to content-real-ppt / editable diagram workflow; does not choose image generation solely due to PPT绘图 wording.",
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "生成PPT图片，另外也给我一份能改文字的重建稿。",
+      "expected_output": "Generates real images first, then paired editable reconstruction; does not deliver native objects alone.",
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "已有PNG，原样放进PPT，每页补演讲备注。",
+      "expected_output": "Assembles supplied images without regenerating or reconstructing; checks mapping and notes, retains original style.",
+      "files": []
+    },
+    {
+      "id": 15,
+      "prompt": "根据实验CSV画误差曲线放进汇报，不要改变数值。",
+      "expected_output": "Uses reproducible data plotting and exact image insertion; never lets image generation fabricate curve values.",
+      "files": []
+    },
+    {
+      "id": 16,
+      "prompt": "这页很空，只有三个图标和一句口号，按图片PPT技能补充信息。",
+      "expected_output": "Adds relevant facts, mechanism/relationships and explanations to page prompt and regenerates; does not rely solely on notes or arbitrary word-count stuffing.",
+      "files": []
+    },
+    {
+      "id": 17,
+      "prompt": "做一页说明实验管理流程的PPT图片；还没有实验结果，不要编结果。",
+      "expected_output": "Loads image-PPT workflow, explicitly constrains the image prompt to supported process/relationships; no invented source/version placeholders or comparative result bars. Any qualitative schematic is labelled on-image, not only in notes. A failed visual check remains incomplete even if PPTX assembly succeeds.",
+      "files": []
+    },
+    {
+      "id": 18,
+      "prompt": "生图工具已经返回image_url和output_hint，但这轮还没保存PNG，继续完成这一页，不能重新生图。",
+      "expected_output": "Handles the actual host return type, preserves/forwards it through generatedImage/store when available; checks the returned path or exact session generation folder, verifies image provenance/content before copying and assembly. Does not assume MCP content or claim lost output without checking existing artifacts.",
+      "files": []
+    }
+  ]
+}

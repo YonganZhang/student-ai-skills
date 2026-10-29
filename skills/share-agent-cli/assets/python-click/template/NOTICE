@@ -1,0 +1,10 @@
+Project packaging layout and test approach adapted from simonw/click-app.
+Upstream: https://github.com/simonw/click-app
+Commit: 84298e257d70d461866f0afb5458baa12d99f8f2
+Author: Simon Willison and click-app contributors
+License: Apache-2.0 (full text in LICENSE)
+
+Local adaptations: Copier generation, src layout, stable JSON and failure
+contract, installed-package version source, behavioral tests, and test/build
+CI without an automatic release job. CLI example and adaptations authored
+for the shared CLI workflow; the example must be adapted to the target business.

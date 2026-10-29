@@ -1,0 +1,26 @@
+# Packaging layout adapted from simonw/click-app; see NOTICE.
+[project]
+name = {{ command_name | tojson }}
+version = "0.1.0"
+description = {{ description | tojson }}
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.10"
+dependencies = ["click>=8.2,<9"]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project.scripts]
+{{ command_name | tojson }} = "{{ command_name.removesuffix('-cli') | replace('-', '_') }}_cli.cli:cli"
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

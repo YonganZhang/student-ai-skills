@@ -1,0 +1,19 @@
+name: Test and build
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - run: python -m venv .venv
+      - run: .venv/bin/python -m pip install '.[test]' build
+      - run: .venv/bin/python -m pytest
+      - run: .venv/bin/python -m build

@@ -1,0 +1,45 @@
+"""Read-only business example. Replace inspect with the requested domain work."""
+
+import errno
+import json
+from pathlib import Path
+import stat
+
+import click
+
+
+@click.group(name={{ command_name | tojson }}, no_args_is_help=False)
+@click.version_option(package_name={{ command_name | tojson }})
+@click.option("--json", "json_output", is_flag=True, help="成功结果输出 JSON")
+@click.pass_context
+def cli(ctx, json_output):
+    """只读查询工具；业务与输出契约见 README。"""
+    ctx.obj = {"json": json_output}
+
+
+def inspect_path(path):
+    try:
+        target = path.resolve(strict=True)
+    except RuntimeError as error:
+        raise OSError(errno.ELOOP, "路径存在软链环", str(path)) from error
+    info = target.stat()
+    kind = "directory" if stat.S_ISDIR(info.st_mode) else (
+        "file" if stat.S_ISREG(info.st_mode) else "other"
+    )
+    return {"path": str(target), "kind": kind, "size_bytes": info.st_size}
+
+
+@cli.command()
+@click.argument("path", type=click.Path(path_type=Path, readable=False))
+@click.option("--json", "json_output", is_flag=True, help="成功结果输出 JSON")
+@click.pass_context
+def inspect(ctx, path, json_output):
+    """查看一个文件或目录的元信息，跟随软链。"""
+    try:
+        result = inspect_path(path)
+    except OSError as error:
+        raise click.ClickException(f"读取失败：{error}；检查路径及访问权限。") from error
+    if json_output or ctx.find_root().obj["json"]:
+        click.echo(json.dumps({"schema_version": 1, "ok": True, "data": result}, ensure_ascii=False))
+    else:
+        click.echo(f"{result['kind']}  {result['size_bytes']} bytes  {result['path']}")

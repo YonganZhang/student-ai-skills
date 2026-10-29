@@ -1,0 +1,10 @@
+{
+  "status": "PENDING_SELECTION",
+  "capability": "SET",
+  "selected_by": "SET_USER_DECISION_REFERENCE",
+  "upstream": [{"repository": "SET", "commit_or_package_version": "SET", "license_file": "SET", "model_license": "SET_OR_NOT_APPLICABLE", "official_docs": ["SET"], "original_example": "SET", "sha256": "SET"}],
+  "documentation_snapshots": [{"url": "SET", "retrieved_at": "SET", "local_path": "SET", "sha256": "SET"}],
+  "adapters": [{"path": "SET", "reason": "SET", "input_output_contract": "SET", "verified_scope": "UNVERIFIED"}],
+  "tests_and_failures": [],
+  "remaining": ["SET"]
+}

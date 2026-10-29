@@ -1,0 +1,78 @@
+import json
+from importlib.metadata import version
+
+from click.testing import CliRunner
+import pytest
+
+from {{ command_name.removesuffix('-cli') | replace('-', '_') }}_cli.cli import cli
+
+
+@pytest.mark.parametrize("args", [["--help"], ["inspect", "--help"]])
+def test_help(args):
+    result = CliRunner().invoke(cli, args)
+    assert result.exit_code == 0
+    assert "inspect" in result.stdout
+    assert result.stderr == ""
+
+
+def test_installed_version():
+    result = CliRunner().invoke(cli, ["--version"])
+    assert result.exit_code == 0
+    expected_version = version({{ command_name | tojson }})
+    assert f"version {expected_version}" in result.stdout
+
+
+@pytest.mark.parametrize("prefix", [True, False])
+def test_json_and_read_only(tmp_path, prefix):
+    target = tmp_path / "样本 data.txt"
+    target.write_bytes(b"abc")
+    args = ["--json", "inspect", str(target)] if prefix else ["inspect", str(target), "--json"]
+    result = CliRunner().invoke(cli, args)
+    assert result.exit_code == 0
+    assert result.stderr == ""
+    assert json.loads(result.stdout) == {
+        "schema_version": 1, "ok": True,
+        "data": {"path": str(target), "kind": "file", "size_bytes": 3},
+    }
+    assert target.read_bytes() == b"abc"
+
+
+def test_text_result(tmp_path):
+    result = CliRunner().invoke(cli, ["inspect", str(tmp_path)])
+    assert result.exit_code == 0
+    assert "directory" in result.stdout
+    assert result.stderr == ""
+
+
+@pytest.mark.parametrize("args", [[], ["inspect"], ["unknown"], ["inspect", ".", "--invalid"]])
+def test_usage_failure(args):
+    result = CliRunner().invoke(cli, args)
+    assert result.exit_code == 2
+    assert result.stdout == ""
+    assert result.stderr
+
+
+@pytest.mark.parametrize("flags", [[], ["--json"]])
+def test_missing_target(tmp_path, flags):
+    result = CliRunner().invoke(cli, ["inspect", str(tmp_path / "absent"), *flags])
+    assert result.exit_code == 1
+    assert result.stdout == ""
+    assert "读取失败" in result.stderr
+
+
+def test_symlink_loop(tmp_path):
+    loop = tmp_path / "loop"
+    loop.symlink_to("loop")
+    result = CliRunner().invoke(cli, ["inspect", str(loop), "--json"])
+    assert result.exit_code == 1
+    assert result.stdout == ""
+    assert "读取失败" in result.stderr
+    assert "Traceback" not in result.stderr
+
+
+def test_option_like_path(tmp_path, monkeypatch):
+    (tmp_path / "--json").write_bytes(b"x")
+    monkeypatch.chdir(tmp_path)
+    result = CliRunner().invoke(cli, ["inspect", "--", "--json"])
+    assert result.exit_code == 0
+    assert "1 bytes" in result.stdout
