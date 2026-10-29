@@ -26,7 +26,10 @@ SCHEMA = "skill-upstream/v1"
 DEFAULT_ROOT = Path(__file__).resolve().parents[2]
 SKIP_DIRS = {"_legacy", "node_modules", ".git", "__pycache__"}
 REQUIRED = ("repo", "paths", "absorbed_commit", "absorbed_at", "mode", "local_paths", "watch", "note")
-OPTIONAL = ("license",)
+OPTIONAL = ("license", "url")
+# Other declared record formats with their own checks (e.g. per-file snapshot manifests verified by
+# the owning skill's tests); the linter skips them instead of forcing them into skill-upstream/v1.
+OTHER_SCHEMAS = {"vendored-snapshot/v1"}
 MODES = ("vendored", "semantic")
 GH_TIMEOUT = 20
 
@@ -57,6 +60,8 @@ def lint_record(path: Path) -> tuple[list[dict], list[str]]:
         return [], [f"{path}: unreadable JSON: {exc}"]
     if not isinstance(data, dict):
         return [], [f"{path}: top level must be an object"]
+    if data.get("schema") in OTHER_SCHEMAS:
+        return [], []
     extra_top = set(data) - {"schema", "sources"}
     if extra_top:
         errors.append(f"{path}: unknown top-level keys {sorted(extra_top)}")

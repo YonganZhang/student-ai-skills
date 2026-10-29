@@ -3,15 +3,18 @@
   "sources": [
     {
       "repo": "microsoft/playwright-cli",
+      "paths": [
+        "skills/playwright-cli/references/"
+      ],
+      "absorbed_commit": "83368cb3bfc0b2bd8ff8af4ade8e0107461ed421",
+      "absorbed_at": "2026-10-18",
+      "mode": "semantic",
+      "local_paths": [
+        "references/"
+      ],
+      "watch": true,
       "license": "Apache-2.0",
-      "license_file": "LICENSE",
-      "paths": ["skills/playwright-cli/references/"],
-      "absorbed_commit": "unknown (absorbed before 2026-10-18; licence text pinned at b1a5903c5b633b8c9f843ad7b629c2a78437040c)",
-      "license_pinned_commit": "b1a5903c5b633b8c9f843ad7b629c2a78437040c",
-      "mode": "adapted",
-      "local_paths": ["references/"],
-      "modifications": "References adapted from the upstream skill: translated or reworded for this workspace, machine-specific notes removed, local routing added. See NOTICE.md.",
-      "watch": true
+      "note": "absorbed_commit 为推断值：吸收时未记录提交，取 2026-10-18 前该路径的最后一次上游提交；LICENSE 文本固定于 b1a5903c5b633b8c9f843ad7b629c2a78437040c。references 改编自上游技能：翻译或改写、去掉机器专属说明、加本地路由，见 NOTICE.md 与 LICENSE。"
     }
   ]
 }

@@ -4,13 +4,21 @@
     {
       "repo": "Leonxlnx/taste-skill",
       "url": "https://github.com/Leonxlnx/taste-skill",
-      "paths": ["skills/taste-skill/SKILL.md", "LICENSE"],
+      "paths": [
+        "skills/taste-skill/SKILL.md",
+        "LICENSE"
+      ],
       "absorbed_commit": "3c7017d636c3a4aad378433ea6d0cfa6c921da4a",
       "absorbed_at": "2026-07-10",
       "mode": "semantic",
-      "local_paths": ["SKILL.md", "references/", "LICENSE"],
+      "local_paths": [
+        "SKILL.md",
+        "references/",
+        "LICENSE"
+      ],
       "license": "MIT",
-      "note": "Modified copy: upstream single file split into SKILL.md + references/ (text moved verbatim by share-project-provision/scripts/split_taste.py), local description and a pointer to the brand reference library. Copyright (c) 2026 Leonxlnx; see LICENSE."
+      "note": "Modified copy: upstream single file split into SKILL.md + references/ (text moved verbatim by share-project-provision/scripts/split_taste.py), local description and a pointer to the brand reference library. Copyright (c) 2026 Leonxlnx; see LICENSE.",
+      "watch": true
     }
   ]
 }

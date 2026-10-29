@@ -2,22 +2,6 @@
   "schema": "skill-upstream/v1",
   "sources": [
     {
-      "repo": "lwmxiaobei/xiaobei-skills",
-      "paths": [
-        "codex-image/SKILL.md",
-        "codex-image/LEGAL.md",
-        "codex-image/references/cli.md"
-      ],
-      "absorbed_commit": "a23857890cf7f3a0dafac7d5dc0c16546c19916a",
-      "absorbed_at": "2026-09-06",
-      "mode": "semantic",
-      "local_paths": [
-        "(retired; archive not shipped)"
-      ],
-      "watch": false,
-      "note": "历史订阅客户端资料已退役；当前使用宿主官方内置图片工具。"
-    },
-    {
       "repo": "Kevinyyy1/image-to-editable-pptx-v2",
       "paths": [
         "skill/image-to-editable-pptx/references/qa-contract.md",

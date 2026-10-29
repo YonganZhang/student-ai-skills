@@ -8,7 +8,7 @@ license: Complete terms in LICENSE.txt
 
 ## 本地设计依据
 
-先读取项目已有设计规范和样式变量。用户指定品牌风格、要选设计参考或明确使用 awesome-design-md 时，读取 `share-project-provision` 技能目录下的 `references/design-reference-library.md`（Claude `~/.claude/skills/`，Codex `~/.agents/skills/`），按页面类型选择、核对并适配；完成后继续本技能流程。普通业务界面修改沿用项目视觉。
+先读取项目已有设计规范和样式变量。用户指定品牌风格、要选设计参考或明确使用 awesome-design-md 时，读取 `share-project-provision` 技能目录下的 `references/design-reference-library.md`（Claude `~/.claude/skills/`，Codex `~/.agents/skills/`），按页面类型选择、核对并适配；完成后继续本技能流程。该参考库随 `share-project-provision` 安装，没装时跳过这一步，沿用项目现有视觉，并提示用户可安装它。普通业务界面修改沿用项目视觉。
 
 Approach this as the design lead at a design studio known for giving every client a distinct visual identity that is not mistaken for anyone else's. This client has already rejected proposals that felt cliché or templated, and is paying for a distinctive point of view: make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief, and take aesthetic risk if justified.
 

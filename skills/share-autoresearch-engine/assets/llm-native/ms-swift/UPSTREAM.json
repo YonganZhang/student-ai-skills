@@ -1,4 +1,5 @@
 {
+  "schema": "vendored-snapshot/v1",
   "scope": "unmodified upstream reference source; not auto-executed",
   "sources": [
     {

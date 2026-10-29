@@ -205,3 +205,14 @@ def test_real_shared_records_pass_lint():
     findings, errors, summary = uw.run(SCRIPT.parents[1], remote=False)
     assert errors == []
     assert summary["records"] > 0
+
+
+def test_other_declared_schema_is_skipped_but_missing_schema_is_not(tmp_path):
+    other = tmp_path / "a" / "UPSTREAM.json"
+    other.parent.mkdir()
+    other.write_text(json.dumps({"schema": "vendored-snapshot/v1", "scope": "x", "sources": [{"path": "LICENSE"}]}))
+    assert uw.lint_record(other) == ([], [])
+    bare = tmp_path / "b" / "UPSTREAM.json"
+    bare.parent.mkdir()
+    bare.write_text(json.dumps({"scope": "x", "sources": [{"path": "LICENSE"}]}))
+    assert uw.lint_record(bare)[1]

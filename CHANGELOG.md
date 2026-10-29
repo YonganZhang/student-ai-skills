@@ -1,5 +1,10 @@
 # 更新记录
 
+## v1.3.1 (2026-10-29)
+
+- 所有技能的 `UPSTREAM.json` 来源记录统一为 `skill-upstream/v1` 格式，`share-skill-creator/scripts/upstream_watch.py --lint --root skills` 全包 0 错误；快照清单类记录声明自己的格式并由所属技能测试校验。
+- `frontend-design`、`design-taste-frontend`：说明设计参考库随 `share-project-provision` 安装，没装时跳过该步并沿用项目视觉。
+
 ## v1.3.0（2026-10-29）
 
 - 新增入门教程 [docs/TUTORIAL.md](docs/TUTORIAL.md)：技能是什么、渐进式披露、技能与 MCP 的区别、安装、使用示例、自己创建技能；README 开头提示新同学先读。
