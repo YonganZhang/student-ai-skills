@@ -1,0 +1,258 @@
+{
+  "repository": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+  "commit": "d9adbe0c2204144183f4651afeb1f42c75dc7c4b",
+  "imported": "2026-09-16",
+  "license": "MIT",
+  "skills": [
+    "experiment-plan",
+    "experiment-bridge",
+    "run-experiment",
+    "monitor-experiment",
+    "training-check",
+    "experiment-audit",
+    "result-to-claim",
+    "ablation-planner",
+    "research-review",
+    "auto-review-loop"
+  ],
+  "note": "Byte-identical upstream content. Local directories use aris-*; SKILL.md renamed REFERENCE.md to avoid extra global skill metadata. Upstream names/frontmatter retained for attribution, not runtime registration. Local execution policy: ../README.md. No installer or MCP server installed.",
+  "files": [
+    {
+      "source": "tools/evidence_check.py",
+      "local": "tools/evidence_check.py",
+      "sha256": "2edbd901d760d22e7e43a14e8e88ab0e089303f489055cd9b5e9d1f4dce50382"
+    },
+    {
+      "source": "tests/test_evidence_check.py",
+      "local": "tests/test_evidence_check.py",
+      "sha256": "cc182ce17a3b91b1a3ca6534aa05931cc4f9a14fa1eb6b6281a17b47201a832d"
+    },
+    {
+      "source": "skills/experiment-plan/SKILL.md",
+      "local": "skills/aris-experiment-plan/REFERENCE.md",
+      "sha256": "c5b53692ff95b0b55e80702e33afc79d9fe8d4f55a69e2a39714013f97ac595e"
+    },
+    {
+      "source": "skills/experiment-bridge/SKILL.md",
+      "local": "skills/aris-experiment-bridge/REFERENCE.md",
+      "sha256": "595d41fee920c7dafb920e89d8e33c0c3967704f84457786432aaadc920767a0"
+    },
+    {
+      "source": "skills/run-experiment/SKILL.md",
+      "local": "skills/aris-run-experiment/REFERENCE.md",
+      "sha256": "4d481ce95d8bcadb93b095c3dd9bda51d68b6edea6b710316d6c0c74bb5bcfa8"
+    },
+    {
+      "source": "skills/monitor-experiment/SKILL.md",
+      "local": "skills/aris-monitor-experiment/REFERENCE.md",
+      "sha256": "0527977308bb7b26139ffb56cd2d45ecc72a9dd2961073ad51fac4aac106961d"
+    },
+    {
+      "source": "skills/training-check/SKILL.md",
+      "local": "skills/aris-training-check/REFERENCE.md",
+      "sha256": "b4f27bbc58aaae314d8c51fe309fb41e42f47dce4f69ba07fac1ce7f0080c789"
+    },
+    {
+      "source": "skills/experiment-audit/SKILL.md",
+      "local": "skills/aris-experiment-audit/REFERENCE.md",
+      "sha256": "dd5c2405aaae472cf2020f16fbd1b02b431874d8353a65a8aa4c102a65f5aef2"
+    },
+    {
+      "source": "skills/result-to-claim/SKILL.md",
+      "local": "skills/aris-result-to-claim/REFERENCE.md",
+      "sha256": "ba53865e333fb05271ad116b94879d567d1e681f592dec2a7e8ae7eac6ef13d6"
+    },
+    {
+      "source": "skills/ablation-planner/SKILL.md",
+      "local": "skills/aris-ablation-planner/REFERENCE.md",
+      "sha256": "ce51bfff265e5f0a6e8fd03333bfa8dee679e728e0d325830988ca5bd31307da"
+    },
+    {
+      "source": "skills/research-review/SKILL.md",
+      "local": "skills/aris-research-review/REFERENCE.md",
+      "sha256": "85c75d2bef1f08e2e7d2e6a7f6bc0ae42faecf942d5314d25f17376e1292597f"
+    },
+    {
+      "source": "skills/auto-review-loop/SKILL.md",
+      "local": "skills/aris-auto-review-loop/REFERENCE.md",
+      "sha256": "5ffe1d2ae9a78350c52e7317fcad7d9fbd18ffeb2a6a244779d9dfa3c9573f4a"
+    },
+    {
+      "source": "skills/shared-references/acceptance-gate.md",
+      "local": "skills/shared-references/acceptance-gate.md",
+      "sha256": "acfe2e790d97445396ff4eb605b91e4de756082d617b89cf9278bff76dc25623"
+    },
+    {
+      "source": "skills/shared-references/assurance-contract.md",
+      "local": "skills/shared-references/assurance-contract.md",
+      "sha256": "01745ff874cf2e662ce1349f79fa7549db4d6f25182af86ef90b621d598b755b"
+    },
+    {
+      "source": "skills/shared-references/capture-antipatterns.md",
+      "local": "skills/shared-references/capture-antipatterns.md",
+      "sha256": "419b914ade074842b815bff5133c18993a31305ca36e40b08918856777857378"
+    },
+    {
+      "source": "skills/shared-references/citation-discipline.md",
+      "local": "skills/shared-references/citation-discipline.md",
+      "sha256": "01fc1cf751d7e0e6bef04897df6ef1bcf1e1b20e5b56d9f208e020cc48ba6725"
+    },
+    {
+      "source": "skills/shared-references/compute-env-contract.md",
+      "local": "skills/shared-references/compute-env-contract.md",
+      "sha256": "293606bcf6281712e0f5e1a05be9b67e001f2e5b567e2a956e2099de9c648974"
+    },
+    {
+      "source": "skills/shared-references/effort-contract.md",
+      "local": "skills/shared-references/effort-contract.md",
+      "sha256": "c1cb84a099d7d465ce71e0fc6c8fe7449c8273072b4cb977e0e58744d767f482"
+    },
+    {
+      "source": "skills/shared-references/evidence-precheck.md",
+      "local": "skills/shared-references/evidence-precheck.md",
+      "sha256": "919a437a2e4a618ff6bcac6c03b7ec12bde3fef33d1a2aea25c9d98fcbd5e2d2"
+    },
+    {
+      "source": "skills/shared-references/experiment-integrity.md",
+      "local": "skills/shared-references/experiment-integrity.md",
+      "sha256": "22150fbdc5867e7790c88f968bccb367079c2db4c190ddce980709aea7e76f60"
+    },
+    {
+      "source": "skills/shared-references/external-cadence.md",
+      "local": "skills/shared-references/external-cadence.md",
+      "sha256": "d0d8e92c9c8f5e60555c8ddf32cf15c78d0bdc61a367ef35d8b0fef8dab906f3"
+    },
+    {
+      "source": "skills/shared-references/fan-out-pattern.md",
+      "local": "skills/shared-references/fan-out-pattern.md",
+      "sha256": "a788fd9fdc88d8b8e1331bcd9c64979914a44cf69018e1ce5be4cfd071a240cb"
+    },
+    {
+      "source": "skills/shared-references/injection-hygiene.md",
+      "local": "skills/shared-references/injection-hygiene.md",
+      "sha256": "bcab2455e4327eaa4feb3810035d1bf6e6a3e352e329badcad6ed95e5fe534de"
+    },
+    {
+      "source": "skills/shared-references/integration-contract.md",
+      "local": "skills/shared-references/integration-contract.md",
+      "sha256": "891b4254337b6da02b25bef55cbe750e90f36fd7c8b537218e49febf6d69ddc0"
+    },
+    {
+      "source": "skills/shared-references/output-composition.md",
+      "local": "skills/shared-references/output-composition.md",
+      "sha256": "8de81708431091a21a641be5f91db7958bb9f9a4b85d4fe03f52c5b496948651"
+    },
+    {
+      "source": "skills/shared-references/output-language.md",
+      "local": "skills/shared-references/output-language.md",
+      "sha256": "7b326400dca5130ce4beedf72fc2010680afe96eb56a6ab21210d323adc9a52e"
+    },
+    {
+      "source": "skills/shared-references/output-manifest.md",
+      "local": "skills/shared-references/output-manifest.md",
+      "sha256": "28e29bc8e53c52afe4eeeb590df8893282a3bbced08e105e154ad228b6cd1922"
+    },
+    {
+      "source": "skills/shared-references/output-versioning.md",
+      "local": "skills/shared-references/output-versioning.md",
+      "sha256": "73a4269b537be728b0ecc35789f11fa6d1fafa6d0430d07ad2738f064b1e4da3"
+    },
+    {
+      "source": "skills/shared-references/patent-format-cn.md",
+      "local": "skills/shared-references/patent-format-cn.md",
+      "sha256": "e5be6c2c6fab3c84c795b53ca419198192b95f2c1ccd63833b5d0510a8f93c1f"
+    },
+    {
+      "source": "skills/shared-references/patent-format-ep.md",
+      "local": "skills/shared-references/patent-format-ep.md",
+      "sha256": "8cf58ac775fe524c230cd7f371abd0ce25eb774029129bc336f884026c58ba23"
+    },
+    {
+      "source": "skills/shared-references/patent-format-us.md",
+      "local": "skills/shared-references/patent-format-us.md",
+      "sha256": "13f179cc70fc8664f356d5258bdaa52a4cc577496e385e5ac5cdd421a12f4f65"
+    },
+    {
+      "source": "skills/shared-references/patent-writing-principles.md",
+      "local": "skills/shared-references/patent-writing-principles.md",
+      "sha256": "8c8dc8250948bd0741b792d350e3afdc686ed194a1bf02359fb0e55b81468d1d"
+    },
+    {
+      "source": "skills/shared-references/prior-art-databases.md",
+      "local": "skills/shared-references/prior-art-databases.md",
+      "sha256": "8225843987fbabb5f11788c19ed8a739f10691319865485d5cb876e7bc2a3cb7"
+    },
+    {
+      "source": "skills/shared-references/resumable-runs.md",
+      "local": "skills/shared-references/resumable-runs.md",
+      "sha256": "bf522bfed126b0db96dfb22ab84f0011ba6f79bedc4f6a28a3a40f67500abb61"
+    },
+    {
+      "source": "skills/shared-references/review-scope-limits.md",
+      "local": "skills/shared-references/review-scope-limits.md",
+      "sha256": "e383dbaa57aed6f8fd2c2bb6bcaefc6806648126d11b21cb6c39eeeec76100f6"
+    },
+    {
+      "source": "skills/shared-references/review-tracing.md",
+      "local": "skills/shared-references/review-tracing.md",
+      "sha256": "b531253ccee0414bde9e3d233e743d9dba9a4283cd40ec527c5863ba0fee6d44"
+    },
+    {
+      "source": "skills/shared-references/reviewer-independence.md",
+      "local": "skills/shared-references/reviewer-independence.md",
+      "sha256": "fbbfcb6e7ff53010b596e8e01ce456d1906734f5bd198745f76ccd62787af3e3"
+    },
+    {
+      "source": "skills/shared-references/reviewer-routing.md",
+      "local": "skills/shared-references/reviewer-routing.md",
+      "sha256": "948275890ca3a6c56fe6ebdc12ba39663df96778657e0cf1ddaefe39f83c21d8"
+    },
+    {
+      "source": "skills/shared-references/skill-governance.md",
+      "local": "skills/shared-references/skill-governance.md",
+      "sha256": "2da8e745ce5dc511206ab3a6a378a26d3bc6e4ca035c1f763f7a0b1793155c73"
+    },
+    {
+      "source": "skills/shared-references/taste-calibration.md",
+      "local": "skills/shared-references/taste-calibration.md",
+      "sha256": "245e12a52b6c013022ddbcd8c682e4e5290bda6e38ecc6f14d7b2eaeb2988af8"
+    },
+    {
+      "source": "skills/shared-references/venue-checklists.md",
+      "local": "skills/shared-references/venue-checklists.md",
+      "sha256": "712396be66d4db85f0038c5ff5479a5fc66db03bc7175c8ed931f7284802f4e2"
+    },
+    {
+      "source": "skills/shared-references/wiki-helper-resolution.md",
+      "local": "skills/shared-references/wiki-helper-resolution.md",
+      "sha256": "ef6af207034a2eea17d437ac2f4c620962f72960ae7a5bf0d00818e1bafc71c2"
+    },
+    {
+      "source": "skills/shared-references/writing-principles.md",
+      "local": "skills/shared-references/writing-principles.md",
+      "sha256": "25c71f6b76fad1a198b47b4eae9b1d101561578cc0a8767e91706957829f0abe"
+    },
+    {
+      "source": "templates/RESEARCH_CONTRACT_TEMPLATE.md",
+      "local": "templates/RESEARCH_CONTRACT_TEMPLATE.md",
+      "sha256": "e71ee594951a50aaa93b1644318c28a705d6fcf9780ca1f61030b1c1bb44696a"
+    },
+    {
+      "source": "LICENSE",
+      "local": "LICENSE",
+      "sha256": "e30cf5dd5f49b4f9b656590e23d782b4756c924a9f0ff0162b3e7b5d87006bf5"
+    }
+  ],
+  "local_skill_names": {
+    "experiment-plan": "aris-experiment-plan",
+    "experiment-bridge": "aris-experiment-bridge",
+    "run-experiment": "aris-run-experiment",
+    "monitor-experiment": "aris-monitor-experiment",
+    "training-check": "aris-training-check",
+    "experiment-audit": "aris-experiment-audit",
+    "result-to-claim": "aris-result-to-claim",
+    "ablation-planner": "aris-ablation-planner",
+    "research-review": "aris-research-review",
+    "auto-review-loop": "aris-auto-review-loop"
+  }
+}

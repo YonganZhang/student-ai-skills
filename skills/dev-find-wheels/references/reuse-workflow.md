@@ -10,7 +10,7 @@
 |---|---|
 | 查模型/数据源、接入或维护外部仓库 | 开发工具箱技能 `share-dev-toolkit`（可选，本包未包含）；未安装时按本技能流程直接核对上游仓库 |
 | 需要新CLI接口 | `~/.claude/skills/share-agent-cli/SKILL.md` |
-| DL/LLM训练、评估与发布 | 深度学习研究技能 `share-autoresearch-engine`（可选，本包未包含） |
+| DL/LLM训练、评估与发布 | `~/.claude/skills/share-autoresearch-engine/SKILL.md`；LLM保留其14环节 |
 | 文档转换、OCR或表格 | Office 工具技能 `share-office-tools`（可选，本包未包含） |
 | 确需安装项目能力模块 | `~/.claude/skills/share-project-provision/SKILL.md` |
 

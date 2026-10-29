@@ -1,0 +1,454 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "wanshuiyin/Auto-claude-code-research-in-sleep",
+      "paths": [
+        "tools/evidence_check.py",
+        "tests/test_evidence_check.py",
+        "skills/experiment-plan/SKILL.md",
+        "skills/experiment-bridge/SKILL.md",
+        "skills/run-experiment/SKILL.md",
+        "skills/monitor-experiment/SKILL.md",
+        "skills/training-check/SKILL.md",
+        "skills/experiment-audit/SKILL.md",
+        "skills/result-to-claim/SKILL.md",
+        "skills/ablation-planner/SKILL.md",
+        "skills/research-review/SKILL.md",
+        "skills/auto-review-loop/SKILL.md",
+        "skills/shared-references/acceptance-gate.md",
+        "skills/shared-references/assurance-contract.md",
+        "skills/shared-references/capture-antipatterns.md",
+        "skills/shared-references/citation-discipline.md",
+        "skills/shared-references/compute-env-contract.md",
+        "skills/shared-references/effort-contract.md",
+        "skills/shared-references/evidence-precheck.md",
+        "skills/shared-references/experiment-integrity.md",
+        "skills/shared-references/external-cadence.md",
+        "skills/shared-references/fan-out-pattern.md",
+        "skills/shared-references/injection-hygiene.md",
+        "skills/shared-references/integration-contract.md",
+        "skills/shared-references/output-composition.md",
+        "skills/shared-references/output-language.md",
+        "skills/shared-references/output-manifest.md",
+        "skills/shared-references/output-versioning.md",
+        "skills/shared-references/patent-format-cn.md",
+        "skills/shared-references/patent-format-ep.md",
+        "skills/shared-references/patent-format-us.md",
+        "skills/shared-references/patent-writing-principles.md",
+        "skills/shared-references/prior-art-databases.md",
+        "skills/shared-references/resumable-runs.md",
+        "skills/shared-references/review-scope-limits.md",
+        "skills/shared-references/review-tracing.md",
+        "skills/shared-references/reviewer-independence.md",
+        "skills/shared-references/reviewer-routing.md",
+        "skills/shared-references/skill-governance.md",
+        "skills/shared-references/taste-calibration.md",
+        "skills/shared-references/venue-checklists.md",
+        "skills/shared-references/wiki-helper-resolution.md",
+        "skills/shared-references/writing-principles.md",
+        "templates/RESEARCH_CONTRACT_TEMPLATE.md",
+        "LICENSE"
+      ],
+      "absorbed_commit": "d9adbe0c2204144183f4651afeb1f42c75dc7c4b",
+      "absorbed_at": "2026-09-16",
+      "mode": "vendored",
+      "local_paths": [
+        "references/aris/vendor/tools/evidence_check.py",
+        "references/aris/vendor/tests/test_evidence_check.py",
+        "references/aris/vendor/skills/aris-experiment-plan/REFERENCE.md",
+        "references/aris/vendor/skills/aris-experiment-bridge/REFERENCE.md",
+        "references/aris/vendor/skills/aris-run-experiment/REFERENCE.md",
+        "references/aris/vendor/skills/aris-monitor-experiment/REFERENCE.md",
+        "references/aris/vendor/skills/aris-training-check/REFERENCE.md",
+        "references/aris/vendor/skills/aris-experiment-audit/REFERENCE.md",
+        "references/aris/vendor/skills/aris-result-to-claim/REFERENCE.md",
+        "references/aris/vendor/skills/aris-ablation-planner/REFERENCE.md",
+        "references/aris/vendor/skills/aris-research-review/REFERENCE.md",
+        "references/aris/vendor/skills/aris-auto-review-loop/REFERENCE.md",
+        "references/aris/vendor/skills/shared-references/acceptance-gate.md",
+        "references/aris/vendor/skills/shared-references/assurance-contract.md",
+        "references/aris/vendor/skills/shared-references/capture-antipatterns.md",
+        "references/aris/vendor/skills/shared-references/citation-discipline.md",
+        "references/aris/vendor/skills/shared-references/compute-env-contract.md",
+        "references/aris/vendor/skills/shared-references/effort-contract.md",
+        "references/aris/vendor/skills/shared-references/evidence-precheck.md",
+        "references/aris/vendor/skills/shared-references/experiment-integrity.md",
+        "references/aris/vendor/skills/shared-references/external-cadence.md",
+        "references/aris/vendor/skills/shared-references/fan-out-pattern.md",
+        "references/aris/vendor/skills/shared-references/injection-hygiene.md",
+        "references/aris/vendor/skills/shared-references/integration-contract.md",
+        "references/aris/vendor/skills/shared-references/output-composition.md",
+        "references/aris/vendor/skills/shared-references/output-language.md",
+        "references/aris/vendor/skills/shared-references/output-manifest.md",
+        "references/aris/vendor/skills/shared-references/output-versioning.md",
+        "references/aris/vendor/skills/shared-references/patent-format-cn.md",
+        "references/aris/vendor/skills/shared-references/patent-format-ep.md",
+        "references/aris/vendor/skills/shared-references/patent-format-us.md",
+        "references/aris/vendor/skills/shared-references/patent-writing-principles.md",
+        "references/aris/vendor/skills/shared-references/prior-art-databases.md",
+        "references/aris/vendor/skills/shared-references/resumable-runs.md",
+        "references/aris/vendor/skills/shared-references/review-scope-limits.md",
+        "references/aris/vendor/skills/shared-references/review-tracing.md",
+        "references/aris/vendor/skills/shared-references/reviewer-independence.md",
+        "references/aris/vendor/skills/shared-references/reviewer-routing.md",
+        "references/aris/vendor/skills/shared-references/skill-governance.md",
+        "references/aris/vendor/skills/shared-references/taste-calibration.md",
+        "references/aris/vendor/skills/shared-references/venue-checklists.md",
+        "references/aris/vendor/skills/shared-references/wiki-helper-resolution.md",
+        "references/aris/vendor/skills/shared-references/writing-principles.md",
+        "references/aris/vendor/templates/RESEARCH_CONTRACT_TEMPLATE.md",
+        "references/aris/vendor/LICENSE"
+      ],
+      "watch": true,
+      "note": "逐字副本；references/aris/vendor/MANIFEST.json 仍由 scripts/verify_aris_vendor.py 读取，保留为逐文件哈希真源，两处同步维护",
+      "license": "MIT"
+    },
+    {
+      "repo": "K-Dense-AI/scientific-agent-skills",
+      "paths": [
+        "skills/timesfm-forecasting",
+        "skills/zarr-python"
+      ],
+      "absorbed_commit": "aa716d029ddcf2fdda3039038fc3d8949816227d",
+      "absorbed_at": "2026-07-10",
+      "mode": "semantic",
+      "local_paths": [
+        "references/timesfm/REFERENCE.md",
+        "references/zarr/REFERENCE.md"
+      ],
+      "watch": true,
+      "note": "改过 frontmatter 的副本；吸收日期不详，取本机配置仓库首次入库日 2026-07-10；commit 按日期反推（gh commits?path=…&until=吸收日）"
+    },
+    {
+      "repo": "google-research/tuning_playbook",
+      "paths": [
+        "README.md",
+        "LICENSE"
+      ],
+      "absorbed_commit": "7554a51f5d3002ba90308d39701b586f5a9b962e",
+      "absorbed_at": "2026-10-22",
+      "mode": "vendored",
+      "local_paths": [
+        "references/upstream/vendor/tuning_playbook-README.md",
+        "references/upstream/vendor/tuning_playbook-LICENSE"
+      ],
+      "watch": true,
+      "note": "逐字副本；卡片 references/upstream/tuning-playbook.md 记行号；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "repo": "google-research/tuning_playbook",
+      "paths": [
+        "README.md"
+      ],
+      "absorbed_commit": "7554a51f5d3002ba90308d39701b586f5a9b962e",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/tuning-playbook.md",
+        "references/tuning/README.md",
+        "scripts/hpo_study.py",
+        "references/workflow/standard-flow.md"
+      ],
+      "watch": true,
+      "note": "改写吸收（README 844-882、901-1148、1186-1254、1508-1528、1663-1799、1817-1986 行）；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD；scripts/hpo_study.py 实现 QMC→TPE 与不可行 trial 记 FAIL；../mlgain-integrate-component/scripts/train_sanity_checks.py 无对应检查",
+      "license": "CC-BY-4.0"
+    },
+    {
+      "repo": "optuna/optuna",
+      "paths": [
+        "optuna/storages/_rdb/storage.py",
+        "optuna/storages/_heartbeat.py",
+        "optuna/storages/_callbacks.py",
+        "optuna/storages/journal/_file.py",
+        "optuna/study/study.py",
+        "optuna/_callbacks.py",
+        "optuna/samplers/_partial_fixed.py",
+        "optuna/samplers/_qmc.py",
+        "optuna/samplers/_tpe/sampler.py",
+        "optuna/pruners/_wilcoxon.py",
+        "optuna/pruners/_patient.py",
+        "optuna/importance/_ped_anova",
+        "optuna/visualization/_slice.py",
+        "optuna/visualization/_edf.py",
+        "optuna/terminator"
+      ],
+      "absorbed_commit": "2b50cfc626355d3f6e6b055b5a275a9ea2e134ed",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/optuna.md",
+        "references/tuning/README.md",
+        "scripts/hpo_study.py"
+      ],
+      "watch": true,
+      "note": "工具依赖 + 文档；核对过的已安装版本 optuna 5.0.0，读的是 5.1.0.dev 源码；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD；JournalFileBackend、add_trials/trials_dataframe、PatientPruner、plot_slice/plot_edf、terminator 为备选，未接入",
+      "license": "MIT"
+    },
+    {
+      "repo": "huggingface/pytorch-image-models",
+      "paths": [
+        "sweep.py",
+        "timm/utils/checkpoint_saver.py",
+        "timm/models/_helpers.py",
+        "timm/optim/_param_groups.py",
+        "timm/utils/model.py",
+        "timm/layers/norm_act.py",
+        "timm/layers/layer_scale.py",
+        "timm/layers/drop.py",
+        "timm/utils/model_ema.py",
+        "timm/utils/agc.py"
+      ],
+      "absorbed_commit": "af97f99efef62bd9bd7eaa908fffe5b7a2d98e2c",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/timm.md",
+        "scripts/run_manifest.py",
+        "scripts/hpo_study.py",
+        "../mlgain-integrate-component/scripts/train_sanity_checks.py",
+        "references/tuning/README.md",
+        "references/triage/README.md"
+      ],
+      "watch": true,
+      "note": "借思路，未复制代码；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD；Lock/JobState、冻结 BN、layer_scale/DropPath/ModelEmaV3/adaptive_clip_grad 为备选，未接入",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "microsoft/RD-Agent",
+      "paths": [
+        "rdagent/core/proposal.py",
+        "rdagent/scenarios/data_science/proposal/exp_gen/proposal.py",
+        "rdagent/scenarios/data_science/proposal/exp_gen/prompts_v2.yaml",
+        "rdagent/scenarios/data_science/dev/prompts.yaml",
+        "rdagent/components/coder/data_science/pipeline/prompts.yaml",
+        "rdagent/components/coder/model_coder/evaluators.py",
+        "rdagent/components/coder/model_coder/eva_utils.py",
+        "rdagent/components/coder/CoSTEER/knowledge_management.py",
+        "rdagent/components/coder/data_science/model/eval_tests/model_test.txt"
+      ],
+      "absorbed_commit": "484776c211e4fbbeef03e0ec00d6bbee7362a4f4",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/rd-agent.md",
+        "references/triage/README.md",
+        "references/multi-agent-protocol.md",
+        "assets/hypothesis-trace.schema.json",
+        "../mlgain-integrate-component/references/paper-port-fidelity.md",
+        "../mlgain-integrate-component/scripts/train_sanity_checks.py"
+      ],
+      "watch": true,
+      "note": "借思路，未复制代码；../mlgain-integrate-component/scripts/train_sanity_checks.py 的 debug_locals 按 debug_info_print 思路重写（sys.setprofile、存摘要），docstring 署名 MIT/Microsoft；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD；exp_feedback 六步判定、调试模式、失败次数上限为备选，未接入",
+      "license": "MIT"
+    },
+    {
+      "repo": "HKUDS/DeepCode",
+      "paths": [
+        "prompts/code_prompts.py",
+        "tools/code_reference_indexer.py",
+        "workflows/code_implementation_workflow.py",
+        "workflows/plan_review_runtime.py",
+        "utils/loop_detector.py"
+      ],
+      "absorbed_commit": "8332d745f12698fe236fa1a35160938e837fd890",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/deepcode.md",
+        "../mlgain-integrate-component/references/paper-port-fidelity.md"
+      ],
+      "watch": true,
+      "note": "借思路；先找参考实现、交出前自检清单、plan_review_runtime、loop_detector 为备选，未接入；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD",
+      "license": "MIT"
+    },
+    {
+      "repo": "VectorSpaceLab/AREX-Skill",
+      "paths": [
+        "cli/packages/coding-agent/src/disco/skills/recover-paper-result/SKILL.md",
+        "LICENSE",
+        "cli/LICENSE"
+      ],
+      "absorbed_commit": "ac3fe1afa80fb9a09775ecfb2b6cc3ba850a2db6",
+      "absorbed_at": "2026-10-22",
+      "mode": "vendored",
+      "local_paths": [
+        "references/upstream/vendor/arex-recover-paper-result.md",
+        "references/upstream/vendor/arex-skill-LICENSE",
+        "references/upstream/vendor/arex-skill-cli-LICENSE"
+      ],
+      "watch": true,
+      "note": "逐字副本；本地文件名不用 SKILL.md（避免 Codex 当成技能）；该文件位于上游 cli/，适用 cli/LICENSE（MIT，版权 Mario Zechner），全文存于 references/upstream/vendor/arex-skill-cli-LICENSE；根目录 Apache-2.0 存于 references/upstream/vendor/arex-skill-LICENSE；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD",
+      "license": "MIT (cli/LICENSE) for the SKILL.md; repo root Apache-2.0"
+    },
+    {
+      "repo": "VectorSpaceLab/AREX-Skill",
+      "paths": [
+        "cli/packages/coding-agent/src/disco/skills/recover-paper-result",
+        "cli/packages/coding-agent/src/disco/skills/plan-paper-skill-modules/SKILL.md",
+        "cli/packages/coding-agent/src/disco/skills/analyze-paper-recovery/SKILL.md",
+        "skills/repositories/repo-skills-router/SKILL.md"
+      ],
+      "absorbed_commit": "ac3fe1afa80fb9a09775ecfb2b6cc3ba850a2db6",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/arex-skill.md",
+        "../mlgain-integrate-component/references/paper-port-fidelity.md"
+      ],
+      "watch": true,
+      "note": "改写吸收；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD；来源边界、预检与时间预算、验收标准及 validate_recovery_experiment.py 的脚本化校验为备选，未接入（../mlgain-integrate-component/scripts/train_sanity_checks.py 无对应检查）",
+      "license": "MIT (cli/), Apache-2.0 (repo root)"
+    },
+    {
+      "repo": "brycewang-stanford/Auto-Research-Skills",
+      "paths": [
+        "catalog/skills.csv",
+        ".gitmodules"
+      ],
+      "absorbed_commit": "14ed77789191335932957a98824f161165189872",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/auto-research-skills.md",
+        "references/triage/README.md",
+        "references/workflow/standard-flow.md",
+        "scripts/hpo_study.py",
+        "../mlgain-integrate-component/references/paper-port-fidelity.md"
+      ],
+      "watch": true,
+      "note": "只借思路；110 个子模块未拉取，多数许可证为空，复制前须逐个核实；research-manager 在目录里属 co-researcher 而非 ai-research-skills；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD；standard-flow.md、paper-port-fidelity.md、hpo_study.py 中的同类思路未署名；ml-training-recipes 为备选，未接入",
+      "license": "CC0-1.0 (catalogue only)"
+    },
+    {
+      "repo": "DeepWisdom/AutoDL",
+      "paths": [
+        "AutoDL_sample_code_submission/Auto_Image/skeleton/projects/logic.py",
+        "AutoDL_scoring_program/score.py",
+        "AutoDL_sample_code_submission/Auto_Image/model.py"
+      ],
+      "absorbed_commit": "48db4eb04d55ce69e93d4a3bdc24592bdb34a868",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/autodl.md",
+        "references/tuning/README.md"
+      ],
+      "watch": true,
+      "note": "只借机制与一个反例，代码不可复用；仓库自 2021 年无更新；absorbed_commit = 2026-10-22 吸收时浅克隆的 HEAD；时间预算停止、对数时间 ALC、按图像 bootstrap 为备选，未接入；../mlgain-integrate-component/scripts/train_sanity_checks.py 无发散回滚",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "Lightning-AI/pytorch-lightning",
+      "paths": [
+        "src/lightning/pytorch/callbacks/spike.py",
+        "src/lightning/fabric/utilities/spike.py",
+        "src/lightning/pytorch/callbacks/weight_averaging.py",
+        "src/lightning/pytorch/callbacks/on_exception_checkpoint.py",
+        "src/lightning/pytorch/callbacks/lr_finder.py",
+        "src/lightning/pytorch/callbacks/model_summary.py",
+        "src/lightning/pytorch/utilities/grads.py",
+        "src/lightning/pytorch/trainer/trainer.py"
+      ],
+      "absorbed_commit": "84df182f50ab34301aabb3c0eb4031815bfb413d",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/lightning.md",
+        "references/workflow/paradigms/vision-dense.md",
+        "references/tuning/README.md"
+      ],
+      "watch": true,
+      "note": "工具；absorbed_commit = 2026-10-22 查到的默认分支 HEAD（只作变化基线）；核对过的已安装版本 lightning 2.6.6；本技能脚本不导入 Lightning；SpikeDetection/EMAWeightAveraging/LearningRateFinder 只写进 references/tuning/README.md，OnExceptionCheckpoint、ModelSummary、grad_norm、overfit_batches/detect_anomaly 为备选，未接入",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "TylerYep/torchinfo",
+      "paths": [
+        "torchinfo/torchinfo.py",
+        "torchinfo/enums.py"
+      ],
+      "absorbed_commit": "3eb5f386139a3ed03f3a429302ace1e40c0eb173",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/torchinfo.md",
+        "../mlgain-integrate-component/scripts/train_sanity_checks.py",
+        "references/workflow/paradigms/vision-dense.md"
+      ],
+      "watch": true,
+      "note": "工具；absorbed_commit = 2026-10-22 查到的默认分支 HEAD（只作变化基线）；核对过的已安装版本 torchinfo 1.8.0；../mlgain-integrate-component/scripts/train_sanity_checks.py 的 frozen_audit 可选调用 summary（未传 mode/col_names）",
+      "license": "MIT"
+    },
+    {
+      "repo": "cleanlab/cleanlab",
+      "paths": [
+        "cleanlab/segmentation",
+        "cleanlab/object_detection"
+      ],
+      "absorbed_commit": "750625747de1b26d8530954f51f0530bd0b51d3c",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/cleanlab.md",
+        "references/workflow/paradigms/vision-dense.md"
+      ],
+      "watch": true,
+      "note": "工具；absorbed_commit = 2026-10-22 查到的默认分支 HEAD（只作变化基线）；核对过的已安装版本 cleanlab 2.9.0；备选，未接入（vision-dense.md 工具表只列名称与链接）",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "voxel51/fiftyone",
+      "paths": [
+        "fiftyone/core/labels.py"
+      ],
+      "absorbed_commit": "aacfc8182fc5353296b5edd7475e63335fedb5cb",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/fiftyone.md",
+        "references/workflow/paradigms/vision-dense.md"
+      ],
+      "watch": true,
+      "note": "工具；absorbed_commit = 2026-10-22 查到的默认分支 HEAD（只作变化基线）；未安装（MongoDB、较重），备选，未接入（vision-dense.md 工具表只列名称）",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "treeverse/dvc",
+      "paths": [
+        "dvc/stage/serialize.py",
+        "dvc/dvcfile.py",
+        "dvc/schema.py"
+      ],
+      "absorbed_commit": "56e59829512ff134aa269099a2099587b810b4dd",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/dvc.md",
+        "scripts/run_manifest.py"
+      ],
+      "watch": true,
+      "note": "工具；absorbed_commit = 2026-10-22 查到的默认分支 HEAD（只作变化基线）；未安装，不作为依赖（与项目 registry/TOP 重叠）；scripts/run_manifest.py 记录内容哈希（代码不引用 DVC），哈希变化判过期与锁文件 schema 为备选，未接入",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "meta-pytorch/captum",
+      "paths": [
+        "captum/attr/_core/layer/layer_activation.py",
+        "captum/attr/_core/layer/layer_feature_ablation.py",
+        "captum/attr/_core/feature_ablation.py"
+      ],
+      "absorbed_commit": "b89cccbe0add104f734793be69488c078164c532",
+      "absorbed_at": "2026-10-22",
+      "mode": "semantic",
+      "local_paths": [
+        "references/upstream/captum.md",
+        "references/workflow/paradigms/vision-dense.md"
+      ],
+      "watch": true,
+      "note": "工具；absorbed_commit = 2026-10-22 查到的默认分支 HEAD（只作变化基线）；未安装；备选，未接入（设想用于 ../mlgain-integrate-component/scripts/module_probe.py 的有效贡献检查，该脚本不导入 Captum）",
+      "license": "BSD-3-Clause"
+    }
+  ]
+}

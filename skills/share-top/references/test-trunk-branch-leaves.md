@@ -205,3 +205,5 @@ mkdir -p _wiki-methodology/_tests/{trunk-recording,branch-modules,leaves-unit}
 ## 链接
 
 - 项目级范例 → 当前项目 `_wiki-methodology/_tests/`
+- 录像 evidence trail(研究项目同款思想) → `~/.claude/skills/share-autoresearch-engine/references/evidence-trail.md`
+- **AI 自诊断手段阶梯**(L0-L5 · 录像卡死时按阶梯走)→ `~/.claude/skills/playwright-cli/references/sub-skills/share-workflow-recording/references/ai-self-diagnose-ladder.md`

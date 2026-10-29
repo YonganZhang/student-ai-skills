@@ -1,0 +1,11 @@
+{
+  "model": "SET_MATCHING_NONQUANTIZED_BASE_PATH",
+  "adapters": [
+    "SET_ADAPTER_CHECKPOINT"
+  ],
+  "merge_lora": true,
+  "torch_dtype": "bfloat16",
+  "output_dir": "SET_NEW_MERGED_DIR",
+  "model_type": "SET_NATIVE_MODEL_TYPE",
+  "template": "SET_NATIVE_TEMPLATE"
+}

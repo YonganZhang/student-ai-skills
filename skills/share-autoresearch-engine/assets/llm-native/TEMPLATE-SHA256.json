@@ -1,0 +1,12 @@
+{
+  "UPSTREAM.json": "5fb4c69bfb0c401fad32cec0259f3f24a4c1556b14b21b084dd7f7b45ff03237",
+  "data-manifest.template.json": "0922bed23f4ffc3f62b9899821929a13886b76a0cfdd947d4877da809e012353",
+  "merge.json": "eb91b2949df15a44b238543433297a64e2375ab2b72debdfd059bb4ce6219b3d",
+  "quantization-decision.template.json": "95bb6db0cb987e0b1edfe7acdab93e8ef5c6ced03a3fc431f2b38dd1c3ea6031",
+  "quantize-bnb4.json": "a3ca638573ae1001d5e9f63eee82c5ae6122dca0e6326380648017bd78fc4348",
+  "run-contract.template.json": "4b3fa292e01558f3358ebf4b851d7f76574c4d7852aca1fef6b7182a214e49e5",
+  "sft-bf16.json": "df2ff26d69cffe3228342df87e2da5e36abbb283022f2f706a47b51aa7b9bf46",
+  "sft-qlora.json": "afa3bf3e29990f0a79abcaab0e5c92068e4eb3525d664780b58de22c3dc4794c",
+  "sft-resume.json": "d3b2fdb2d9550f00a780c6ea8b68c00aecdf3914734627d7322559deb6bb5735",
+  "sft-zero3.json": "b6062d9c12721852b80749e9df7677678bee1ab4eb5523a1c14471d31f9170ea"
+}

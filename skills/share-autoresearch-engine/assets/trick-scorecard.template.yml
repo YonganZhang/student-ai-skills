@@ -1,0 +1,32 @@
+# Trick 记分卡：每个候选 trick 一张，决定是否进入最小验证。
+trick:
+  id: ""
+  name: ""
+  source:
+    type: kaggle | hf | paper | github | blog | internal
+    title: ""
+    url: ""
+    code: ""
+    license: ""
+  mechanism: ""
+  our_failure_mode: ""
+  native_position: ""
+  candidate_positions: []
+  required_alignment: []
+  evidence:
+    - ""
+  risks:
+    leakage: low | medium | high
+    public_lb_overfit: low | medium | high
+    external_data: low | medium | high
+    compute: low | medium | high
+    license: low | medium | high
+  cost:
+    train: ""
+    inference: ""
+  minimal_test: ""
+  falsification: ""
+  decision: screen | adopt | reject | backlog
+  decision_reason: ""
+  owner: ""
+  date: ""

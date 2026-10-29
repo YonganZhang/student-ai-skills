@@ -1,0 +1,22 @@
+# Run manifest 模板。字段按项目合同增删，但不要删掉 test_read。
+git_commit: ""
+git_dirty: true
+config_path: ""
+config_sha256: ""
+resolved_config_path: ""
+resolved_config_sha256: ""
+data_path: ""
+data_sha256: ""
+split_seed: null
+train_seed: null
+budget_max_steps: null
+validation_interval: null
+best_step: null
+best_val_loss: null
+best_at_cap: null
+curve_verdict: ""
+deployment_metric_name: ""
+deployment_metric_value: null
+threshold: null
+test_read: false
+notes: ""

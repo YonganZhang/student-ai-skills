@@ -1,0 +1,103 @@
+{
+  "reviewed_at": "2026-10-26",
+  "status": "DOCUMENTATION_REVIEW_ONLY_NO_INSTALL",
+  "strata": {
+    "repository": "https://github.com/Niko1221/Strata",
+    "documentation_revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+    "release_observed": "v0.2.6",
+    "release_published_at": "2026-10-25T13:45:25Z",
+    "license": "MIT"
+  },
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/README.md",
+      "sha256": "4e77c2470de1c233a788e8d9c34790d766fb752aed72e86eb2e030c901fa35fe",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/LICENSE",
+      "sha256": "949b9b0aada7476006469e58ee4ffb0e0f68c2d9137e90a356757b61a09d37f0",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/docs/DEEPSEEK41.md",
+      "sha256": "39694360385b70c1f368cde0bf6c87074d8964f62e91693d73a099342806167c",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/docs/MODELS.md",
+      "sha256": "23f2e64bc16662a40b8d637763b10619a69d8081d7872fdcd4f2f374dc9e8f30",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/docs/INSTALL.md",
+      "sha256": "c6ad52ae009814f7803f4556089778cfdc0ea78844050289c162b4989415e24a",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/docs/BENCHMARK_PROTOCOL.md",
+      "sha256": "8fb66be3e68e97daa6d1cf6118d7f852be3d316a719d4acd8005b65fbbadd91f",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/docs/COMMUNITY_BENCHMARKS.md",
+      "sha256": "91232819721b0e094a8a48aeba6f57b7628629f40c6d4f866281b7ed67411f9d",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/tools/dsv41/tune.py",
+      "sha256": "bb75873d33774cc5d27525e4af0693eb9d6cb2a72dc9d92c50426d3651b1fab0",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/strata_control/dsv41_fit.py",
+      "sha256": "a7d64e9e9da08b5220594a5520e2c0b739bacc2ce92670a84eb8bf5db7c47e30",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/raw/1bae0e1088993b9b82de08f59de5be5a34e42170/README.md",
+      "sha256": "b72b796e4f4c739eca5d0ad360a7679b39118ca7eb64891f7151a527b292c42a",
+      "revision": null,
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://huggingface.co/ISTA-DASLab/DeepSeek-V4.1-Flash-1017-GSQ-RCO-GGUF/raw/85d6710fd54b2a54974f0943a24bd90db3f43388/README.md",
+      "sha256": "2ab6fd08e0aef874ed0c497d84095f13ccd248eb5f47aeeccc974cac83e810f3",
+      "revision": null,
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/docs/AI_SETUP.md",
+      "sha256": "e49dfa65aa352c01b4bcc1841c2d8eecc86bbc5cf0b57fccb82c31e10ac6a046",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/AGENTS.md",
+      "sha256": "500c2d87c729b3c6a9f51df003547118416d072cab54f7f0b39347f9d83d578a",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Niko1221/Strata/4b9e05a2a806a3fe24f7b2560d98626c37dade35/docs/TERMINAL.md",
+      "sha256": "cba7001f849201155efb933d61339cfb83fa4542a39ae36168f3b8af869f73ca",
+      "revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+      "role": "official runtime/model documentation"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/momori777/Artemis/4db7a3e819fc88ead065b3df0c44f8b8e20386d5/skills/strata/SKILL.md",
+      "sha256": "84529968742651aa1ee292ddc02d456c175845760985453bbfa68230c716592b",
+      "revision": "4db7a3e819fc88ead065b3df0c44f8b8e20386d5",
+      "role": "third-party project-specific skill; not installed"
+    }
+  ]
+}

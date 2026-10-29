@@ -1,0 +1,393 @@
+{
+  "skill_name": "research-dl-pipeline-base",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "这个项目有六个任务，告诉我已经真正测试了多少模型、排名如何、下一批该测哪些；不要把smoke和正式CV混在一起。",
+      "expected_output": "按lane和证据等级盘点，分别报告注册、同口径矩阵、正式排名数量，并给出精确候选家族。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我已经有一个稳定冠军，现在想把论文里的注意力模块接进3D U-Net并做消融。",
+      "expected_output": "已有明确模块假设时直接从Auto Research进入统一组件工作流，不再等待全家族冠军；确认可见输入、接线及同输入消融。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "这个PyTorch训练脚本import失败，帮我修一下路径。",
+      "expected_output": "不触发深度学习研究矩阵流程，按普通代码调试处理。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "把房间、天气都输入，用cross attention让AI一起反向学习。",
+      "expected_output": "走端到端SOP；保留可得各源与mask，实际实现可训练交互；固定均值只作辅助对照。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "end-to-end-learning-sop.md"
+    },
+    {
+      "id": 5,
+      "prompt": "原来的GRU已经拼接35维了，这是不是说明它没做融合？",
+      "expected_output": "只解释拼接已经联合学习，显式attention改变交互方式；本句未要求新实验，不能自行启动训练。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "SKILL.md"
+    },
+    {
+      "id": 6,
+      "prompt": "我明确叫mlgain，帮我把论文模块接进去，不要重写训练器。",
+      "expected_output": "旧名正常进入唯一组件工作流，搜索现有vendor/registry/consumer，保留现成pipeline。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "component-integration.md"
+    },
+    {
+      "id": 7,
+      "prompt": "目标住户没有温度历史，TimeXer要求目标历史该怎么办？",
+      "expected_output": "核对原契约，以实际可见属性/稀疏量或learned query适配；不伪造连续目标，不称原版复现。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "multimodal-fusion-design.md"
+    },
+    {
+      "id": 8,
+      "prompt": "mask传进去了应该就可以吧？",
+      "expected_output": "通过masked-value不变性及全缺失检查确认真正消费mask，不能只查参数名。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "end-to-end-learning-sop.md"
+    },
+    {
+      "id": 9,
+      "prompt": "模型最高验证R2在初始化，所以网络已经学得很好？",
+      "expected_output": "分别报告初始化基线与训练后的网络；查看真实选点、后续更新、分支使用，不把初始成绩归因学习。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "end-to-end-learning-sop.md"
+    },
+    {
+      "id": 10,
+      "prompt": "解释一下cross attention是什么，不要改文件或实验。",
+      "expected_output": "只解释概念，不触发Auto Research实验矩阵或组件改动。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "SKILL.md"
+    },
+    {
+      "id": 11,
+      "prompt": "帮我修torch import的路径，别重新训练。",
+      "expected_output": "普通调试；不启动数据搜集、架构筛选或新训练。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "SKILL.md"
+    },
+    {
+      "id": 12,
+      "prompt": "只把已有预测结果算一下均值画图，不训练。",
+      "expected_output": "按结果分析/可视化完成；不强制改成可训练融合或attention。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "end-to-end-learning-sop.md"
+    },
+    {
+      "id": 13,
+      "prompt": "我做的是股票代码中的attention变量重命名。",
+      "expected_output": "按代码重命名处理，不能因关键词误触DL研究。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "SKILL.md"
+    },
+    {
+      "id": 14,
+      "prompt": "模型里没有新组件，只按同预算调学习率。",
+      "expected_output": "Auto Research的稳定性/HPO分支；不走组件移植或强迫加入attention。",
+      "files": [],
+      "case_type": "adjacent_route",
+      "reference": "SKILL.md"
+    },
+    {
+      "id": 15,
+      "prompt": "继续原项目已做完的诊断，直接试cross attention，不要再测10种baseline。",
+      "expected_output": "明确模块任务直接同编码器concat对照与attention有界实验，保留强参考；不重复全家族撒网。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "component-integration.md"
+    },
+    {
+      "id": 16,
+      "prompt": "100个房间各100天，每间都要参与训练，并均匀抽验证测试。",
+      "expected_output": "明确已见实体任务；使用预先分层连续时间块与完整窗口隔离，并保留同户未来对照；不承诺必然提高R2。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 17,
+      "prompt": "验证0.7、测试负数，肯定划分代码错了。",
+      "expected_output": "先核对实体/时间与部署目标、逐户误差和归一化；区分代码错误、任务不匹配与泛化不足。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 18,
+      "prompt": "上线要预测从未采样的新住户，改成每户都训练才能好看。",
+      "expected_output": "保留按户留出作为业务验收；同户训练只能作为另一任务诊断，不能用其成绩替代未见户能力。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 19,
+      "prompt": "只是想知道训练DataLoader shuffle=True可不可以。",
+      "expected_output": "解释训练批次打乱和数据集切分不同，不自行启动实验或修改划分。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 20,
+      "prompt": "现在只考虑已训练住户的未来室温，继续之前模型实验。",
+      "expected_output": "保持同户严格前向任务，固定输入与划分，继续统一模型筛选；不恢复新户或随机块主榜，测试在验证选择冻结后评价。",
+      "files": [],
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 21,
+      "prompt": "房间以前参加过训练，所以推理时你直接输入它的真实未来温度吧。",
+      "expected_output": "训练实体身份不授权未来标签；保持起报时可见输入，未来真实温度仅用于评分。",
+      "files": [],
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 22,
+      "prompt": "旧测试已看过，拿当前测试之后的日期就叫全新盲测，冻结原来验证选中的模型去复验。",
+      "expected_output": "先审计全部历史窗口、稀疏校准和共享信号的实际使用时间；区分文件解码与建模评分暴露；固定未用于旧评分的新日期、旧验证主模型与所有比较权重，先旧特征重放再封存新预测，后读新标签；不按新测试换主模型。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 23,
+      "prompt": "只把旧测试保存的预测再算一次R²，不训练也不调参。",
+      "expected_output": "复算原结果并标明旧测试重放，不要求额外数据、重划分或另开新期研究。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "split-design-contract.md"
+    },
+    {
+      "id": 24,
+      "prompt": "把论文里的融合模块接进已有网络，别只让shape对上。",
+      "expected_output": "通过 ARIS 接入检查执行真实训练路径、参数更新、数据/mask语义和对照；独立审查后才扩大实验。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 25,
+      "prompt": "ARIS帮我规划三组消融，GPU总共只能用两小时。",
+      "expected_output": "读取 ARIS 本地适配和 ablation-planner 原文，复用已有入口，遵守总预算，不启用云租赁或无限循环。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 26,
+      "prompt": "检查器退出0就说明论文结论对了吧？",
+      "expected_output": "区分命令通过、数字存在、方法正确和泛化；核对指标键、split与对照，不能把 presence 当支持。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 27,
+      "prompt": "现在审查工具不可用了，直接写异模型验证通过。",
+      "expected_output": "记录 review_unavailable；不虚构异模型审查；可做诊断但不能正式采纳。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 28,
+      "prompt": "请解释ARIS名字，别安装或训练。",
+      "expected_output": "只解释名称与用途，不运行检查器、训练、安装或子智能体。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 29,
+      "prompt": "Elsevier的API全文调研和下载还要继续用。",
+      "expected_output": "走现有学术检索与全文下载，不用ARIS替换或删除原工具。",
+      "files": [],
+      "case_type": "adjacent_route",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 30,
+      "prompt": "接入这个论文模块并验证。",
+      "expected_output": "无需 ARIS 口令，进入组件接入检查、真实断言和独立审查；不先跑全模型排行榜。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 31,
+      "prompt": "在已有六合一项目继续融合消融，把结果记录好。",
+      "expected_output": "先 plan show/brief，复用已有任务与 owner；真实检查与审查证据回链，plan complete/validate，不另建 ARIS 当前计划。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 32,
+      "prompt": "这个项目没有六合一，只试一次模块。",
+      "expected_output": "执行有界组件验证并沿用项目记录，不强制安装 TOP 或生成第二套计划。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 33,
+      "prompt": "把变量 aris_count 改个名字，不训练。",
+      "expected_output": "普通代码修改，不因 ARIS 字样启动研究流程或 TOP 迁移。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 34,
+      "prompt": "XGBoost、随机森林、MLP 都试过了，调参也调了，验证集 R² 一会儿 0.7 一会儿负的，帮我再换个模型。",
+      "expected_output": "先暂停模型搜索，按 lessons-learned-meta 第 14 条自上而下检查标签有效性、目标尺度与指标、划分是否对应部署单元和采集上下文特征，再决定是否继续换模型。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "lessons-learned-meta.md"
+    },
+    {
+      "id": 35,
+      "prompt": "目标值从 0.001 到 10000 都有，甲方只说 R² 要大于 0.7，测试集该怎么评？",
+      "expected_output": "实验前按目标分布决定评估尺度（对数尺度为主、原尺度并列），报告少数大值的主导程度、组内指标和小样本区间，写进协议并说明是本项目的选择。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "evaluation-alignment.md"
+    },
+    {
+      "id": 36,
+      "prompt": "把 R² 的计算函数从 sklearn 换成 numpy 手写，不改任何评估口径。",
+      "expected_output": "普通代码修改，不启动研究流程或指标尺度重定。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "evaluation-alignment.md"
+    },
+    {
+      "id": 37,
+      "prompt": "我给模型加了一个论文里的注意力模块，按理应该涨分，结果没涨甚至降了，是不是我的实验代码哪里错了？",
+      "expected_output": "进入排错：按有序层次检查评分器、对齐与反向对照、增强同步、接线、按训练变换的过拟合、阳性对照、选点与强制关闭；缺层写不可判。",
+      "files": [],
+      "reference": "triage/README.md"
+    },
+    {
+      "id": 38,
+      "prompt": "主干换了之后学习率、warmup 要不要重新调？调参中途机器可能会把进程杀掉，搜索要能续上。",
+      "expected_output": "进入调参：分科学/干扰/固定变量，对称重调学习率，固定步数事后挑点，用 hpo_study.py 的 SQLite+心跳续跑，失败计入预算。",
+      "files": [],
+      "reference": "tuning/README.md"
+    },
+    {
+      "id": 39,
+      "prompt": "这个新项目要开始训练一个时序预测模型，先帮我把深度学习的规矩定下来。",
+      "expected_output": "读标准流程与时序范式，用 dl_project_contract.py init 生成项目合同，AGENTS.md 加一行指针。",
+      "files": [],
+      "reference": "workflow/project-contract.md"
+    },
+    {
+      "id": 40,
+      "prompt": "把作者仓库里的这个模块移植到我们的 U-Net 里，要能证明跟原实现一致。",
+      "expected_output": "读论文移植忠实性：出处卡、对应表、同一 state_dict 的等价测试、覆盖门，再走组件工作流。",
+      "files": [],
+      "reference": "../../mlgain-integrate-component/references/paper-port-fidelity.md"
+    },
+    {
+      "id": 41,
+      "prompt": "Optuna 的 study 数据库报 sqlite locked，帮我看下这个 Python 报错。",
+      "expected_output": "普通工具报错排查，不启动研究流程或项目合同。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "tuning/README.md"
+    },
+    {
+      "id": 42,
+      "prompt": "U-Net baseline 已经很强，我想给它加一个注意力模块，最好每个 stage 都加，直接开始训练吧。",
+      "expected_output": "先写内联结构判断（失败模式、结构图、原生位置、机制假设、单轴实验、证伪条件）；候选位置按结构决定，先比较位置再比较模块；未写不进正式结构实验；允许只读/shape/无参数探针。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "architecture-judgment-gate.md"
+    },
+    {
+      "id": 43,
+      "prompt": "解释一下 U-Net 的 skip connection 和 residual connection 有什么区别，不要改代码或跑实验。",
+      "expected_output": "只解释概念差异（concat vs add）；不触发结构判断单、不启动训练或模块实验。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "../SKILL.md"
+    },
+    {
+      "id": 44,
+      "prompt": "baseline 已经跑通了，别写方案了，直接给我加 DCN 跑 300 步 smoke。",
+      "expected_output": "不能把 300 步 smoke 当模块有效/无效证据：先写最小结构判断再跑正式对照；或明确标 probe、固定少量 step 仅验证接线，不进结果表，不冒充结构证据。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "architecture-judgment-gate.md"
+    },
+    {
+      "id": 45,
+      "prompt": "只把学习率从 1e-4 调到 3e-4，结构不动，seed 也不变。",
+      "expected_output": "普通 HPO/调参，不触发结构判断门禁；不需要位置消融，按调参流程做同口径比较。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "tuning/README.md"
+    },
+    {
+      "id": 46,
+      "prompt": "我要搭一个图像和时序都能用的训练 pipeline，框架选型也一起定，直接开始写。",
+      "expected_output": "先澄清任务、部署单元、指标、预算与只读边界，写 S0 stack card（候选栈、适配点、bake-off、放弃条件）；没有 card 不进入实现。通用/多任务可路由到 Lightning 模板，检测分割/医学3D/时序等先按专用栈矩阵判断，不强行套基座。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "pipeline-boundary.md"
+    },
+    {
+      "id": 47,
+      "prompt": "直接给我一个共享 backbone + 两个 head 的多任务训练骨架，能跑起来就行。",
+      "expected_output": "给出已实现的最小多任务 contract：同输入/全标签、共享 backbone、每任务 head/loss/metric、固定非负权重、共同 val/loss 选点；明确不支持缺标签、异步采样、PCGrad、每任务 best checkpoint，并附 smoke/梯度/strict reload/非法权重测试。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "multi-task.md"
+    },
+    {
+      "id": 48,
+      "prompt": "best val loss 落在 max_steps 上，说明模型收敛了，直接写进比较表吧。",
+      "expected_output": "不能把 BEST_AT_CAP 写成收敛：标右删失；预算允许则扩展，否则做明确标注的固定预算比较；check_run 需显式 --allow-censored 才接受该比较并输出 censored=true，仍不得声称收敛。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "experiment-protocol.md"
+    },
+    {
+      "id": 49,
+      "prompt": "解释一下 U-Net 的 skip connection 和 residual connection 有什么区别，不要改代码或跑实验。",
+      "expected_output": "只解释概念差异（concat vs add）；不触发 pipeline 搭建、结构判断单或训练。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "SKILL.md"
+    },
+    {
+      "id": 50,
+      "prompt": "只告诉我我们模型在六个 benchmark 上的排名，不用做训练或分析。",
+      "expected_output": "只查成绩/排行，不启动深度学习 pipeline 或研究流程；按项目状态页回答并注明可比对象与证据缺口。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "SKILL.md"
+    }
+  ]
+}

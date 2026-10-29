@@ -1,0 +1,34 @@
+seed: 17
+split_seed: 17
+structure:
+  mode: baseline
+  baseline_reason: "reference template: shipped small U-Net, no structural change"
+  baseline_sha256: "5d789b896f238561b6e7bb82e004d843b159ab6c5bda3a8a535479be9506cc2f"
+output_dir: runs/points
+deployment_metric_name: "val_loss"
+data:
+  data_path: data/points.npz
+  batch_size: 8
+  num_workers: 0
+model:
+  name: small_unet
+  kwargs:
+    in_channels: 1
+    out_channels: 1
+    base: 8
+module:
+  loss: mse
+  metrics: [mae]
+  lr: 0.001
+  weight_decay: 0.0
+  scheduler: null
+trainer:
+  max_steps: 100
+  max_epochs: -1
+  val_check_interval: 0.25
+  accelerator: gpu
+  devices: 1
+  precision: 32-true
+  gradient_clip_val: 0.0
+  enable_progress_bar: false
+  enable_model_summary: false

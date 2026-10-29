@@ -1,0 +1,34 @@
+seed: 17
+split_seed: 17
+structure:
+  mode: baseline
+  baseline_reason: "reference template: shipped TCN, no structural change"
+  baseline_sha256: "0fbfcfa225fe99ec51f5389bfbcca0d9b946230b148bf548cafb223a7ca1a2ea"
+output_dir: runs/series
+deployment_metric_name: "val_mae"
+data:
+  data_path: data/series.npz
+  batch_size: 8
+  num_workers: 0
+model:
+  name: tcn
+  kwargs:
+    in_channels: 2
+    hidden: 16
+    out_dim: 1
+module:
+  loss: mse
+  metrics: [mae]
+  lr: 0.001
+  weight_decay: 0.0
+  scheduler: null
+trainer:
+  max_steps: 100
+  max_epochs: -1
+  val_check_interval: 0.25
+  accelerator: gpu
+  devices: 1
+  precision: 32-true
+  gradient_clip_val: 0.0
+  enable_progress_bar: false
+  enable_model_summary: false

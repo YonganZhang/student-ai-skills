@@ -1,5 +1,14 @@
 # 更新记录
 
+## v1.1.0（2026-10-29）
+
+- 新增 2 个技能（共 14 个）：
+  - web-playwright（目录 `playwright-cli`）：Playwright CLI 浏览器操作、E2E 验收与演示录像。依赖 npm 包 `@playwright/cli`，README 给出安装方法；`install.sh` 默认只检查并提示，新增 `--with-playwright` 才执行 `npm install -g @playwright/cli`。
+  - research-dl-pipeline-base（目录 `share-autoresearch-engine`）：深度学习训练与研究闭环，含 Lightning 模板、实验门禁脚本和 ARIS 参考。
+- 公开前处理：两技能去掉本机路径、代理与 systemd 等本机设定（`open_session.sh` 改为有代理才加代理配置、有 systemd 才进独立 scope）、私有看板与凭证工具、私有项目名与实验进展；录像后期、视频制作、外援审查、组件接入参考库 mlgain 等未收录引用标“本包未包含”；不随附约 32 MB 的 model-zoo 上游代码（按 SOURCES.md 自行克隆）。
+- v1.0.0 中把这两个技能标成“本包未包含”的引用（dev-find-wheels、dev-project-provision、project-top）改为指向包内技能。
+- 修正：project-top 一处测试样例里的私有框架名；dev-agent-cli 一处指向未发布内部记录的说明。
+
 ## v1.0.0（2026-10-29）
 
 首个公开版本。

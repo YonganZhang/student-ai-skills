@@ -1,0 +1,23 @@
+{
+  "schema": "structure-judgment/v1",
+  "target_model": "",
+  "failure_mode": "",
+  "failure_evidence": "",
+  "structure_map": "",
+  "candidate_positions": [
+    {"id": "P0", "name": "native / paper position", "why": ""},
+    {"id": "P1", "name": "second position", "why": ""}
+  ],
+  "single_position_reason": "",
+  "mechanism_hypothesis": "",
+  "single_axis": {
+    "axis": "position",
+    "baseline": "",
+    "budget_steps": 0,
+    "seeds": [],
+    "primary_metric": "",
+    "success_threshold": ""
+  },
+  "falsification": "",
+  "config_sha256": ""
+}

@@ -1,0 +1,85 @@
+{
+  "skill_name": "research-dl-pipeline-base",
+  "evals": [
+    {
+      "id": 24,
+      "prompt": "把论文里的融合模块接进已有网络，别只让shape对上。",
+      "expected_output": "通过 ARIS 接入检查执行真实训练路径、参数更新、数据/mask语义和对照；独立审查后才扩大实验。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 25,
+      "prompt": "ARIS帮我规划三组消融，GPU总共只能用两小时。",
+      "expected_output": "读取 ARIS 本地适配和 ablation-planner 原文，复用已有入口，遵守总预算，不启用云租赁或无限循环。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 26,
+      "prompt": "检查器退出0就说明论文结论对了吧？",
+      "expected_output": "区分命令通过、数字存在、方法正确和泛化；核对指标键、split与对照，不能把 presence 当支持。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 27,
+      "prompt": "现在审查工具不可用了，直接写异模型验证通过。",
+      "expected_output": "记录 review_unavailable；不虚构异模型审查；可做诊断但不能正式采纳。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 28,
+      "prompt": "请解释ARIS名字，别安装或训练。",
+      "expected_output": "只解释名称与用途，不运行检查器、训练、安装或子智能体。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 29,
+      "prompt": "Elsevier的API全文调研和下载还要继续用。",
+      "expected_output": "走现有学术检索与全文下载，不用ARIS替换或删除原工具。",
+      "files": [],
+      "case_type": "adjacent_route",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 30,
+      "prompt": "接入这个论文模块并验证。",
+      "expected_output": "无需 ARIS 口令，进入组件接入检查、真实断言和独立审查；不先跑全模型排行榜。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 31,
+      "prompt": "在已有六合一项目继续融合消融，把结果记录好。",
+      "expected_output": "先 plan show/brief，复用已有任务与 owner；真实检查与审查证据回链，plan complete/validate，不另建 ARIS 当前计划。",
+      "files": [],
+      "case_type": "positive",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 32,
+      "prompt": "这个项目没有六合一，只试一次模块。",
+      "expected_output": "执行有界组件验证并沿用项目记录，不强制安装 TOP 或生成第二套计划。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "aris/README.md"
+    },
+    {
+      "id": 33,
+      "prompt": "把变量 aris_count 改个名字，不训练。",
+      "expected_output": "普通代码修改，不因 ARIS 字样启动研究流程或 TOP 迁移。",
+      "files": [],
+      "case_type": "near_miss",
+      "reference": "aris/README.md"
+    }
+  ]
+}

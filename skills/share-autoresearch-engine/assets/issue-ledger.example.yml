@@ -1,0 +1,27 @@
+# 已关闭示例：演示证据、不变量、检查与关闭字段。不是项目真实事故。
+schema_version: 1
+issues:
+  - id: DL-2026-001
+    title: 验证集患者与训练集重叠，F1 虚高
+    status: closed
+    severity: P0
+    blocks_action: freeze
+    layer: selection
+    symptom: "val F1 0.93，test 0.61；同患者图像跨 split"
+    evidence:
+      - path: runs/example/manifest.json
+        line: "12"
+        fact: "patient_id 在 fit/select 两侧重复 37 例"
+    root_cause: "split 按图像而不是按患者"
+    invariant: "同一患者/视频/位置只能出现在一个 split"
+    check: "split 前做 group overlap 断言；CI 跑泄漏探针"
+    automation: script
+    regression: "tests/test_split_group.py"
+    close_evidence: "python scripts/check_split.py --group patient_id -> 0 overlap"
+    owner: builder
+    opened: 2026-10-25
+    reviewed: 2026-10-26
+    closed_by: reviewer
+    affected_claims:
+      - "该 run 的 val F1 不作最终结论"
+    notes: "已用 group split 重跑；旧结论标为不可用。"

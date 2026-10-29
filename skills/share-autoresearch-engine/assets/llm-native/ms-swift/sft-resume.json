@@ -1,0 +1,47 @@
+{
+  "model": "SET_LOCAL_MODEL_PATH",
+  "model_type": "SET_NATIVE_MODEL_TYPE",
+  "template": "SET_NATIVE_TEMPLATE",
+  "use_hf": true,
+  "tuner_type": "lora",
+  "tuner_backend": "peft",
+  "target_modules": [
+    "SET_TARGET_MODULE"
+  ],
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "torch_dtype": "bfloat16",
+  "bf16": true,
+  "attn_impl": "sdpa",
+  "dataset": [
+    "SET_FIT_JSONL"
+  ],
+  "val_dataset": [
+    "SET_SELECT_JSONL"
+  ],
+  "split_dataset_ratio": 0.0,
+  "max_length": 2048,
+  "packing": false,
+  "padding_free": false,
+  "truncation_strategy": "delete",
+  "max_steps": 50,
+  "per_device_train_batch_size": 1,
+  "per_device_eval_batch_size": 1,
+  "gradient_accumulation_steps": 1,
+  "gradient_checkpointing": true,
+  "learning_rate": 0.0001,
+  "seed": 42,
+  "data_seed": 42,
+  "save_steps": 25,
+  "eval_steps": 25,
+  "save_strategy": "steps",
+  "eval_strategy": "steps",
+  "save_only_model": false,
+  "report_to": [
+    "none"
+  ],
+  "output_dir": "SET_NEW_OUTPUT_DIR",
+  "add_version": false,
+  "resume_from_checkpoint": "SET_COMPLETE_NATIVE_CHECKPOINT",
+  "resume_only_model": false
+}

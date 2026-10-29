@@ -1,0 +1,40 @@
+{
+  "scope": "primary documentation and implementation; actual executions recorded per project",
+  "sources": [
+    {
+      "repository": "modelscope/ms-swift",
+      "revision": "484e836d691a52fd8c1723137ee3d64c6e066683",
+      "url": "https://github.com/modelscope/ms-swift",
+      "local_manifest": "../../assets/llm-native/ms-swift/UPSTREAM.json",
+      "use": "native CLI, qlora, merge and bnb export references"
+    },
+    {
+      "repository": "huggingface/trl",
+      "revision": "v0.29.1",
+      "url": "https://github.com/huggingface/trl/blob/v0.29.1/docs/source/sft_trainer.md",
+      "use": "SFT data, template, mask, packing and native trainer"
+    },
+    {
+      "repository": "huggingface/peft",
+      "revision": "v0.20.0",
+      "url": "https://github.com/huggingface/peft/blob/v0.20.0/docs/source/developer_guides/quantization.md",
+      "use": "QLoRA kbit preparation and supported quantization boundaries"
+    },
+    {
+      "url": "https://huggingface.co/learn/llm-course/chapter11/1",
+      "use": "official curriculum; not a complete production standard"
+    },
+    {
+      "url": "https://github.com/huggingface/datatrove",
+      "use": "data pipeline and dedup implementation; pin actual use in project"
+    },
+    {
+      "url": "https://github.com/NVIDIA/Model-Optimizer",
+      "use": "PTQ/QAT and hardware-specific export; verify current paths"
+    },
+    {
+      "url": "https://huggingface.co/docs/transformers/quantization/overview",
+      "use": "model/hardware/PEFT/serialization compatibility matrix, not runtime evidence"
+    }
+  ]
+}

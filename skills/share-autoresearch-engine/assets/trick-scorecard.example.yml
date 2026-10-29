@@ -1,0 +1,37 @@
+# 采购示例：只演示字段与推理，不声称本地已涨点。
+trick:
+  id: TRICK-EXAMPLE-001
+  name: Simple Copy-Paste
+  source:
+    type: paper
+    title: "Simple Copy-Paste is a Strong Data Augmentation Method for Instance Segmentation"
+    url: "https://arxiv.org/abs/2012.07177"
+    code: "https://github.com/google-research/copy-paste"
+    license: "check repo LICENSE before use"
+  mechanism: "把实例粘贴到新背景，重建 box/mask；增加实例-背景组合与遮挡多样性。"
+  our_failure_mode: "小目标/遮挡样本少，错误集中在低对比与重叠区域。"
+  native_position: "训练期数据增强；不改变模型结构。"
+  candidate_positions:
+    - "dataloader：只在 fit 数据上生成粘贴样本"
+  required_alignment:
+    - "实例 mask/box 同步变换"
+    - "粘贴边界与遮挡关系一致"
+    - "验证/测试不增强"
+  evidence:
+    - "论文报告实例分割/检测增益；是否迁移到原子/粒子图像未知"
+  risks:
+    leakage: low
+    public_lb_overfit: low
+    external_data: medium
+    compute: low
+    license: medium
+  cost:
+    train: "dataloader CPU/内存上涨；需缓存实例"
+    inference: "不变"
+  minimal_test: "同 split/同主预算，fit-only Copy-Paste vs baseline；看低对比/遮挡切片和 box/mask 质量。"
+  falsification: "同预算 3 seeds 无增益，或增益只来自更多 epoch/更强增强；低对比切片变差。"
+  decision: screen
+  decision_reason: "机制匹配遮挡/小目标，但本地未验证；先做 1 个数据集的最小对照。"
+  local_evidence: "not_run"
+  owner: ""
+  date: "2026-10-25"

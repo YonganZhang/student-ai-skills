@@ -13,6 +13,7 @@ BIN_DIR="${PLAN_BIN_DIR:-$HOME/.local/bin}"
 
 TARGET="both"; ONLY=""; MODE="copy"; FORCE=0; DRY=0
 WITH_PLAN=1; SP_MODE="official"   # official (fallback vendored) | vendored | skip
+WITH_PW=0; PW_PKG="@playwright/cli"   # npm package that provides the playwright-cli command
 
 usage() {
   cat <<'EOF'
@@ -20,6 +21,7 @@ usage() {
 
 把本仓库 skills/ 下的技能装到 Claude Code（~/.claude/skills/）和/或 Codex（~/.agents/skills/），
 安装 plan 命令（project-top 的计划 CLI），并安装 Superpowers。
+playwright-cli 技能需要的 playwright-cli 命令（npm 包 @playwright/cli）默认只检查并提示，不自动全局安装。
 
 选项:
   --target claude|codex|both   安装到哪个宿主（默认 both）
@@ -30,6 +32,7 @@ usage() {
   --bin-dir DIR                plan 命令的安装目录（默认 ~/.local/bin）
   --superpowers MODE           official（默认：先官方插件，失败再复制随附 skills）| vendored | skip
   --no-superpowers             等同 --superpowers skip
+  --with-playwright            缺 playwright-cli 命令时执行 npm install -g @playwright/cli（需要 Node.js 18+ 与 npm）
   --dry-run                    只打印将要执行的动作，不改任何文件
   --list                       列出可安装的技能后退出
   -h, --help                   显示本帮助
@@ -41,6 +44,7 @@ usage() {
   bash install.sh
   bash install.sh --target claude --only share-top,grill-to-spec --no-superpowers
   bash install.sh --link --force
+  bash install.sh --only playwright-cli --with-playwright --no-superpowers --no-plan
 
 退出码: 0 成功（含按规则跳过的项）；1 安装或校验失败；2 参数错误。
 EOF
@@ -64,6 +68,7 @@ while [[ $# -gt 0 ]]; do
     --superpowers) [[ $# -ge 2 ]] || die_usage "--superpowers 需要参数"; SP_MODE="$2"; shift 2 ;;
     --superpowers=*) SP_MODE="${1#*=}"; shift ;;
     --no-superpowers) SP_MODE="skip"; shift ;;
+    --with-playwright) WITH_PW=1; shift ;;
     --dry-run) DRY=1; shift ;;
     --list) list_skills; exit 0 ;;
     -h|--help) usage; exit 0 ;;
@@ -160,6 +165,27 @@ if [[ $WITH_PLAN -eq 1 ]]; then
     case ":$PATH:" in *":$BIN_DIR:"*) ;; *) say "  提示: $BIN_DIR 不在 PATH 中，请把 export PATH=\"$BIN_DIR:\$PATH\" 加入 shell 配置";; esac
   fi
   command -v python3 >/dev/null 2>&1 || say "  提示: 未找到 python3，plan 需要 Python 3.10+"
+fi
+
+# 2b. playwright-cli command for the playwright-cli skill: check and hint; global npm install only with --with-playwright
+want_pw=$WITH_PW
+for s in "${SELECTED[@]}"; do [[ "$s" == playwright-cli ]] && want_pw=1; done
+if [[ $want_pw -eq 1 ]]; then
+  echo "== playwright-cli 命令（npm 包 $PW_PKG）"
+  if command -v playwright-cli >/dev/null 2>&1; then
+    say "  已有 $(command -v playwright-cli)（版本 $(playwright-cli --version 2>/dev/null || echo 未知)）"
+  elif [[ $WITH_PW -eq 1 ]]; then
+    if ! command -v npm >/dev/null 2>&1; then
+      echo "  未找到 npm：先安装 Node.js 18+，再运行 npm install -g $PW_PKG" >&2; FAILED=$((FAILED + 1))
+    elif run npm install -g "$PW_PKG"; then
+      say "  $([[ $DRY -eq 1 ]] && echo 将安装 || echo 已安装) $PW_PKG"; INSTALLED=$((INSTALLED + 1))
+    else
+      echo "  npm install -g $PW_PKG 失败；没有全局写权限时先 npm config set prefix ~/.npm-global 并把 ~/.npm-global/bin 加入 PATH（见 README）" >&2
+      FAILED=$((FAILED + 1))
+    fi
+  else
+    say "  提示: 未找到 playwright-cli 命令。需要浏览器自动化时运行 npm install -g $PW_PKG，或重跑本脚本并加 --with-playwright"
+  fi
 fi
 
 # 3. Superpowers (official plugin first, vendored skills as fallback)

@@ -1,0 +1,62 @@
+{
+  "schema_version": "dl-model-matrix/v1",
+  "matrix_id": "REPLACE_WITH_MATRIX_ID",
+  "objective": "family_screen_then_stable_champion",
+  "cross_track_reporting": {
+    "raw_score_global_ranking": false,
+    "allowed_aggregates": [
+      "relative_improvement_vs_incumbent",
+      "stability_pass_rate",
+      "practical_delta_pass_rate",
+      "failure_rate",
+      "betu"
+    ]
+  },
+  "tracks": [
+    {
+      "track_id": "REPLACE_WITH_TRACK_ID",
+      "task_type": "REPLACE_WITH_TASK_TYPE",
+      "current_incumbent_id": "REPLACE_WITH_INCUMBENT",
+      "readiness": "screen_ready",
+      "lanes": [
+        {
+          "lane_id": "REPLACE_WITH_LANE_ID",
+          "matrix_stage": "family_screen",
+          "execution_status": "planned",
+          "primary_metric": {"name": "REPLACE_WITH_METRIC", "direction": "higher_is_better"},
+          "split": {"unit": "REPLACE_WITH_REPEAT_UNIT", "count": 3, "status": "ready"},
+          "budget_profile": "REPLACE_WITH_MATCHED_BUDGET_PROFILE",
+          "incumbent_model_id": "REPLACE_WITH_INCUMBENT",
+          "historical_candidates": [],
+          "planned_candidates": [
+            {
+              "model_id": "REPLACE_WITH_MODEL_1",
+              "family": "incumbent_or_classical",
+              "role": "incumbent",
+              "status": "ready",
+              "source": "REPLACE_WITH_CODE_OR_PACKAGE",
+              "rationale": "REPLACE_WITH_DATA_AND_TASK_FIT_REASON"
+            },
+            {
+              "model_id": "REPLACE_WITH_MODEL_2",
+              "family": "mainstream_deep_network",
+              "role": "challenger",
+              "status": "ready",
+              "source": "REPLACE_WITH_CODE_OR_PACKAGE",
+              "rationale": "REPLACE_WITH_DATA_AND_TASK_FIT_REASON"
+            },
+            {
+              "model_id": "REPLACE_WITH_MODEL_3",
+              "family": "domain_or_pretrained_model",
+              "role": "challenger",
+              "status": "ready",
+              "source": "REPLACE_WITH_CODE_OR_PACKAGE",
+              "rationale": "REPLACE_WITH_DATA_AND_TASK_FIT_REASON"
+            }
+          ],
+          "next_action": "run matched-budget family screen"
+        }
+      ]
+    }
+  ]
+}

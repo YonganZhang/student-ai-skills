@@ -1,6 +1,6 @@
 # 学生 AI 技能包（Claude Code / Codex）
 
-一组可直接安装到 Claude Code 和 Codex 的技能（Agent Skills），覆盖项目计划与交接、PPT 与方法图、需求澄清与代码审查、CLI 设计、前端设计和项目模组安装，并随附 Superpowers 工作流。技能是写给 AI 读的操作手册：装好后用平常的话提需求，AI 会按场景自动加载对应技能。
+一组可直接安装到 Claude Code 和 Codex 的技能（Agent Skills），覆盖项目计划与交接、PPT 与方法图、需求澄清与代码审查、CLI 设计、前端设计、项目模组安装、浏览器自动化和深度学习实验流程，并随附 Superpowers 工作流。技能是写给 AI 读的操作手册：装好后用平常的话提需求，AI 会按场景自动加载对应技能。
 
 - 宿主：Claude Code（`~/.claude/skills/`）、Codex（`~/.agents/skills/`，Codex 当前的用户级技能目录）。
 - 系统：Linux / macOS（安装脚本为 bash）。部分脚本需要 Python 3.10+；`plan` 命令调用 `/usr/bin/python3`，少数子命令需要 PyYAML。
@@ -21,10 +21,12 @@
 | `share-agent-cli` | dev-agent-cli | 设计和规范 CLI：help、机器输出、退出码、非交互；附 Python 母模板 | “给这个脚本做个 CLI” | 自有，MIT；Click 母模板含 simonw/click-app 的 Apache-2.0 LICENSE/NOTICE |
 | `frontend-design` | frontend-design | 后台、表单、多步业务界面的视觉设计 | “美化这个后台页面” | [anthropics/skills](https://github.com/anthropics/skills)，Apache-2.0（改过的副本，见 `UPSTREAM.json`） |
 | `design-taste-frontend` | design-taste-frontend | 落地页、作品集、营销页与整体改版（与上一项二选一） | “做个落地页”“重新设计首页” | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，MIT（改过的副本，见 `UPSTREAM.json`） |
+| `playwright-cli` | web-playwright | 用 Playwright CLI 操作真实浏览器：打开网页、填表点击、截图、E2E 验收与演示录像；附会话脚本和录像验收子流程 | “用浏览器打开这个网址把表填了”“跑一遍 E2E 验收”“录个操作演示” | 自有，MIT；`references/` 部分改编自 [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli)，Apache-2.0（技能内 `LICENSE`、`NOTICE.md`）。**需另装命令**，见下文“Playwright CLI” |
+| `share-autoresearch-engine` | research-dl-pipeline-base | 深度学习训练与研究闭环：过拟合/欠拟合诊断、loss 与超参、论文模块移植与对照实验、AI 检查点、实验回执与门禁；附 PyTorch Lightning 模板和检查脚本 | “模型过拟合了怎么办”“把这篇论文的模块接进我的网络”“帮我设计消融实验” | 自有，MIT；随附 ARIS（wanshuiyin/Auto-claude-code-research-in-sleep，MIT）技能正文、tuning_playbook（CC-BY-4.0）、AREX-Skill（Apache-2.0/MIT）、ms-swift 示例（Apache-2.0）等，来源、提交与许可见 `UPSTREAM.json` 与各 `vendor/` LICENSE |
 | `share-project-provision` | dev-project-provision | 模组安装器：按项目类型推荐并安装项目级技能模组（前端设计、软件骨架、Impeccable、授权逆向包等） | “这个项目要装什么”“开启前端设计模式”“开启骨架模式” | 自有，MIT；模板分别保留上游许可（见下文） |
 | `third_party/superpowers` | superpowers（插件） | TDD、系统化调试、头脑风暴、写计划、子智能体开发等 15 个工作流技能 | 自动触发，如“帮我做个新功能” | [obra/superpowers](https://github.com/obra/superpowers) 7.0.0，MIT，作者 Jesse Vincent |
 
-技能之间会互相引用。凡是写着“（可选，本包未包含）”的技能，本包没有收录，AI 读到时会跳过或改用通用做法。需要外部模型复核时，可另装公开的外援审查技能 <https://github.com/YonganZhang/external-review-skill>。
+技能之间会互相引用。凡是写着“（可选，本包未包含）”的技能，本包没有收录（例如 research-dl-pipeline-base 引用的组件接入参考库 mlgain），AI 读到时会跳过或改用通用做法。需要外部模型复核时，可另装公开的外援审查技能 <https://github.com/YonganZhang/external-review-skill>。
 
 ## 安装
 
@@ -42,9 +44,28 @@ bash install.sh                # 默认：两端都装、复制方式、装 plan
 - `--link`：用软链接代替复制，之后 `git pull` 即生效；仓库目录不能删除或移动。
 - `--force`：覆盖已存在的同名目录。默认遇到同名目录会跳过并提示，不会覆盖你自己的技能。
 - `--no-plan`、`--bin-dir DIR`：不装或换位置安装 `plan` 命令（默认 `~/.local/bin/plan`，指向已安装的 `share-top/scripts/plan`）。
-- `--superpowers official|vendored|skip`：Superpowers 的安装方式，见下节。
+- `--superpowers official|vendored|skip`：Superpowers 的安装方式，见下文。
+- `--with-playwright`：缺 `playwright-cli` 命令时执行 `npm install -g @playwright/cli`；不加时只提示。
 
 装完后开一个新会话，技能才会被发现。Claude Code 里输入 `/skills` 可查看；终端里运行 `plan help` 检查计划命令。
+
+## Playwright CLI（playwright-cli 技能需要）
+
+`playwright-cli` 技能驱动的是 Microsoft 官方 npm 包 [`@playwright/cli`](https://www.npmjs.com/package/@playwright/cli)（源码 [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli)，Apache-2.0，提供 `playwright-cli` 命令；本包维护时用的是 0.1.22）。安装脚本默认只检查并提示，不会替你全局安装 npm 包：
+
+```bash
+node --version                      # 需要 Node.js 18+
+npm install -g @playwright/cli      # 或：bash install.sh --only playwright-cli --with-playwright
+playwright-cli --version
+```
+
+没有全局写权限时不要用 sudo，改用户级前缀：`npm config set prefix ~/.npm-global`，再把 `~/.npm-global/bin` 加入 PATH。首次打开会话时会按需下载 Chromium。远程服务器或无桌面的 Linux 只能跑无头浏览器；要让人看画面或接管，需要自行准备图形桌面、虚拟显示（如 Xvfb）加远程桌面，本包不提供这类服务。
+
+## research-dl-pipeline-base 的说明
+
+- 训练规则要求 CUDA GPU，默认用 PyTorch Lightning；`assets/lightning-template/` 需要 `pip install -r requirements.txt`（含 `lightning`），其 CPU 单测和 `tests/smoke.py` 不需要显卡。
+- 原技能里约 32 MB 的时序/神经算子上游代码（`references/model-zoo/upstream/`，含数据与预编译库）没有随附；`references/model-zoo/SOURCES.md` 记录了仓库和 commit，需要时自行克隆。作者私有项目的实验记录也未随附，案例只保留可迁移的做法。
+- 文中多处引用的组件接入参考库 `mlgain-integrate-component`（简称 mlgain，本包未包含），相关链接已标“本包未包含”：主流程（`SKILL.md` 与标准流程）可独立使用，但组件接入参考页里指向它的细则（接线检查、放置理论、受控比较等）需要你按文中要点自行展开。
 
 ## Superpowers
 
@@ -84,5 +105,7 @@ bash install.sh                # 默认：两端都装、复制方式、装 plan
   - `share-project-provision/templates/skills/dev-software-skeleton/`：MIT，cursor/plugins pstack（`LICENSE`）。
   - `share-agent-cli/assets/python-click/template/`：Apache-2.0，simonw/click-app（`LICENSE`、`NOTICE`）。
   - `share-top/references/absorbed/`：planning-with-files 与 mattpocock/skills 的许可文本随附。
+  - `skills/playwright-cli/references/`：部分改编自 microsoft/playwright-cli，Apache-2.0（`LICENSE`、`NOTICE.md`）。
+  - `skills/share-autoresearch-engine/references/aris/vendor/`：MIT，wanshuiyin/Auto-claude-code-research-in-sleep（`LICENSE`）；`references/upstream/vendor/`：tuning_playbook（CC-BY-4.0）、AREX-Skill（Apache-2.0 / MIT）；`assets/llm-native/ms-swift/upstream/`：Apache-2.0；`references/timesfm/`、`references/zarr/`：K-Dense-AI/scientific-agent-skills（Apache-2.0 / MIT）。
   - `third_party/superpowers/`：MIT，Jesse Vincent（`LICENSE`）。
 - 各技能的上游仓库、固定提交与改动说明记在其 `UPSTREAM.json`。

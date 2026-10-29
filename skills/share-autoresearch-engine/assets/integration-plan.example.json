@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "budget_seconds": 300,
+  "checks": [
+    {"id": "interface", "command": ["python3", "-m", "pytest", "_tests/test_component.py::test_interface", "-q"], "timeout_seconds": 60},
+    {"id": "training_path", "command": ["python3", "-m", "pytest", "_tests/test_component.py::test_training_path", "-q"], "timeout_seconds": 60},
+    {"id": "data_semantics", "command": ["python3", "-m", "pytest", "_tests/test_component.py::test_data_semantics", "-q"], "timeout_seconds": 60},
+    {"id": "baseline_control", "command": ["python3", "-m", "pytest", "_tests/test_component.py::test_baseline_control", "-q"], "timeout_seconds": 60},
+    {"id": "checkpoint", "command": ["python3", "-m", "pytest", "_tests/test_component.py::test_checkpoint", "-q"], "timeout_seconds": 60}
+  ]
+}

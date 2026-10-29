@@ -1,0 +1,11 @@
+{
+  "model": "SET_SELECTED_OR_MERGED_CHECKPOINT",
+  "model_type": "SET_NATIVE_MODEL_TYPE",
+  "template": "SET_NATIVE_TEMPLATE",
+  "quant_method": "bnb",
+  "quant_bits": 4,
+  "bnb_4bit_compute_dtype": "bfloat16",
+  "bnb_4bit_quant_type": "nf4",
+  "torch_dtype": "bfloat16",
+  "output_dir": "SET_NEW_QUANTIZED_DIR"
+}

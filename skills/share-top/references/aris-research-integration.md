@@ -1,6 +1,6 @@
 # Auto Research / ARIS 与六合一联动
 
-本页负责研究工作流与项目记录的交界；研究实现和检查仍走深度学习研究技能 `share-autoresearch-engine` 及其 ARIS 本地合同（可选，本包未包含）。用户无需说 ARIS，直接表达论文模块接入、融合验证、消融或实验审计意图即可路由。
+本页负责研究工作流与项目记录的交界；研究实现和检查仍走 [Auto Research](../../share-autoresearch-engine/SKILL.md) → [ARIS 本地合同](../../share-autoresearch-engine/references/aris/README.md)。用户无需说 ARIS，直接表达论文模块接入、融合验证、消融或实验审计意图即可路由。
 
 ## 何时使用
 

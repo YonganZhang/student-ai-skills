@@ -380,7 +380,7 @@ def test_technical_titles_bare_phases_and_the_details_article(tmp_path: Path) ->
     p = str(root)
     ok(tmp_path, "plan", "add", p, "--parent", "P3", "--title", "跑 _outputs/x.json 的 0.4563% 复核")
     ok(tmp_path, "plan", "add", p, "--parent", "P3", "--title", "Piggyback PackNet ZipIt 三种机制")
-    ok(tmp_path, "plan", "add", p, "--parent", "P3", "--title", "按 GAIA 框架整理物性/岩相两个场景")   # a name and "/" are fine
+    ok(tmp_path, "plan", "add", p, "--parent", "P3", "--title", "按 ACME 框架整理物性/岩相两个场景")   # a name and "/" are fine
     ok(tmp_path, "plan", "phase", "add", p, "--title", "以后再说")
     warnings = {w["code"]: w["message"] for w in ok(tmp_path, "plan", "validate", p)["warnings"]}
     assert "P3.2" in warnings["PLAN_TITLE_TECHNICAL"] and "P3.3" in warnings["PLAN_TITLE_TECHNICAL"]

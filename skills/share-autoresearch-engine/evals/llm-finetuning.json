@@ -1,0 +1,13 @@
+{
+  "scope": "Routing cases for manual/model replay, not measured trigger accuracy",
+  "cases": [
+    {"request": "用现成框架给一个开源模型做领域SFT，之后量化部署", "expected": "LLM子流程、量化决策、原生模板", "avoid": "自写训练循环"},
+    {"request": "只有16GB显存，想用QLoRA训练", "expected": "模型/硬件/内核/峰值核验，训练与部署量化分开", "avoid": "保证任意模型能放下"},
+    {"request": "微调后要导出INT4，还需要什么测试", "expected": "导出重载、开发质量/性能、冻结后test、服务验收", "avoid": "量化成功等于质量通过"},
+    {"request": "已经有可用ms-swift，多卡要怎么迁移", "expected": "复用原生栈、依赖隔离、目标硬件/恢复测试", "avoid": "强制迁移Lightning"},
+    {"request": "模型不够懂专业词汇，是否先CPT再SFT", "expected": "基线错误、数据/预算和独立增益验证", "avoid": "强制所有算法串行"},
+    {"request": "说明LoRA是什么", "expected": "概念解释，无需全流程", "avoid": "自动下载或开训"},
+    {"request": "查最新模型排行榜", "expected": "资料检索，不触发训练子流程", "avoid": "自动建立训练工程"},
+    {"request": "改图像分割网络的跳连", "expected": "视觉专用栈与父结构门禁", "avoid": "误走LLM模板"}
+  ]
+}

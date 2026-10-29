@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "project_sidecar_not_native_strata_config",
+  "status": "UNBOUND_NOT_AUTHORIZATION",
+  "upstream": {
+    "repository": "https://github.com/Niko1221/Strata",
+    "documentation_revision": "4b9e05a2a806a3fe24f7b2560d98626c37dade35",
+    "release_to_verify": "SET",
+    "terminal_version": "SET",
+    "control_version": "SET",
+    "engine_version": "SET"
+  },
+  "model": {
+    "repository": "SET",
+    "revision": "SET",
+    "asset_sha_manifest": "SET",
+    "family": "SET",
+    "preset_or_model_path": "SET",
+    "speed_and_expert_count": "SET",
+    "resolved_context_tokens": null
+  },
+  "scope": {
+    "authorization_reference": "SET",
+    "gpu_ids": [],
+    "max_ram_gib": null,
+    "max_download_gb": null,
+    "max_disk_peak_gb": null,
+    "max_wall_seconds": null,
+    "data_dir": "SET",
+    "listen_address": "127.0.0.1",
+    "client_config_write": false
+  },
+  "evidence": {
+    "plan_output": "SET",
+    "actual_launch_argv": "SET",
+    "health_and_loaded": "UNVERIFIED",
+    "model_identity": "UNVERIFIED",
+    "bounded_generation": "UNVERIFIED",
+    "target_quality": "UNVERIFIED",
+    "performance_and_resources": "UNVERIFIED",
+    "client_protocol": "UNVERIFIED",
+    "owned_processes_and_stop_receipt": "SET",
+    "rollback_version_and_config": "SET"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "hypothesis-trace/v1",
+  "title": "One proposal of a model-design team round (one JSON object per line in the project ledger)",
+  "description": "Field design adapted from microsoft/RD-Agent rdagent/core/proposal.py (Hypothesis, HypothesisFeedback, Trace; MIT). See references/multi-agent-protocol.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "round", "parents", "role", "hypothesis", "reason", "target_error", "expected_effect", "falsification", "config", "cells", "result", "verdict"],
+  "properties": {
+    "id": {"type": "string"},
+    "round": {"type": "string"},
+    "parents": {"type": "array", "items": {"type": "string"}, "description": "ids this proposal builds on, plus the current best"},
+    "role": {"type": "string", "description": "who proposed it (analyst, structure_expert, training_expert, checker, result_analyst, human)"},
+    "hypothesis": {"type": "string"},
+    "reason": {"type": "string"},
+    "target_error": {"type": "string", "description": "error type addressed (e.g. confident false alarms on background)"},
+    "scores": {"type": "object", "additionalProperties": false,
+               "properties": {"alignment": {"type": "integer", "minimum": 1, "maximum": 10},
+                              "impact": {"type": "integer", "minimum": 1, "maximum": 10},
+                              "novelty": {"type": "integer", "minimum": 1, "maximum": 10},
+                              "feasibility": {"type": "integer", "minimum": 1, "maximum": 10},
+                              "risk_reward": {"type": "integer", "minimum": 1, "maximum": 10}}},
+    "expected_effect": {"type": "string"},
+    "falsification": {"type": "string"},
+    "config": {"type": "object", "description": "the arm configuration actually trained"},
+    "cells": {"type": "array", "items": {"type": "string"}, "description": "run directories / cell ids"},
+    "fault_checks": {"type": "object", "description": "per-cell alarms summary (parity, optimizer, effective contribution, selection exposure, reload, bypass)"},
+    "result": {"type": "object", "description": "select-split numbers shown to the team and development numbers kept by the executor"},
+    "verdict": {"enum": ["useful", "useless", "harmful", "untestable", "implementation_failure", "pending"]},
+    "verdict_reason": {"type": "string"},
+    "new_hypothesis": {"type": "string"}
+  }
+}

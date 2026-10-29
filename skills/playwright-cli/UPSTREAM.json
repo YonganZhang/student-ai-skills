@@ -1,0 +1,17 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "microsoft/playwright-cli",
+      "license": "Apache-2.0",
+      "license_file": "LICENSE",
+      "paths": ["skills/playwright-cli/references/"],
+      "absorbed_commit": "unknown (absorbed before 2026-10-18; licence text pinned at b1a5903c5b633b8c9f843ad7b629c2a78437040c)",
+      "license_pinned_commit": "b1a5903c5b633b8c9f843ad7b629c2a78437040c",
+      "mode": "adapted",
+      "local_paths": ["references/"],
+      "modifications": "References adapted from the upstream skill: translated or reworded for this workspace, machine-specific notes removed, local routing added. See NOTICE.md.",
+      "watch": true
+    }
+  ]
+}

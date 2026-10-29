@@ -1,0 +1,59 @@
+{
+  "scope": "unmodified upstream reference source; not auto-executed",
+  "sources": [
+    {
+      "repository": "modelscope/ms-swift",
+      "revision": "484e836d691a52fd8c1723137ee3d64c6e066683",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/modelscope/ms-swift/484e836d691a52fd8c1723137ee3d64c6e066683/LICENSE",
+      "snapshot": "upstream/LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "license": "Apache-2.0; see LICENSE"
+    },
+    {
+      "repository": "modelscope/ms-swift",
+      "revision": "484e836d691a52fd8c1723137ee3d64c6e066683",
+      "path": "swift/cli/sft.py",
+      "url": "https://raw.githubusercontent.com/modelscope/ms-swift/484e836d691a52fd8c1723137ee3d64c6e066683/swift/cli/sft.py",
+      "snapshot": "upstream/swift__cli__sft.py",
+      "sha256": "97162d10eb5b82cdfadf1ec30a0eac50cc0bc9646140b8342806df9e8e6e07f0",
+      "license": "Apache-2.0; see LICENSE"
+    },
+    {
+      "repository": "modelscope/ms-swift",
+      "revision": "484e836d691a52fd8c1723137ee3d64c6e066683",
+      "path": "examples/train/qlora/bnb/train.sh",
+      "url": "https://raw.githubusercontent.com/modelscope/ms-swift/484e836d691a52fd8c1723137ee3d64c6e066683/examples/train/qlora/bnb/train.sh",
+      "snapshot": "upstream/examples__train__qlora__bnb__train.sh",
+      "sha256": "86338bcfe9d49456bfa2f256913161f7f40070fa1e050c313afa3d34ea49f5af",
+      "license": "Apache-2.0; see LICENSE"
+    },
+    {
+      "repository": "modelscope/ms-swift",
+      "revision": "484e836d691a52fd8c1723137ee3d64c6e066683",
+      "path": "examples/export/merge_lora.sh",
+      "url": "https://raw.githubusercontent.com/modelscope/ms-swift/484e836d691a52fd8c1723137ee3d64c6e066683/examples/export/merge_lora.sh",
+      "snapshot": "upstream/examples__export__merge_lora.sh",
+      "sha256": "2ebee4ec2c0bf7241e2270fab8301df018dfedbcb6aaae313955f38fd3b6ee1f",
+      "license": "Apache-2.0; see LICENSE"
+    },
+    {
+      "repository": "modelscope/ms-swift",
+      "revision": "484e836d691a52fd8c1723137ee3d64c6e066683",
+      "path": "examples/export/quantize/bnb.sh",
+      "url": "https://raw.githubusercontent.com/modelscope/ms-swift/484e836d691a52fd8c1723137ee3d64c6e066683/examples/export/quantize/bnb.sh",
+      "snapshot": "upstream/examples__export__quantize__bnb.sh",
+      "sha256": "79138d6c3cdcf4621d9cd240c5a8db3a3bee1c769b703ca954319265202ff2d2",
+      "license": "Apache-2.0; see LICENSE"
+    },
+    {
+      "repository": "modelscope/ms-swift",
+      "revision": "484e836d691a52fd8c1723137ee3d64c6e066683",
+      "path": "examples/models/qwen3_5/transformers.sh",
+      "url": "https://raw.githubusercontent.com/modelscope/ms-swift/484e836d691a52fd8c1723137ee3d64c6e066683/examples/models/qwen3_5/transformers.sh",
+      "snapshot": "upstream/examples__models__qwen3_5__transformers.sh",
+      "sha256": "bc776379df246bc17050218aa7e56e2bc61a376a0f085ae7d98810fc8775036b",
+      "license": "Apache-2.0; see LICENSE"
+    }
+  ]
+}

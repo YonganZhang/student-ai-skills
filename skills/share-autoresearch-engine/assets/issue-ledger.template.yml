@@ -1,0 +1,26 @@
+# Issue ledger 模板。复制到项目问题台账，不要只留在聊天里。
+schema_version: 1
+issues:
+  - id: DL-YYYY-001
+    title: ""
+    status: open          # open / mitigated / closed / wontfix
+    severity: P1          # P0 / P1 / P2
+    blocks_action: none   # scale / freeze / test / claim / none
+    layer: data           # task / data / model / training / selection / eval / deploy / process
+    symptom: ""
+    evidence:
+      - path: ""
+        line: ""
+        fact: ""
+    root_cause: ""
+    invariant: ""
+    check: ""
+    automation: script    # assert / script / gate / regression / manual
+    regression: ""
+    close_evidence: ""    # 命令/结果/复审链接；关闭时必填
+    owner: ""
+    opened: YYYY-MM-DD
+    reviewed: ""
+    closed_by: ""
+    affected_claims: []
+    notes: ""

@@ -1,0 +1,27 @@
+{
+  "records": [
+    {
+      "sample_id": "SET_ID",
+      "source_cluster_id": "SET_SOURCE_CLUSTER",
+      "split": "fit"
+    }
+  ],
+  "input_files": [
+    {
+      "path": "SET_FIT_JSONL",
+      "sha256": "SET_SHA256",
+      "split": "fit",
+      "license_status": "SET_ACCEPTANCE",
+      "quality_status": "SET_ACCEPTANCE"
+    },
+    {
+      "path": "SET_SELECT_JSONL",
+      "sha256": "SET_SHA256",
+      "split": "select",
+      "license_status": "SET_ACCEPTANCE",
+      "quality_status": "SET_ACCEPTANCE"
+    }
+  ],
+  "calibration_ids": [],
+  "note": "Identity-only records must cover every actual sample; manifest metadata requires source audit, and never contains test answers."
+}

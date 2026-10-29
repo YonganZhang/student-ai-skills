@@ -1,0 +1,28 @@
+{
+  "status": "PENDING_DECISION",
+  "model_revision": "SET_REVISION",
+  "training_quantization": {
+    "decision": "PENDING",
+    "method": null,
+    "reason": "SET_MEMORY_QUALITY_SUPPORT_REASON",
+    "weight_storage": null,
+    "compute_dtype": null,
+    "optimizer_dtype": null
+  },
+  "deployment_quantization": {
+    "decision": "PENDING",
+    "method": null,
+    "reason": "SET_LATENCY_MEMORY_QUALITY_REASON",
+    "target_hardware_engine": "SET_TARGET",
+    "calibration_required": null,
+    "calibration_split": null,
+    "quality_tolerance_reference": "SET_PREDECLARED_CONTRACT",
+    "benchmark_reference": null,
+    "rollback_reference": "SET_ORIGINAL_PRECISION",
+    "source_checkpoint": "SET_SELECTED_OR_MERGED_CHECKPOINT",
+    "source_identity_reference": "SET_BASE_ADAPTER_OR_FULL_CHECKPOINT_IDENTITY"
+  },
+  "data_boundary": "CALIBRATION_FIT_SELECT_OR_DEDICATED_CALIBRATION_ONLY",
+  "actual_validation": [],
+  "execution_authorization": "SEPARATE_RUN_CONTRACT"
+}

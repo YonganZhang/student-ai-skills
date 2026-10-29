@@ -1,0 +1,27 @@
+{
+  "status": "PENDING",
+  "operation": "sft",
+  "authorization_reference": "SET_REAL_SCOPE",
+  "native_config": {
+    "path": "SET_CONFIG",
+    "sha256": "SET_SHA256"
+  },
+  "data_manifest": {
+    "path": "SET_DATA_MANIFEST",
+    "sha256": "SET_SHA256"
+  },
+  "quantization_decision": {
+    "path": "SET_DECISION",
+    "sha256": "SET_SHA256"
+  },
+  "budget": {
+    "max_steps": null,
+    "max_wall_seconds": null,
+    "max_gpus": null
+  },
+  "source_checkpoint": "SET_SELECTED_OR_MERGED_CHECKPOINT",
+  "source_identity_reference": {
+    "path": "SET_SOURCE_ASSET_MANIFEST",
+    "sha256": "SET_SHA256"
+  }
+}

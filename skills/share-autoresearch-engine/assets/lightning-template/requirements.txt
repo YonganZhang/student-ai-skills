@@ -1,0 +1,11 @@
+# Reference template dependencies. Pin exact versions in a real project lockfile.
+# These are compatibility bounds, not a frozen environment.
+torch>=2.1,<3
+lightning>=2.2,<3
+numpy>=1.24,<3
+PyYAML>=6.0,<7
+# Optional: exact distributed metrics instead of per-batch averaging
+# torchmetrics>=1.3
+# Optional: config composition and multirun
+# hydra-core>=1.3
+# optuna>=3.6

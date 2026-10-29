@@ -62,7 +62,7 @@ description: "项目技能模组/装备。设计软件骨架、架构骨架或�
 | **开发类(software)** | 不默认安装通用方法论 skill；软件骨架按明确设计任务启用，其余按需准备框架、CLI 或测试工具 |
 | **+ 前端开发** | **frontend-design** + **design-taste-frontend(taste)** |
 | 深度学习 / 模型 / 数据 | HuggingFace / Kaggle CLI 或 API 工作流（按需） |
-| 需要控制浏览器 / E2E | Playwright CLI（对应技能（可选，本包未包含）） |
+| 需要控制浏览器 / E2E | Playwright CLI（本包 `playwright-cli` 技能；命令需另装 `npm i -g @playwright/cli`） |
 | 逆向工程 / 安全研究（授权内） | **reverse-skill-pack**(按需装项目级;默认轻量,综合需求才装完整路由包) |
 
 > 一类需求 = 档案/目录里一行。要支持新类型,照「扩展」加行即可。
