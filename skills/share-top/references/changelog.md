@@ -127,7 +127,7 @@
 
 ## 2026-09-23 — references / sub-skills 类层化
 
-**做了什么**：按技能维护流程的「内容分层」原则清理 references/ 与 references/sub-skills/：单项目约定移出（逐字原文另行存档，未随本包发布），历史来由移到本节，无来源目标值改写为判断标准。顶层 scripts/、tests/、core/、templates/、profiles/、SKILL.md 与 references/absorbed/ 未动（sub-skills 自带的模板只改了注释与头部说明）。
+**做了什么**：按 `share-skill-creator/references/memory-to-sop.md`「内容分层」清理 references/ 与 references/sub-skills/：单项目约定移出（逐字原文另行存档，未随本包发布），历史来由移到本节，无来源目标值改写为判断标准。顶层 scripts/、tests/、core/、templates/、profiles/、SKILL.md 与 references/absorbed/ 未动（sub-skills 自带的模板只改了注释与头部说明）。
 
 **为什么**：换一个项目，skill 规则仍要成立；单项目参数、日期和事故叙事留在规则里，会被当成通用约束。
 

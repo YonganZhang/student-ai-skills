@@ -1,5 +1,12 @@
 # 更新记录
 
+## v1.3.0（2026-10-29）
+
+- 新增入门教程 [docs/TUTORIAL.md](docs/TUTORIAL.md)：技能是什么、渐进式披露、技能与 MCP 的区别、安装、使用示例、自己创建技能；README 开头提示新同学先读。
+- 新增 1 个技能（共 17 个）：agent-skill-creator（目录 `share-skill-creator`），技能创建器：创建与修改技能、写 description、结构分层、正例与近误触负例验证、测试用例评估与 description 迭代、吸收外部技能；附 `quick_validate`、`check_skill_filenames`、`audit_skill_routing`、`audit_skill_refs`、`scan_orphans`、`upstream_watch` 等脚本与测试。
+- 公开前精选：只保留创建、评估、吸收相关内容；不随附维护者自用的技能清单与低频库、跨宿主同步、完整配置回放、案例泄漏审计、全局 harness 审计、路由契约测试与历史记录。个人写法约定改写为通用的 `references/conventions.md`；技能放置位置写成个人 `~/.claude/skills/`、`~/.agents/skills/` 与项目 `.claude/skills/`、`.agents/skills/`；脚本默认目录改为 `~/.claude/skills`（可用 `SKILLS_DIR` 覆盖），`check_skill_filenames.sh --fix` 改为就地改名。
+- dev-project-provision、dev-grill-to-spec、project-top、research-dl-pipeline-base 里原先把技能创建器标成“本包未包含”的引用改为指向包内 `share-skill-creator`。
+
 ## v1.2.0（2026-10-29）
 
 - 新增 2 个技能（共 16 个）：

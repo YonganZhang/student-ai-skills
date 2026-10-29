@@ -1,10 +1,12 @@
 # 学生 AI 技能包（Claude Code / Codex）
 
-一组可直接安装到 Claude Code 和 Codex 的技能（Agent Skills），覆盖项目计划与交接、PPT 与方法图、需求澄清与代码审查、提 PR 前自检、CLI 设计、前端设计、项目模组安装、浏览器自动化和深度学习实验流程，并随附 Superpowers 工作流。技能是写给 AI 读的操作手册：装好后用平常的话提需求，AI 会按场景自动加载对应技能。
+> **新同学先读 [docs/TUTORIAL.md](docs/TUTORIAL.md)**：技能是什么、怎么安装、怎么使用、怎么自己创建技能，约 15 分钟。
+
+一组可直接安装到 Claude Code 和 Codex 的技能（Agent Skills），覆盖项目计划与交接、PPT 与方法图、需求澄清与代码审查、提 PR 前自检、CLI 设计、前端设计、项目模组安装、浏览器自动化、深度学习实验流程和技能创建与评估，并随附 Superpowers 工作流。技能是写给 AI 读的操作手册：装好后用平常的话提需求，AI 会按场景自动加载对应技能。
 
 - 宿主：Claude Code（`~/.claude/skills/`）、Codex（`~/.agents/skills/`，Codex 当前的用户级技能目录）。
 - 系统：Linux / macOS（安装脚本为 bash）。部分脚本需要 Python 3.10+；`plan` 命令调用 `/usr/bin/python3`，少数子命令需要 PyYAML。
-- 版本：见 [CHANGELOG.md](CHANGELOG.md)。当前共 16 个技能（含 1 个必装）加 Superpowers。
+- 版本：见 [CHANGELOG.md](CHANGELOG.md)。当前共 17 个技能（含 1 个必装）加 Superpowers。
 
 ## 技能清单
 
@@ -28,6 +30,7 @@
 | `share-autoresearch-engine` | research-dl-pipeline-base | 深度学习训练与研究闭环：过拟合/欠拟合诊断、loss 与超参、论文模块移植与对照实验、AI 检查点、实验回执与门禁；附 PyTorch Lightning 模板和检查脚本 | “模型过拟合了怎么办”“把这篇论文的模块接进我的网络”“帮我设计消融实验” | 自有，MIT；随附 ARIS（wanshuiyin/Auto-claude-code-research-in-sleep，MIT）技能正文、tuning_playbook（CC-BY-4.0）、AREX-Skill（Apache-2.0/MIT）、ms-swift 示例（Apache-2.0）等，来源、提交与许可见 `UPSTREAM.json` 与各 `vendor/` LICENSE |
 | `mlgain-integrate-component` | research-mlgain-integrate-component | 组件接入参考库（research-dl-pipeline-base 的配套）：论文 / SOTA 模块接入模型时选接入点、接线与兼容检查、受控比较、效果下降排查；附探针脚本与报告模板。源文件为低频库格式 `REFERENCE.md`，本包改名为 `SKILL.md` | “把这个论文模块接进我的模型”“接入后效果变差了”“选哪个接入点” | 自有，MIT |
 | `share-project-provision` | dev-project-provision | 模组安装器：按项目类型推荐并安装项目级技能模组（前端设计、软件骨架、Impeccable、授权逆向包等） | “这个项目要装什么”“开启前端设计模式”“开启骨架模式” | 自有，MIT；模板分别保留上游许可（见下文） |
+| `share-skill-creator` | agent-skill-creator | 技能创建器：创建、修改、评估、吸收技能；写好 description，`SKILL.md` 保持简短、细节放 `references/`/`scripts/`/`assets/`，用真实说法与近误触说法验证触发，跑测试用例与 description 迭代（`run_eval`/`run_loop` 需要 Claude Code 的 `claude` 命令）；附结构校验、引用审计、孤儿脚本扫描等脚本 | “帮我把这个流程做成一个技能”“优化这个技能的触发”“吸收这个外部技能” | 改编自 [anthropics/skills](https://github.com/anthropics/skills) 的 skill-creator，Apache-2.0（技能内 `LICENSE.txt`）；吸收 mattpocock/skills 两篇（MIT，文件头注明）；来源与改动见 `UPSTREAM.json` |
 | `third_party/superpowers` | superpowers（插件） | TDD、系统化调试、头脑风暴、写计划、子智能体开发等 15 个工作流技能 | 自动触发，如“帮我做个新功能” | [obra/superpowers](https://github.com/obra/superpowers) 7.0.0，MIT，作者 Jesse Vincent |
 
 技能之间会互相引用。凡是写着“（可选，本包未包含）”的技能，本包没有收录，AI 读到时会跳过或改用通用做法。需要外部模型复核时，可另装公开的外援审查技能 <https://github.com/YonganZhang/external-review-skill>。
@@ -112,5 +115,6 @@ playwright-cli --version
   - `skills/playwright-cli/references/`：部分改编自 microsoft/playwright-cli，Apache-2.0（`LICENSE`、`NOTICE.md`）。
   - `skills/share-autoresearch-engine/references/aris/vendor/`：MIT，wanshuiyin/Auto-claude-code-research-in-sleep（`LICENSE`）；`references/upstream/vendor/`：tuning_playbook（CC-BY-4.0）、AREX-Skill（Apache-2.0 / MIT）；`assets/llm-native/ms-swift/upstream/`：Apache-2.0；`references/timesfm/`、`references/zarr/`：K-Dense-AI/scientific-agent-skills（Apache-2.0 / MIT）。
   - `skills/mlgain-integrate-component/`、`skills/dev-pr-self-check/`：自有，MIT。
+  - `skills/share-skill-creator/`：改编自 anthropics/skills 的 skill-creator，Apache-2.0（`LICENSE.txt`；脚本、`agents/`、`eval-viewer/`、`assets/`、`references/schemas.md` 等）；`references/absorbed/`：mattpocock/skills，MIT（文件头注明）；本地增补部分为自有，MIT。
   - `third_party/superpowers/`：MIT，Jesse Vincent（`LICENSE`）。
 - 各技能的上游仓库、固定提交与改动说明记在其 `UPSTREAM.json`。

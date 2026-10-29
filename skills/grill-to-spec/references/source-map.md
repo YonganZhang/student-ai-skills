@@ -23,7 +23,7 @@ Related upstream absorbed elsewhere:
 - `skills/engineering/diagnosing-bugs/SKILL.md` → moved out of this skill 2026-10-07 (local adaptation not included in this package; read upstream https://github.com/mattpocock/skills ).
 - `skills/engineering/codebase-design/` and `improve-codebase-architecture/SKILL.md` → moved out 2026-10-07 (local adaptation not included in this package; read upstream).
 - `skills/engineering/code-review/SKILL.md` → `share-code-review/references/absorbed/mattpocock-two-axis-review.md`.
-- `skills/productivity/writing-for-agents/SKILL.md` and `skills/engineering/retro/SKILL.md` → a skill-maintenance skill (not included in this package).
+- `skills/productivity/writing-for-agents/SKILL.md` and `skills/engineering/retro/SKILL.md` → `share-skill-creator`.
 
 Local adaptations:
 

@@ -29,7 +29,7 @@ description: "项目技能模组/装备。设计软件骨架、架构骨架或�
 
 ## 可选模块
 
-用户要吸收技能、仓库或外部能力时，先确定落位（全局技能、项目技能或按需模块；专门的技能创建流程（可选，本包未包含））。本入口负责执行已选的项目装备；模块配方存在按需 reference 中，不进入全局技能清单。项目固定安装版本，更新不自动传播。
+用户要吸收技能、仓库或外部能力时，先交给 `share-skill-creator` 的 [落位选择](../share-skill-creator/references/placement-and-modules.md)。本入口负责执行已选的项目装备；模块配方存在按需 reference 中，不进入全局技能清单。项目固定安装版本，更新不自动传播。
 
 - 用户明确选择 Impeccable → 读 [项目设计模块配方](references/modules/impeccable.md)，用 `scripts/install_impeccable.py` 预览、安装和核验。安装器拒绝覆盖同职责技能；替换范围已批准时先归档旧入口，再安装。
 - 只说开启前端设计模式 → 沿用下方现有预设；Impeccable 尚是可选候选，不因进入软件项目自动安装。
@@ -91,6 +91,6 @@ description: "项目技能模组/装备。设计软件骨架、架构骨架或�
 - 本 skill = **按项目类型建议 + 装现成第三方 skill/CLI 到项目级或复用全局能力**。
 - 新项目的进度骨架不在本 skill 生成：用 share-top 的 `~/.claude/skills/share-top/scripts/init-research.sh <项目>`，默认只建必需部分（`AGENTS.md` + `_task_plan.md` + `_logs/`），codemap/registry/wiki/tests 等可选模块用 `--with` 按需启用；不生成 roadmap、phases、six_dim_contract、external_reviews、capabilities、naming 骨架。
 - 把自己代码封装成 CLI → `share-agent-cli`；API 服务封装属 `share-dev-toolkit`（可选，本包未包含）。
-- 新建/优化/吸收 skill 本体、跑 eval → 专门的技能创建流程（可选，本包未包含）。
+- 新建/优化/吸收 skill 本体、跑 eval → `share-skill-creator`。
 - 改 settings.json / enabledPlugins / hooks 细节 → 先读当前本地 schema与对应官方文档；Claude 侧可用内置 `update-config` skill 改 settings.json；Codex 侧改 `~/.codex/config.toml`。
 - 配置只安装在当前机器的当前项目；不向其他机器传播。

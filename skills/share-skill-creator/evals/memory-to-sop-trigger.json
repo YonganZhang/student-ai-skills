@@ -1,0 +1,19 @@
+[
+  {"query":"帮我重构 share-foo skill，入口太长了，拆成 router 和按需 references。","should_trigger":true},
+  {"query":"这个 SKILL.md 的 description 总是误触代码 review，帮我优化触发边界。","should_trigger":true},
+  {"query":"把这个外部 skill 吸收到本地，但先决定它在现有主流程的接入点和分流。","should_trigger":true},
+  {"query":"审一下所有 nested SKILL.md，父 skill 已覆盖的就改成普通 reference，降低上下文税。","should_trigger":true},
+  {"query":"这个 skill 新增了脚本但没人调用，帮我补入口或归档，并跑 routing/ref/orphan 审计。","should_trigger":true},
+  {"query":"Claude 和 Codex 两边都要有这条能力，但路径和 hooks 不同，帮我做语义适配。","should_trigger":true},
+  {"query":"我有一套反复出现的修改流程，想做成一个能测试触发和 near-miss 的 skill。","should_trigger":true},
+  {"query":"只修 src/parser.py 里这个空指针，别改规则和 skill。","should_trigger":false},
+  {"query":"把这段中文摘要翻译成英文，保持术语一致。","should_trigger":false},
+  {"query":"检查 GitHub Actions 为什么失败，修复 CI。","should_trigger":false},
+  {"query":"把 Claude 和 Codex 当前 diff 同步一下，不需要设计新 skill。","should_trigger":false},
+  {"query":"解释一下 SOP 和 checklist 有什么区别，不要修改文件。","should_trigger":false},
+  {"query":"把这段重复代码抽成一个普通 Python 函数，不要做 agent skill。","should_trigger":false},
+  {"query":"读这个 PDF，提取第二张表。","should_trigger":false},
+  {"query":"帮我给服务器加 fail2ban 并检查 sshd。","should_trigger":false},
+  {"query":"做一张 Nature 风格的 ROC 图。","should_trigger":false},
+  {"query":"把项目 README 加 badges 和安装说明。","should_trigger":false}
+]

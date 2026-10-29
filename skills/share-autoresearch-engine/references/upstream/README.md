@@ -40,13 +40,12 @@
 1. 查上游变化（只读）：
 
    ```bash
-   # 维护者工具：技能创建技能 share-skill-creator 的 upstream_watch.py（可选，本包未包含）；未安装时按 UPSTREAM.json 逐个对比上游提交
-   python3 <share-skill-creator 技能目录（本包未包含）>/scripts/upstream_watch.py --remote
+   python3 ~/.claude/skills/share-skill-creator/scripts/upstream_watch.py --remote
    ```
 
    只输出吸收版本之后确有改动的路径；逐字副本还会比对文件哈希。
 2. 读对应卡片的"拿了什么"和"下次升级看哪些路径"，只看与我们吸收内容相关的改动。
-3. 值得吸收时，按技能吸收流程（`share-skill-creator`（可选，本包未包含））选择性吸收：逐字副本整份替换并重算比对；改写吸收的只改受影响的本地文件。
+3. 值得吸收时，按 `share-skill-creator` 的 absorber 流程选择性吸收：逐字副本整份替换并重算比对；改写吸收的只改受影响的本地文件。
 4. 更新 `UPSTREAM.json` 对应条目的 `absorbed_commit` 与 `absorbed_at`；上游搬路径时改 `paths` 并在 `note` 写旧路径。
 5. 更新卡片：版本号、行号；把看过但决定不采纳的上游改动及原因写进"没拿什么及原因"。
 6. 工具类条目同时核对当前项目解释器里的已安装版本，升级前先跑调用它的脚本的测试。

@@ -1,0 +1,94 @@
+{
+  "schema": "skill-upstream/v1",
+  "sources": [
+    {
+      "repo": "anthropics/skills",
+      "paths": [
+        "skills/skill-creator/scripts/__init__.py",
+        "skills/skill-creator/scripts/generate_report.py",
+        "skills/skill-creator/scripts/improve_description.py",
+        "skills/skill-creator/scripts/quick_validate.py",
+        "skills/skill-creator/scripts/utils.py"
+      ],
+      "absorbed_commit": "b9e19e6f44773509fbdd7001d77ff41a49a486c1",
+      "absorbed_at": "2026-09-23",
+      "mode": "vendored",
+      "local_paths": [
+        "scripts/__init__.py",
+        "scripts/generate_report.py",
+        "scripts/improve_description.py",
+        "scripts/quick_validate.py",
+        "scripts/utils.py"
+      ],
+      "watch": true,
+      "note": "按内容比对：这些文件与上游当前版本逐字一致；吸收日期不详（维护者仓库最早入库 2026-07-10），commit 取 skill-creator 路径最近一次提交",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "anthropics/skills",
+      "paths": [
+        "skills/skill-creator/SKILL.md",
+        "skills/skill-creator/agents",
+        "skills/skill-creator/assets",
+        "skills/skill-creator/eval-viewer",
+        "skills/skill-creator/references/schemas.md",
+        "skills/skill-creator/LICENSE.txt",
+        "skills/skill-creator/scripts/aggregate_benchmark.py",
+        "skills/skill-creator/scripts/package_skill.py",
+        "skills/skill-creator/scripts/run_eval.py",
+        "skills/skill-creator/scripts/run_loop.py"
+      ],
+      "absorbed_commit": "b9e19e6f44773509fbdd7001d77ff41a49a486c1",
+      "absorbed_at": "2026-09-23",
+      "mode": "semantic",
+      "local_paths": [
+        "references/authoring-evaluation-guide.md",
+        "SKILL.md",
+        "agents",
+        "assets",
+        "eval-viewer",
+        "references/schemas.md",
+        "LICENSE.txt",
+        "scripts/aggregate_benchmark.py",
+        "scripts/package_skill.py",
+        "scripts/run_eval.py",
+        "scripts/run_loop.py"
+      ],
+      "watch": true,
+      "note": "SKILL.md 正文拆成 references/authoring-evaluation-guide.md（对比命令见该文件末尾）；agents/、eval-viewer/、schemas.md 是 CRLF 副本，忽略行尾后与上游一致；run_eval/run_loop/package_skill/aggregate_benchmark 有本地修改",
+      "license": "Apache-2.0"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "paths": [
+        "skills/productivity/writing-for-agents/SKILL.md"
+      ],
+      "absorbed_commit": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d",
+      "absorbed_at": "2026-10-07",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/mattpocock-writing-for-agents.md",
+        "SKILL.md"
+      ],
+      "watch": true,
+      "note": "只取措辞层检查点；结构规范仍以 references/conventions.md 为准。未吸收 SKILL-MECHANICS.md（model/user-invoked 与 router 机制，本技能未使用 disable-model-invocation）。",
+      "license": "MIT"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "paths": [
+        "skills/engineering/retro/SKILL.md"
+      ],
+      "absorbed_commit": "4588b32ecab9ecc9fc8cc6b6c5e7d675b6004b0d",
+      "absorbed_at": "2026-10-07",
+      "mode": "semantic",
+      "local_paths": [
+        "references/absorbed/mattpocock-retro.md",
+        "SKILL.md"
+      ],
+      "watch": true,
+      "note": "按技能包结构改写；公开包只随附会话复盘，未随附原 harness 审计子流程。改全局配置或新增 hook 仍需用户同意。",
+      "license": "MIT"
+    }
+  ]
+}
