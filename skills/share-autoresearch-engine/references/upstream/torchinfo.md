@@ -14,8 +14,8 @@
 
 | 上游位置 | 用途 | 状态 |
 |---|---|---|
-| `torchinfo/torchinfo.py:48` `summary(...)`，参数 `col_names`（54）、`mode`（59） | 逐层打印参数量、输出形状；`mode="train"/"eval"` 控制 BN/dropout 的模式，避免在错误模式下统计 | 已实现（`mlgain/scripts/train_sanity_checks.py`（本包未包含）:`frozen_audit`：装了 torchinfo 时调用 `summary(model, input_size=…, verbose=0)` 附逐层表）；`col_names`、`mode` 未传，备选，未接入 |
-| `torchinfo/enums.py:30` `ColumnSettings`，`TRAINABLE = "trainable"`（42） | 每层"可训练"列：确认新接入模块确实可训练、冻结部分确实冻结 | 已实现（`mlgain/scripts/train_sanity_checks.py`（本包未包含）:`frozen_audit` 读取每层结果的 `trainable` 属性，不经 `ColumnSettings`） |
+| `torchinfo/torchinfo.py:48` `summary(...)`，参数 `col_names`（54）、`mode`（59） | 逐层打印参数量、输出形状；`mode="train"/"eval"` 控制 BN/dropout 的模式，避免在错误模式下统计 | 已实现（`../mlgain-integrate-component/scripts/train_sanity_checks.py`:`frozen_audit`：装了 torchinfo 时调用 `summary(model, input_size=…, verbose=0)` 附逐层表）；`col_names`、`mode` 未传，备选，未接入 |
+| `torchinfo/enums.py:30` `ColumnSettings`，`TRAINABLE = "trainable"`（42） | 每层"可训练"列：确认新接入模块确实可训练、冻结部分确实冻结 | 已实现（`../mlgain-integrate-component/scripts/train_sanity_checks.py`:`frozen_audit` 读取每层结果的 `trainable` 属性，不经 `ColumnSettings`） |
 | `torchinfo/enums.py:7` `Mode` | `summary` 的 mode 取值 | 备选，未接入 |
 
 工具清单另见 `references/workflow/paradigms/vision-dense.md`。

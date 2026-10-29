@@ -1,15 +1,18 @@
 # 学生 AI 技能包（Claude Code / Codex）
 
-一组可直接安装到 Claude Code 和 Codex 的技能（Agent Skills），覆盖项目计划与交接、PPT 与方法图、需求澄清与代码审查、CLI 设计、前端设计、项目模组安装、浏览器自动化和深度学习实验流程，并随附 Superpowers 工作流。技能是写给 AI 读的操作手册：装好后用平常的话提需求，AI 会按场景自动加载对应技能。
+一组可直接安装到 Claude Code 和 Codex 的技能（Agent Skills），覆盖项目计划与交接、PPT 与方法图、需求澄清与代码审查、提 PR 前自检、CLI 设计、前端设计、项目模组安装、浏览器自动化和深度学习实验流程，并随附 Superpowers 工作流。技能是写给 AI 读的操作手册：装好后用平常的话提需求，AI 会按场景自动加载对应技能。
 
 - 宿主：Claude Code（`~/.claude/skills/`）、Codex（`~/.agents/skills/`，Codex 当前的用户级技能目录）。
 - 系统：Linux / macOS（安装脚本为 bash）。部分脚本需要 Python 3.10+；`plan` 命令调用 `/usr/bin/python3`，少数子命令需要 PyYAML。
-- 版本：见 [CHANGELOG.md](CHANGELOG.md)。
+- 版本：见 [CHANGELOG.md](CHANGELOG.md)。当前共 16 个技能（含 1 个必装）加 Superpowers。
 
 ## 技能清单
 
+**必装：`dev-pr-self-check`（提 PR 前自检）。** `install.sh` 无论怎么用 `--only` 都会把它装上，`--list` 里标“必装”。
+
 | 目录 | 技能名 | 用途 | 常用说法（触发） | 来源 / 许可证 |
 |---|---|---|---|---|
+| `dev-pr-self-check` | dev-pr-self-check | **必装**。提 PR 前作者侧自检：跑测试与构建、新上下文审 diff、按风险分级，写测试 / 风险 / 回滚说明，收敛审查轮次；附 `scripts/scope_check.py` | “提 PR”“准备合并”“PR 自检” | 自有，MIT |
 | `share-top` | project-top | 项目目标、计划、进度、验收与交接（“六合一”项目记录法），附 `plan` 命令和 `sixone-cli.py` | “建个计划”“现在做到哪了”“交接一下”“梳理项目方法论” | 自有，MIT；吸收 planning-with-files、mattpocock/skills 部分思路（许可见 `references/absorbed/`） |
 | `pptx-gen` | content-pptx-gen | AI 生图做整页图片型 PPT，默认白底，交付 PNG/PPTX 与备注 | “PPT 绘图”“生成 PPT 图片” | 自有，MIT |
 | `real-ppt` | content-real-ppt | 原生可编辑 PPT：按原图复刻文字、形状、连接线，或制作/修改原生 PPT | “把这张图转成可编辑 PPT”“做个真实 PPT” | 自有，MIT |
@@ -23,10 +26,11 @@
 | `design-taste-frontend` | design-taste-frontend | 落地页、作品集、营销页与整体改版（与上一项二选一） | “做个落地页”“重新设计首页” | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill)，MIT（改过的副本，见 `UPSTREAM.json`） |
 | `playwright-cli` | web-playwright | 用 Playwright CLI 操作真实浏览器：打开网页、填表点击、截图、E2E 验收与演示录像；附会话脚本和录像验收子流程 | “用浏览器打开这个网址把表填了”“跑一遍 E2E 验收”“录个操作演示” | 自有，MIT；`references/` 部分改编自 [microsoft/playwright-cli](https://github.com/microsoft/playwright-cli)，Apache-2.0（技能内 `LICENSE`、`NOTICE.md`）。**需另装命令**，见下文“Playwright CLI” |
 | `share-autoresearch-engine` | research-dl-pipeline-base | 深度学习训练与研究闭环：过拟合/欠拟合诊断、loss 与超参、论文模块移植与对照实验、AI 检查点、实验回执与门禁；附 PyTorch Lightning 模板和检查脚本 | “模型过拟合了怎么办”“把这篇论文的模块接进我的网络”“帮我设计消融实验” | 自有，MIT；随附 ARIS（wanshuiyin/Auto-claude-code-research-in-sleep，MIT）技能正文、tuning_playbook（CC-BY-4.0）、AREX-Skill（Apache-2.0/MIT）、ms-swift 示例（Apache-2.0）等，来源、提交与许可见 `UPSTREAM.json` 与各 `vendor/` LICENSE |
+| `mlgain-integrate-component` | research-mlgain-integrate-component | 组件接入参考库（research-dl-pipeline-base 的配套）：论文 / SOTA 模块接入模型时选接入点、接线与兼容检查、受控比较、效果下降排查；附探针脚本与报告模板。源文件为低频库格式 `REFERENCE.md`，本包改名为 `SKILL.md` | “把这个论文模块接进我的模型”“接入后效果变差了”“选哪个接入点” | 自有，MIT |
 | `share-project-provision` | dev-project-provision | 模组安装器：按项目类型推荐并安装项目级技能模组（前端设计、软件骨架、Impeccable、授权逆向包等） | “这个项目要装什么”“开启前端设计模式”“开启骨架模式” | 自有，MIT；模板分别保留上游许可（见下文） |
 | `third_party/superpowers` | superpowers（插件） | TDD、系统化调试、头脑风暴、写计划、子智能体开发等 15 个工作流技能 | 自动触发，如“帮我做个新功能” | [obra/superpowers](https://github.com/obra/superpowers) 7.0.0，MIT，作者 Jesse Vincent |
 
-技能之间会互相引用。凡是写着“（可选，本包未包含）”的技能，本包没有收录（例如 research-dl-pipeline-base 引用的组件接入参考库 mlgain），AI 读到时会跳过或改用通用做法。需要外部模型复核时，可另装公开的外援审查技能 <https://github.com/YonganZhang/external-review-skill>。
+技能之间会互相引用。凡是写着“（可选，本包未包含）”的技能，本包没有收录，AI 读到时会跳过或改用通用做法。需要外部模型复核时，可另装公开的外援审查技能 <https://github.com/YonganZhang/external-review-skill>。
 
 ## 安装
 
@@ -65,7 +69,7 @@ playwright-cli --version
 
 - 训练规则要求 CUDA GPU，默认用 PyTorch Lightning；`assets/lightning-template/` 需要 `pip install -r requirements.txt`（含 `lightning`），其 CPU 单测和 `tests/smoke.py` 不需要显卡。
 - 原技能里约 32 MB 的时序/神经算子上游代码（`references/model-zoo/upstream/`，含数据与预编译库）没有随附；`references/model-zoo/SOURCES.md` 记录了仓库和 commit，需要时自行克隆。作者私有项目的实验记录也未随附，案例只保留可迁移的做法。
-- 文中多处引用的组件接入参考库 `mlgain-integrate-component`（简称 mlgain，本包未包含），相关链接已标“本包未包含”：主流程（`SKILL.md` 与标准流程）可独立使用，但组件接入参考页里指向它的细则（接线检查、放置理论、受控比较等）需要你按文中要点自行展开。
+- 文中引用的组件接入参考库 `mlgain-integrate-component`（简称 mlgain）已随包提供，装在同级目录，相对链接直接可用。其探针脚本的测试 `tests/test_dl_probes.py` 需要 PyTorch，没有 torch 时会跳过。
 
 ## Superpowers
 
@@ -107,5 +111,6 @@ playwright-cli --version
   - `share-top/references/absorbed/`：planning-with-files 与 mattpocock/skills 的许可文本随附。
   - `skills/playwright-cli/references/`：部分改编自 microsoft/playwright-cli，Apache-2.0（`LICENSE`、`NOTICE.md`）。
   - `skills/share-autoresearch-engine/references/aris/vendor/`：MIT，wanshuiyin/Auto-claude-code-research-in-sleep（`LICENSE`）；`references/upstream/vendor/`：tuning_playbook（CC-BY-4.0）、AREX-Skill（Apache-2.0 / MIT）；`assets/llm-native/ms-swift/upstream/`：Apache-2.0；`references/timesfm/`、`references/zarr/`：K-Dense-AI/scientific-agent-skills（Apache-2.0 / MIT）。
+  - `skills/mlgain-integrate-component/`、`skills/dev-pr-self-check/`：自有，MIT。
   - `third_party/superpowers/`：MIT，Jesse Vincent（`LICENSE`）。
 - 各技能的上游仓库、固定提交与改动说明记在其 `UPSTREAM.json`。

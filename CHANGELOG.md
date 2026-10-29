@@ -1,11 +1,18 @@
 # 更新记录
 
+## v1.2.0（2026-10-29）
+
+- 新增 2 个技能（共 16 个）：
+  - dev-pr-self-check（**必装**）：提 PR 前作者侧自检（测试与构建、新上下文审 diff、风险分级、PR 说明模板、`scope_check.py`）。`install.sh` 的 `--only` 不含它时也会安装并提示“dev-pr-self-check 为必装，已一并安装”；`--list` 标“必装”。
+  - research-mlgain-integrate-component（目录 `mlgain-integrate-component`）：组件接入参考库，research-dl-pipeline-base 的配套。源文件 `REFERENCE.md` 在包内改名为 `SKILL.md`。
+- research-dl-pipeline-base 里指向 mlgain 的链接改为指向包内同级目录；探针夹具恢复使用包内 `probe_hooks.py`。
+- 公开前处理：参考库一处本机环境路径泛化、油藏知识技能标“本包未包含”；dev-pr-self-check 测试里一处私有项目名改为通用名。
 ## v1.1.0（2026-10-29）
 
 - 新增 2 个技能（共 14 个）：
   - web-playwright（目录 `playwright-cli`）：Playwright CLI 浏览器操作、E2E 验收与演示录像。依赖 npm 包 `@playwright/cli`，README 给出安装方法；`install.sh` 默认只检查并提示，新增 `--with-playwright` 才执行 `npm install -g @playwright/cli`。
   - research-dl-pipeline-base（目录 `share-autoresearch-engine`）：深度学习训练与研究闭环，含 Lightning 模板、实验门禁脚本和 ARIS 参考。
-- 公开前处理：两技能去掉本机路径、代理与 systemd 等本机设定（`open_session.sh` 改为有代理才加代理配置、有 systemd 才进独立 scope）、私有看板与凭证工具、私有项目名与实验进展；录像后期、视频制作、外援审查、组件接入参考库 mlgain 等未收录引用标“本包未包含”；不随附约 32 MB 的 model-zoo 上游代码（按 SOURCES.md 自行克隆）。
+- 公开前处理：两技能去掉本机路径、代理与 systemd 等本机设定（`open_session.sh` 改为有代理才加代理配置、有 systemd 才进独立 scope）、私有看板与凭证工具、私有项目名与实验进展；录像后期、视频制作、外援审查等未收录引用标“本包未包含”（组件接入参考库自 v1.2.0 起随包提供）；不随附约 32 MB 的 model-zoo 上游代码（按 SOURCES.md 自行克隆）。
 - v1.0.0 中把这两个技能标成“本包未包含”的引用（dev-find-wheels、dev-project-provision、project-top）改为指向包内技能。
 - 修正：project-top 一处测试样例里的私有框架名；dev-agent-cli 一处指向未发布内部记录的说明。
 

@@ -1,6 +1,6 @@
 # 组件集成工作流：唯一执行入口
 
-这是 Auto Research 的组件执行分支。`mlgain-integrate-component`（mlgain 组件接入参考库，可选，本包未包含） 只保留兼容入口与参考库；不要求先完成全家族排行榜，也不为已有用途重复确认权限。
+这是 Auto Research 的组件执行分支。`mlgain-integrate-component` 只保留兼容入口与参考库；不要求先完成全家族排行榜，也不为已有用途重复确认权限。
 
 **先读**：[训练判断核心](training-core.md)（过拟合/欠拟合、loss、归一化、初始化、融合、对照）；找模块与移植流程读 [从论文到模块](idea-to-module.md)。结构判断单是护栏，不替代这些判断。
 
@@ -48,22 +48,22 @@
 
 | 需要解决的问题 | 参考 |
 |---|---|
-| 没有可信完整 pipeline | 借 pipeline（mlgain 组件接入参考库，可选，本包未包含）、包与精确插槽（mlgain 组件接入参考库，可选，本包未包含） |
+| 没有可信完整 pipeline | [借 pipeline](../../mlgain-integrate-component/references/borrow-existing-pipeline.md)、[包与精确插槽](../../mlgain-integrate-component/references/pipeline-package-catalog.md) |
 | **先判断改哪里、原生还是外挂** | [结构判断门禁](architecture-judgment-gate.md) |
-| 惯例、分类和理论放置 | 框架惯例（mlgain 组件接入参考库，可选，本包未包含）、模块分类（mlgain 组件接入参考库，可选，本包未包含）、放置理论（mlgain 组件接入参考库，可选，本包未包含） |
-| 张量/语义/数据契约 | 抠契约（mlgain 组件接入参考库，可选，本包未包含）、兼容性（mlgain 组件接入参考库，可选，本包未包含）、数据合理性（mlgain 组件接入参考库，可选，本包未包含） |
-| 旁路、初始化、残差与门控 | 函数保持（mlgain 组件接入参考库，可选，本包未包含）、残差门控（mlgain 组件接入参考库，可选，本包未包含） |
-| 真实梯度与缺测接线 | 接线检查（mlgain 组件接入参考库，可选，本包未包含）、机理探针（mlgain 组件接入参考库，可选，本包未包含）及该页挂载的 `probe_hooks.py` |
-| 论文/作者实现的忠实移植与等价测试 | 论文移植忠实性（mlgain 组件接入参考库，可选，本包未包含） |
+| 惯例、分类和理论放置 | [框架惯例](../../mlgain-integrate-component/references/framework-placement-conventions.md)、[模块分类](../../mlgain-integrate-component/references/module-taxonomy.md)、[放置理论](../../mlgain-integrate-component/references/architecture-placement-theory.md) |
+| 张量/语义/数据契约 | [抠契约](../../mlgain-integrate-component/references/extract-interface-contract.md)、[兼容性](../../mlgain-integrate-component/references/compatibility-check.md)、[数据合理性](../../mlgain-integrate-component/references/feature-and-data-reasonableness.md) |
+| 旁路、初始化、残差与门控 | [函数保持](../../mlgain-integrate-component/references/function-preserving-socket-protocol.md)、[残差门控](../../mlgain-integrate-component/references/residual-gating-safe-integration.md) |
+| 真实梯度与缺测接线 | [接线检查](../../mlgain-integrate-component/references/integration-sanity-checks.md)、[机理探针](../../mlgain-integrate-component/references/mechanistic-diagnosis.md)及该页挂载的 `probe_hooks.py` |
+| 论文/作者实现的忠实移植与等价测试 | [论文移植忠实性](../../mlgain-integrate-component/references/paper-port-fidelity.md) |
 | 结果反直觉、怀疑实验本身有错 | [排错](triage/README.md)：有序排查，缺层写"不可判" |
 | 改结构后重调与可续跑搜索 | [调参](tuning/README.md) |
 | 扩大实验与独立确认 | [稳定冠军](stable-champion-protocol.md)、[证据等级](evidence-trail.md)、[独立验证](independent-verification.md) |
-| 长期维护的组件卡 | 集成报告（mlgain 组件接入参考库，可选，本包未包含） |
+| 长期维护的组件卡 | [集成报告](../../mlgain-integrate-component/references/integration-report-template.md) |
 
 ## 程度和结论边界
 
 - 做了结构/接口改动时，最小 wiring 检查不能省；纯数据/loss/调参不套这套。单卡不跑分布式探针；compile/FSDP/捕获等只在实际使用时查机理参考的适用范围，不继承“所有生态已验证”的泛化保证。
-- 首轮同合理默认超参回答有限预算下哪一个更好；不是证明两架构各自最优。进一步 HPO 给双方对称预算。既有受控比较细则（mlgain 组件接入参考库，可选，本包未包含）用于需要稳健采纳/调参的阶段，不强制每次试模块前完成 HPO。
+- 首轮同合理默认超参回答有限预算下哪一个更好；不是证明两架构各自最优。进一步 HPO 给双方对称预算。既有[受控比较细则](../../mlgain-integrate-component/references/controlled-comparison.md)用于需要稳健采纳/调参的阶段，不强制每次试模块前完成 HPO。
 - 诊断数值帮助定位，不是机械审批阈值。零初始化首步梯度例外以实际后续更新检验；未使用分支也不能仅凭注意力可视化判定。
 - 限定动作 oracle 只适用于对应的选择/门控职责；不能拿“选已有结果”的上界否定可生成额外修正的神经网络。涉及该问题再读[职责与上界](agent-value-oracle.md)。
 - 用户要可训练模块时就把模块接入并完成有界试验；固定后处理、重复审计或无限等待冠军都不能替代交付。

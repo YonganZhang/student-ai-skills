@@ -14,7 +14,7 @@
 
 | 上游位置 | 内容 | 状态 |
 |---|---|---|
-| `AutoDL_sample_code_submission/Auto_Image/skeleton/projects/logic.py:295-297` `handle_divergence` | 发散时回滚到上一个检查点，学习率乘 0.25 | 已写进文档（`references/tuning/README.md`"训练过程里的保护"）；`mlgain/scripts/train_sanity_checks.py`（本包未包含） 没有对应检查 |
+| `AutoDL_sample_code_submission/Auto_Image/skeleton/projects/logic.py:295-297` `handle_divergence` | 发散时回滚到上一个检查点，学习率乘 0.25 | 已写进文档（`references/tuning/README.md`"训练过程里的保护"）；`../mlgain-integrate-component/scripts/train_sanity_checks.py` 没有对应检查 |
 | 同文件 `:299-386`（`break_train_loop_condition`、`terminate_train_loop_condition`） | 按剩余时间预算估"再跑一轮测试+两轮训练"的耗时决定停止；指标平台期停止 | 备选，未接入 |
 | `AutoDL_scoring_program/score.py:214-230`（`transform_time` 对数时间、`auc_step`）、`:626` `get_alc` | 学习曲线下面积（ALC）在对数时间轴上计算，兼顾早期表现与最终分数 | 备选，未接入 |
 | `AutoDL_scoring_program/score.py:427` `compute_scores_bootstrap` | bootstrap 估误差；它按样本重采样，宜改为按图像（独立单位）重采样 | 备选，未接入 |

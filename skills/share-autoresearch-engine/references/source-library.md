@@ -26,7 +26,7 @@
 
 | 领域 | 状态 | 证据/边界 |
 |---|---|---|
-| Lightning 基座 | ✅ 单卡 GPU 最小实测 | points 在单张消费级 GPU 上跑 20 步，`accelerator_receipt.json` 为 `status: GPU`、`device: cuda:0`；CPU 单测仍保留；DDP/真实任务 parity 未在本 skill 验收 |
+| Lightning 基座 | ✅ 最小实测 | 参考模板 CPU smoke 通过（points/series/multitask）；GPU/DDP/真实任务 parity 未在本 skill 验收 |
 | HF Trainer/HF 生态 | 📖 已读关键文档 | 边界已写清；参考模板未跑过 HF Trainer |
 | MMEngine/MMDetection/MMSegmentation | 🔗 仅路由 | 参考模板未安装/跑通 |
 | MONAI/nnU-Net | 🔗 仅路由 | 参考模板未跑过医学 3D |

@@ -17,11 +17,11 @@
 | `investigating-anomalous-results` → `skills/science-superpowers/skills/investigating-anomalous-results/SKILL.md` | K-Dense-AI/science-superpowers / 空 | 反常结果先查实验本身 | 已写进文档（`references/triage/README.md`，"来源"一节署名） |
 | `differential-audit`、`diagnose`、`credible-claims` → `skills/claude-code-my-workflow/.claude/skills/*/SKILL.md` | pedrohcgs/claude-code-my-workflow / 空 | 差分审计、诊断顺序、结论可信度分级 | 已写进文档（`references/triage/README.md` 的有序排查与"来源"一节；`references/workflow/standard-flow.md` S8 的结论四分类，未署名） |
 | `compare`、`launch`、`debug`、`reproduce` → `skills/phd-skills/plugin/skills/*/SKILL.md` | fcakyon/phd-skills / 空 | 比较前对齐设置、启动前检查、复现流程 | 已写进文档（`references/workflow/standard-flow.md` S4 阳性对照复现、S5 体检通过才开实验、S8 配对比较；思路相近，未署名） |
-| `safe-debug`、`minimal-run-and-audit` → `skills/rigorpilot-skills/skills/*/SKILL.md` | lllllllama/RigorPilot-Skills / 空 | 最小运行 + 审计再放大 | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 5 节"先最小可运行，再完整训练"，未署名）；`train_sanity_checks.py` 只有单项检查，没有"最小运行再放大"流程 |
+| `safe-debug`、`minimal-run-and-audit` → `skills/rigorpilot-skills/skills/*/SKILL.md` | lllllllama/RigorPilot-Skills / 空 | 最小运行 + 审计再放大 | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 5 节"先最小可运行，再完整训练"，未署名）；`train_sanity_checks.py` 只有单项检查，没有"最小运行再放大"流程 |
 | `research-manager`（第 808 行）→ `skills/co-researcher/skills/research-manager/SKILL.md` | poemswe/co-researcher / 空 | 研究任务台账 | 已实现（`assets/hypothesis-trace.schema.json`；字段设计署名来自 RD-Agent，本条只是同类思路） |
 | `ml-training-recipes`（第 109 行）→ `skills/ai-research-skills/10-optimization/ml-training-recipes/SKILL.md` | Orchestra-Research/AI-Research-SKILLs / MIT | 训练配方清单 | 备选，未接入（`references/tuning/README.md` 的调参顺序来自 Tuning Playbook，找不到可归于本条的内容） |
 | `experiment-queue` → `skills/aris/skills/experiment-queue/SKILL.md` | wanshuiyin/Auto-claude-code-research-in-sleep（ARIS）/ 空（上游实为 MIT，已另有 vendored 条目） | 实验排队与续跑 | 已实现（`scripts/hpo_study.py`:`cmd_create` 入队、`cmd_run` 续跑；同类机制，由 Optuna 存储实现） |
-| `paper-code-audit` → `skills/feynman/skills/paper-code-audit/SKILL.md` | companion-inc/feynman / 空 | 论文与代码逐项对照审计 | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 2 节对应表，未署名） |
+| `paper-code-audit` → `skills/feynman/skills/paper-code-audit/SKILL.md` | companion-inc/feynman / 空 | 论文与代码逐项对照审计 | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 2 节对应表，未署名） |
 
 更正：`research-manager` 在目录里属于 `co-researcher` 集合（许可证空），不属于 `ai-research-skills`；`ai-research-skills` 里同名的是 `ara-research-manager`（第 160 行，MIT，`22-agent-native-research-artifact/research-manager/`）。原吸收清单把两者混写，具体借的是哪一个待确认；两者都只借思路。
 

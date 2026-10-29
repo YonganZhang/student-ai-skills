@@ -1,0 +1,35 @@
+# Template manifest for one component integration point.
+# Copy per socket, fill in, and version it alongside the code.
+# Contract-incompatible change -> bump major. Internal algorithm improvement
+# that keeps the contract -> bump component minor. Behavior-unchanged bugfix
+# -> bump patch. adapter/merge are versioned SEPARATELY from component.
+# Checkpoint loaders must fail loudly on an incompatible schema_version —
+# never load with strict=False to silently swallow a mismatch.
+
+schema_version: 1
+
+socket:
+  id: encoder.blocks.3.after_attention   # dotted path to where this plugs in
+  contract_version: 1.0.0
+  input_axes: [batch, time, channel]
+  output_axes: [batch, time, channel]
+  mask_semantics: causal_and_padding      # or: none / padding_only / causal_only
+
+component:
+  name: candidate_name
+  version: 1.0.0                          # bump this for v1 -> v2 controlled comparisons
+  source_url: https://...
+  source_commit: exact_commit_sha
+
+adapter:
+  version: 1.0.0
+  pre: identity                           # or a named pre_adapter class
+  post: identity
+
+merge:
+  policy: residual_scalar                 # baseline | replace | residual_scalar | residual_channel
+  init: zero                              # zero (ReZero) | small_epsilon (LayerScale) | n/a for replace
+
+baseline:
+  checkpoint_sha256: ...
+  config_sha256: ...

@@ -7,7 +7,7 @@
 - **预测（forecasting）**：由过去 L 步（加协变量）预测未来 H 步；单序列、多变量或多实体面板。
 - **序列回归/分类**：一个窗口 → 一个标量或类别（如由传感器窗口估计当前状态）。
 - **参数→轨迹代理**：静态参数向量 → 多通道轨迹，推理时没有历史序列；直接用 [model-zoo](../../model-zoo/SOURCES.md)。
-- 异常检测、缺失填补、时序分类的现成包见 pipeline 包目录（mlgain 组件接入参考库，可选，本包未包含） T4–T8；多源传感器融合读[多模态融合](../../multimodal-fusion-design.md)。
+- 异常检测、缺失填补、时序分类的现成包见 [pipeline 包目录](../../../../mlgain-integrate-component/references/pipeline-package-catalog.md) T4–T8；多源传感器融合读[多模态融合](../../multimodal-fusion-design.md)。
 
 ## 2. 数据接口合同
 
@@ -68,14 +68,14 @@
 | 小样本过拟合 | 几十个窗口、训练变换下，样本内误差接近 0 | 故意制造训练故障（梯度断开、新参数漏进优化器、学习率为 0）必须达不到；随机标签能被大模型记住，不能当这里的反例（随机标签泄漏检查放在独立留出集） |
 | 叠图 | 预测、真值、季节朴素三条线画在同一张图，按 horizon 抽几个起报点人看 | 把预测前移一步再画，人眼应看得出错位 |
 
-S6 逐格检查按接线门禁（mlgain 组件接入参考库，可选，本包未包含）。
+S6 逐格检查按[接线门禁](../../../../mlgain-integrate-component/references/integration-sanity-checks.md)。
 
 ## 8. 常见模块与放置
 
 - **输入侧**：逐窗口归一化（RevIN 类）、趋势/季节分解、patching、通道独立 vs 通道混合——这几项常比换主干影响大。
 - **协变量编码**：静态条件注入、未来已知变量单独分支；参数→轨迹任务统一用条件注入适配，见 [model-zoo SOURCES](../../model-zoo/SOURCES.md)。
 - **多源融合**：拼接 vs 交叉注意力的同输入比较，见[多模态融合](../../multimodal-fusion-design.md)。
-- 现成包的换件位置：pipeline 包目录（mlgain 组件接入参考库，可选，本包未包含） T1–T3；放置理论与零初始化接入：放置理论（mlgain 组件接入参考库，可选，本包未包含）、残差门控（mlgain 组件接入参考库，可选，本包未包含）；特征合理性：特征与数据合理性（mlgain 组件接入参考库，可选，本包未包含）。
+- 现成包的换件位置：[pipeline 包目录](../../../../mlgain-integrate-component/references/pipeline-package-catalog.md) T1–T3；放置理论与零初始化接入：[放置理论](../../../../mlgain-integrate-component/references/architecture-placement-theory.md)、[残差门控](../../../../mlgain-integrate-component/references/residual-gating-safe-integration.md)；特征合理性：[特征与数据合理性](../../../../mlgain-integrate-component/references/feature-and-data-reasonableness.md)。
 
 ## 9. 调参起点
 
@@ -107,4 +107,4 @@ S6 逐格检查按接线门禁（mlgain 组件接入参考库，可选，本包�
 | [Optuna](https://github.com/optuna/optuna) | 可续跑的超参搜索（本技能包装见[调参](../../tuning/README.md)） | MIT |
 | [Lightning](https://github.com/Lightning-AI/pytorch-lightning) / [torchinfo](https://github.com/TylerYep/torchinfo) | 自写循环 / 核对 shape 与参数量 | Apache-2.0 / MIT |
 
-pytorch-forecasting 的版本约束与 Lightning 命名空间分裂问题见 pipeline 包目录（mlgain 组件接入参考库，可选，本包未包含），不在此重复。
+pytorch-forecasting 的版本约束与 Lightning 命名空间分裂问题见 [pipeline 包目录](../../../../mlgain-integrate-component/references/pipeline-package-catalog.md)，不在此重复。

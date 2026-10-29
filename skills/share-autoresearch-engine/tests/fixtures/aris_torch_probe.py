@@ -43,14 +43,15 @@ def main():
             assert out.shape == (batch, 4), f"axis contract violated: {out.shape}"
             assert out.dtype == sample.dtype and torch.isfinite(out).all()
     elif args.check == "training_path":
+        helper = Path(__file__).resolve().parents[3] / "mlgain-integrate-component/scripts/probe_hooks.py"
+        spec = importlib.util.spec_from_file_location("probe_hooks", helper)
+        probes = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(probes)
         optimizer = torch.optim.SGD(model.base.parameters() if args.bug == "optimizer" else model.parameters(), lr=0.1)
         optimizer_ids = {id(p) for group in optimizer.param_groups for p in group["params"]}
         assert all(id(p) in optimizer_ids for p in model.parameters()), "optimizer omitted parameters"
         names = {"scale", "branch.weight"}
-        # inline stand-in for the unshipped mlgain probe_hooks.snapshot_params (validates names, clones values)
-        params = dict(model.named_parameters())
-        assert names <= params.keys(), f"unknown parameter names: {sorted(names - params.keys())}"
-        before = {name: params[name].detach().clone() for name in names}
+        before = probes.snapshot_params(model, names)
         for _ in range(4):
             optimizer.zero_grad()
             loss = (model(x, mask) - 1).square().mean()

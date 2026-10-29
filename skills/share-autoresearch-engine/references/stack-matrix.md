@@ -6,7 +6,7 @@ Star 数只作生态可见度参考，不作质量或适配度证据；数据截
 
 | 栈 | 主领域 | 优势 | 边界 | 在本 skill 中的角色 |
 |---|---|---|---|---|
-| [PyTorch Lightning](https://github.com/Lightning-AI/pytorch-lightning) + Hydra | 通用/多任务监督学习 | `LightningModule`/`DataModule` 接口清楚；DDP、AMP、checkpoint、callbacks、日志成熟；图像/时序/3D 均可 | 抽象泄漏；自定义循环/多 optimizer 别扭；不提供科学选择与 HPO | **默认训练执行层**；专用栈例外要写 stack card |
+| [PyTorch Lightning](https://github.com/Lightning-AI/pytorch-lightning) + Hydra | 通用/多任务监督学习 | `LightningModule`/`DataModule` 接口清楚；DDP、AMP、checkpoint、callbacks、日志成熟；图像/时序/3D 均可 | 抽象泄漏；自定义循环/多 optimizer 别扭；不提供科学选择与 HPO | **基座候选** |
 | [HF Transformers Trainer](https://github.com/huggingface/transformers) | Transformer/VLM/LLM、HF 模型 | 生态最大；分布式/AMP/checkpoint/日志/HPO 集成；文档与社区强 | Transformer-first；任意模型要改 `compute_loss`/`compute_metrics`/collator；点检测不自然 | LLM/VLM/HF 模型专用，不作基座 |
 | [MMEngine](https://github.com/open-mmlab/mmengine) | OpenMMLab 视觉检测/分割 | Registry + Config + Hook；成熟 recipe；分布式；与 MMDetection/MMSegmentation 配套 | 偏图像；体系重；时序/自定义点检测适配成本高 | 检测/分割专用栈 |
 | [Accelerate](https://github.com/huggingface/accelerate) / [Fabric](https://lightning.ai/docs/fabric/stable/) | 原生 PyTorch 多卡/AMP | 侵入小；灵活；HF/Lightning 生态 | 不提供 Trainer、callbacks、config、HPO；要自己重建 | 自定义循环/特殊任务 |

@@ -1,8 +1,4 @@
-"""CPU wiring test only: image-like/series/multitask through the same loop.
-
-This is not a training acceptance run; real training must use CUDA with
-``pipeline.train --accelerator gpu`` and produce ``accelerator_receipt.json``.
-"""
+"""CPU smoke test: image-like and time-series data through the same loop."""
 from __future__ import annotations
 
 import subprocess

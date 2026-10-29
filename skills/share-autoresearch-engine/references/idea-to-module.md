@@ -185,5 +185,5 @@ paper:
 
 - 训练判断：[训练核心](training-core.md)
 - 模块接入：[组件工作流](component-integration.md)、[结构判断门禁](architecture-judgment-gate.md)
-- 论文移植忠实性：paper-port-fidelity（mlgain 组件接入参考库，可选，本包未包含）
+- 论文移植忠实性：[paper-port-fidelity](../../mlgain-integrate-component/references/paper-port-fidelity.md)
 - 来源与链接：[来源库](source-library.md)

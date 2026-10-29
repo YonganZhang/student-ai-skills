@@ -23,7 +23,7 @@
 | `README.md:1111-1148`、`1663-1799` | 探索期用准随机搜索、收敛期再交给贝叶斯优化；不可行 trial 的处理 | 已实现（`scripts/hpo_study.py`:`QmcThenTpe` 先 QMC 后 TPE；`make_objective` 对非有限指标/失败命令记 FAIL）；已写进文档（`references/tuning/README.md` 第 4 步） |
 | `README.md:1186-1254` | 不受算力限制时估 `max_train_steps`：无正则、恒定学习率扫到训练集拟合 | 已写进文档（`references/tuning/README.md` 第 3 步） |
 | `README.md:1508-1528` | 固定步数训练，事后从周期性检查点里回看选最好的（top-N 保存） | 已写进文档（`references/tuning/README.md` 第 3 步）；`scripts/selection_exposure_check.py` 按曲线取最优步并判定该步是否测到新分支，不保存检查点 |
-| `README.md:1817-1986` | 不稳定性：用 2 倍最优学习率短跑约 500 步判断；warmup 扫法；按梯度范数第 90 百分位定裁剪阈值；残差分支零初始化 | 已写进文档（`references/tuning/README.md` 第 2 步，未写"2 倍学习率短跑 500 步"的具体做法）；`mlgain/scripts/train_sanity_checks.py`（本包未包含） 没有对应检查 |
+| `README.md:1817-1986` | 不稳定性：用 2 倍最优学习率短跑约 500 步判断；warmup 扫法；按梯度范数第 90 百分位定裁剪阈值；残差分支零初始化 | 已写进文档（`references/tuning/README.md` 第 2 步，未写"2 倍学习率短跑 500 步"的具体做法）；`../mlgain-integrate-component/scripts/train_sanity_checks.py` 没有对应检查 |
 
 科学 / 干扰 / 固定变量的划分（同一 README 的增量调参章节）也体现在 `references/workflow/standard-flow.md` 的 S7。
 

@@ -16,13 +16,13 @@
 
 | 上游位置 | 用途 | 状态 |
 |---|---|---|
-| `src/lightning/pytorch/callbacks/spike.py:12` `SpikeDetection`（实现在 `src/lightning/fabric/utilities/spike.py:15`） | 损失尖峰检测，触发时抛 `TrainingSpikeException` 而不是悄悄继续 | 已写进文档（`references/tuning/README.md`"训练过程里的保护"，只列回调名）；`mlgain/scripts/train_sanity_checks.py`（本包未包含） 不导入或调用它 |
+| `src/lightning/pytorch/callbacks/spike.py:12` `SpikeDetection`（实现在 `src/lightning/fabric/utilities/spike.py:15`） | 损失尖峰检测，触发时抛 `TrainingSpikeException` 而不是悄悄继续 | 已写进文档（`references/tuning/README.md`"训练过程里的保护"，只列回调名）；`../mlgain-integrate-component/scripts/train_sanity_checks.py` 不导入或调用它 |
 | `src/lightning/pytorch/callbacks/weight_averaging.py:366` `EMAWeightAveraging` | EMA 权重；评估时要分清 EMA 与原始权重 | 已写进文档（`references/tuning/README.md`，只列回调名） |
 | `src/lightning/pytorch/callbacks/on_exception_checkpoint.py:31` `OnExceptionCheckpoint` | 异常/被杀时保存检查点，配合可续跑 | 备选，未接入（`scripts/hpo_study.py` 与 `references/tuning/README.md` 都未提及） |
 | `src/lightning/pytorch/callbacks/lr_finder.py:32` `LearningRateFinder` | 学习率范围测试，作为扫学习率前的粗定位 | 已写进文档（`references/tuning/README.md`，只列回调名） |
-| `src/lightning/pytorch/callbacks/model_summary.py:39` `ModelSummary` | 训练开始时打印可训练参数量 | 备选，未接入（`mlgain/scripts/module_probe.py`（本包未包含） 不导入它；同类功能见 `mlgain/scripts/train_sanity_checks.py`（本包未包含）:`frozen_audit`，用的是 torchinfo） |
-| `src/lightning/pytorch/utilities/grads.py:22` `grad_norm` | 逐层梯度范数，用于确认新分支有梯度、定梯度裁剪阈值 | 备选，未接入（`mlgain/scripts/train_sanity_checks.py`（本包未包含） 不导入它；`mlgain/scripts/probe_hooks.py`（本包未包含） 有自写的逐模块梯度范数，与 Lightning 无关） |
-| `src/lightning/pytorch/trainer/trainer.py:112` `overfit_batches`、`:128` `detect_anomaly` | 小样本过拟合、autograd 异常检测 | 备选，未接入（`mlgain/scripts/train_sanity_checks.py`（本包未包含）:`overfit_under_training_transforms` 是自写的过拟合循环，不经 Lightning Trainer；`detect_anomaly` 未用） |
+| `src/lightning/pytorch/callbacks/model_summary.py:39` `ModelSummary` | 训练开始时打印可训练参数量 | 备选，未接入（`../mlgain-integrate-component/scripts/module_probe.py` 不导入它；同类功能见 `../mlgain-integrate-component/scripts/train_sanity_checks.py`:`frozen_audit`，用的是 torchinfo） |
+| `src/lightning/pytorch/utilities/grads.py:22` `grad_norm` | 逐层梯度范数，用于确认新分支有梯度、定梯度裁剪阈值 | 备选，未接入（`../mlgain-integrate-component/scripts/train_sanity_checks.py` 不导入它；`../mlgain-integrate-component/scripts/probe_hooks.py` 有自写的逐模块梯度范数，与 Lightning 无关） |
+| `src/lightning/pytorch/trainer/trainer.py:112` `overfit_batches`、`:128` `detect_anomaly` | 小样本过拟合、autograd 异常检测 | 备选，未接入（`../mlgain-integrate-component/scripts/train_sanity_checks.py`:`overfit_under_training_transforms` 是自写的过拟合循环，不经 Lightning Trainer；`detect_anomaly` 未用） |
 
 工具清单另见 `references/workflow/paradigms/vision-dense.md`。
 

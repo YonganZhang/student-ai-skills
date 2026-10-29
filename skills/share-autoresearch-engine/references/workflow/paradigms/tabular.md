@@ -69,14 +69,14 @@
 | 组隔离 | 断言每个组 ID 只出现在一侧 | 随机划分时断言必须失败 |
 | 小样本过拟合 | 神经网络在几十行上训练误差接近 0 | 故意制造训练故障（梯度断开、新参数漏进优化器、学习率为 0）必须达不到；随机标签能被大模型记住，不能当这里的反例（随机标签泄漏检查放在独立留出集） |
 
-S6 逐格检查按接线门禁（mlgain 组件接入参考库，可选，本包未包含）；特征是否合理按特征与数据合理性（mlgain 组件接入参考库，可选，本包未包含）。
+S6 逐格检查按[接线门禁](../../../../mlgain-integrate-component/references/integration-sanity-checks.md)；特征是否合理按[特征与数据合理性](../../../../mlgain-integrate-component/references/feature-and-data-reasonableness.md)。
 
 ## 8. 常见模块与放置
 
 - 表格上收益最大的通常是**特征**（领域公式派生量、组内统计、比率），而不是网络模块；派生特征同样遵守折内拟合与预测时可见性。
-- 深度模型里常见改动位置：数值特征的嵌入层、类别嵌入、跨列注意力；接入方式与放置理论见放置理论（mlgain 组件接入参考库，可选，本包未包含）、残差门控（mlgain 组件接入参考库，可选，本包未包含）。
+- 深度模型里常见改动位置：数值特征的嵌入层、类别嵌入、跨列注意力；接入方式与放置理论见[放置理论](../../../../mlgain-integrate-component/references/architecture-placement-theory.md)、[残差门控](../../../../mlgain-integrate-component/references/residual-gating-safe-integration.md)。
 - 外部预训练嵌入（图像、文本）降维后拼进 GBDT，见[迁移学习优先](../../transfer-learning-first.md)。
-- 每个改动配同容量/同预算对照：受控比较（mlgain 组件接入参考库，可选，本包未包含）。
+- 每个改动配同容量/同预算对照：[受控比较](../../../../mlgain-integrate-component/references/controlled-comparison.md)。
 
 ## 9. 调参起点
 

@@ -11,11 +11,11 @@
 | S1 任务与指标 | 原生指标、聚合方式、匹配规则、阈值或解码规则写成合同；评价器实现入口 | [评测对齐](../evaluation-alignment.md) |
 | S2 数据接口 | 数据合同（下文）+ 真实样本叠图；预处理统计量只来自训练子集 | [数据卫生](../data-hygiene.md)、[泄漏清单](../leakage-checklist.md) |
 | S3 划分与选择 | fit / select / evaluate / test 四段、独立单位、数据种子；测试集开启规则 | [划分合同](../split-design-contract.md)、[选择卫生](../selection-hygiene.md) |
-| S4 基线与阳性对照 | 强基线分数 + 一个"已知好"的参照能在本流水线复现其分数 | [迁移学习优先](../transfer-learning-first.md)、借 pipeline（mlgain 组件接入参考库，可选，本包未包含） |
+| S4 基线与阳性对照 | 强基线分数 + 一个"已知好"的参照能在本流水线复现其分数 | [迁移学习优先](../transfer-learning-first.md)、[借 pipeline](../../../mlgain-integrate-component/references/borrow-existing-pipeline.md) |
 | S5 流水线体检 | 评分器自检、叠图含反向对照、增强同步、按训练变换做记忆/学习探针；关键项通过再开实验 | [排错](../triage/README.md) |
-| S6 结构判断与一次改一处 | 先写[结构判断](../architecture-judgment-gate.md)（可内联）；改动以插座接入，逐格故障检查（函数保持接口才要求第 0 步等价；否则查作者初始化、激活/更新窗口；优化器成员、有效贡献、选中步、严格重载、同 checkpoint on/off）无报警 | [结构判断门禁](../architecture-judgment-gate.md)、[组件工作流](../component-integration.md)、论文移植忠实性（mlgain 组件接入参考库，可选，本包未包含） |
+| S6 结构判断与一次改一处 | 先写[结构判断](../architecture-judgment-gate.md)（可内联）；改动以插座接入，逐格故障检查（函数保持接口才要求第 0 步等价；否则查作者初始化、激活/更新窗口；优化器成员、有效贡献、选中步、严格重载、同 checkpoint on/off）无报警 | [结构判断门禁](../architecture-judgment-gate.md)、[组件工作流](../component-integration.md)、[论文移植忠实性](../../../mlgain-integrate-component/references/paper-port-fidelity.md) |
 | S7 调参 | 科学/干扰/固定变量分开；改结构后对两边对称重调干扰超参；搜索可续跑 | [调参](../tuning/README.md) |
-| S8 比较与采纳 | 配对多 seed；与阈值无关的指标和工作点指标都报；同容量对照；结论为 有用/无用/有害/不可判 | 受控比较（mlgain 组件接入参考库，可选，本包未包含）、[稳定冠军](../stable-champion-protocol.md) |
+| S8 比较与采纳 | 配对多 seed；与阈值无关的指标和工作点指标都报；同容量对照；结论为 有用/无用/有害/不可判 | [受控比较](../../../mlgain-integrate-component/references/controlled-comparison.md)、[稳定冠军](../stable-champion-protocol.md) |
 | S9 溯源与归档 | 每个 run 有运行清单（代码含被忽略文件、数据、环境、seed、划分、检查点哈希）；结论带证据等级 | `scripts/run_manifest.py`、[证据链](../evidence-trail.md) |
 
 跳阶段的代价：S5 没过就比较模块，得到的"无用"可能是流水线错误；S3 没定就调参，选择层会成为主噪声源。

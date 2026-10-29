@@ -13,7 +13,7 @@
 - 候选模型家族、最大运行次数、训练更新/样本/墙钟上限；
 - 重复单位：seed、空间 fold、井族、数据集或 rolling origin；
 - promotion 的最小实际改善与拒绝规则；
-- frozen test 的开启时点、不可回流规则和重跑回执要求。
+- frozen test 的唯一开启时点和一次性消费规则。
 
 看到结果后不能改变这些字段。确需改变时，关闭当前 round，说明原因并创建新的 protocol id。
 
@@ -53,7 +53,7 @@ BETU（Baseline-Equivalent Training Unit）只在同一场景、同一硬件 lan
 2. **Incumbent confirmation**：对前列家族按完整 development protocol 重复，确认冠军不是偶然。
 3. **Adjacent innovation**：围绕冠军一次改变 1–2 个设计原语，执行配对消融。
 4. **Independent promotion**：由不读设计结论的 verifier 重算指标并检查协议。
-5. **Refit/test**：配置冻结后 refit；frozen test 每次评价写一次且不得反馈下一候选；报告/评测器修复可重跑，不得借机改模型。
+5. **Refit/test**：配置冻结后 refit；frozen test 只消费一次且不得反馈下一候选。
 
 Family screen 的结果不能与完整预算结果混榜。不同模态、标签空间或数据集必须分 lane。
 

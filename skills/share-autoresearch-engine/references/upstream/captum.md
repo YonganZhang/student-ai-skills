@@ -14,7 +14,7 @@
 
 | 上游位置 | 用途 | 状态 |
 |---|---|---|
-| `captum/attr/_core/layer/layer_activation.py:21` `LayerActivation` | 取某层激活，量化新模块的输出幅度 | 备选，未接入（设想用于 `mlgain/scripts/module_probe.py`（本包未包含） 的有效贡献检查；该脚本现在用自写的 `ResidualSocket`/`EffectiveContribution`，不导入 Captum） |
+| `captum/attr/_core/layer/layer_activation.py:21` `LayerActivation` | 取某层激活，量化新模块的输出幅度 | 备选，未接入（设想用于 `../mlgain-integrate-component/scripts/module_probe.py` 的有效贡献检查；该脚本现在用自写的 `ResidualSocket`/`EffectiveContribution`，不导入 Captum） |
 | `captum/attr/_core/layer/layer_feature_ablation.py:29` `LayerFeatureAblation`、`captum/attr/_core/feature_ablation.py:269` `FeatureAblation` | 消融式归因：把某层/某组特征置为基线后看输出变化 | 备选，未接入 |
 
 用法要点：Captum 的归因目标须是标量。热图输出的定位模型要先包一层，把热图变成标量目标（例如真值点附近窗口内的热图和、或某个预测峰值），再传给归因方法；窗口半径要在真实物理尺度上验证过。

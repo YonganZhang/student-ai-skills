@@ -12,7 +12,7 @@ import yaml
 from lightning.pytorch.callbacks import LearningRateMonitor, ModelCheckpoint
 from lightning.pytorch.loggers import CSVLogger
 
-from pipeline.callbacks import BudgetGuard, CurveAudit, GPUReceipt, ManifestCallback
+from pipeline.callbacks import BudgetGuard, CurveAudit, ManifestCallback
 from pipeline.data import ArrayDataModule
 from pipeline.losses import build_loss, build_metrics
 from pipeline.models import build_model, build_multitask_model
@@ -279,14 +279,6 @@ def main() -> None:
         cfg["trainer"]["devices"] = args.devices
 
     trainer_cfg = dict(cfg["trainer"])
-    accelerator = str(trainer_cfg.get("accelerator", "gpu")).lower()
-    if accelerator in {"auto", "gpu", "cuda"}:
-        if not torch.cuda.is_available():
-            raise SystemExit("CUDA_REQUIRED: GPU training is the default; CPU is only for explicit unit tests (--accelerator cpu)")
-        cfg["trainer"]["accelerator"] = "gpu"
-        trainer_cfg["accelerator"] = "gpu"
-    elif accelerator == "cpu":
-        print("WARNING: CPU_WIRING_ONLY; this is not an accepted training run", file=sys.stderr)
     max_steps = int(trainer_cfg.get("max_steps", -1))
     if max_steps <= 0:
         raise SystemExit("max_steps must be positive; max_epochs-only runs cannot pass the cap gate")
@@ -482,7 +474,6 @@ def main() -> None:
         ),
         LearningRateMonitor(logging_interval="step"),
         CurveAudit(out_dir),
-        GPUReceipt(out_dir),
         manifest_cb,
     ]
     logger = CSVLogger(save_dir=str(out_dir / "logs"), name="csv", version="")

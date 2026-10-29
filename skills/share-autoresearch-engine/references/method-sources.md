@@ -10,7 +10,7 @@
 | [Hidden Technical Debt in Machine Learning Systems](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems) | ML 系统大部分成本在 glue code、数据依赖、配置、反馈环，不在模型 | 固定上游 + 薄适配层；config/manifest；数据合同；禁止 pipeline jungle | 不给具体代码模板 |
 | [The ML Test Score](https://research.google/pubs/pub46555/) | 数据测试、模型测试、基础设施测试、监控要系统化 | 数据/模型/恢复/守卫检查表；run manifest；报警码 | 面向生产系统，研究实验需裁剪 |
 | [No Free Lunch（概览）](https://en.wikipedia.org/wiki/No_free_lunch_in_search_and_optimization) | 没有对所有问题都最优的算法 | “没有通用最优 pipeline”；专用任务走专用栈；必须 bake-off | 不告诉你当前任务该选哪个 |
-| [scikit-learn: Model Selection](https://scikit-learn.org/stable/model_selection.html) | 训练/验证/测试分离；交叉验证；选择会消耗数据 | fit/select/evaluate 三段；val 选点；test 最终评价；best−2nd | 不覆盖深度模型的大预算和分布式 |
+| [scikit-learn: Model Selection](https://scikit-learn.org/stable/model_selection.html) | 训练/验证/测试分离；交叉验证；选择会消耗数据 | fit/select/evaluate 三段；val 选点；test 一次；best−2nd | 不覆盖深度模型的大预算和分布式 |
 | [NeurIPS Reproducibility Checklist](https://www.cs.mcgill.ca/~jpineau/ReproducibilityChecklist.pdf) | 代码、数据、超参、seed、计算量、误差棒要可复现 | manifest；3 seeds；配置/数据哈希；结论带区间 | 不保证实验设计正确 |
 | [Datasheets for Datasets](https://arxiv.org/abs/1803.09010) / [Model Cards](https://arxiv.org/abs/1810.03993) | 数据和模型要有来源、边界、适用条件 | 数据合同、stack card、上游来源与 license 记录 | 不解决训练调参 |
 | [fast.ai Practical Deep Learning](https://course.fast.ai/) | 先跑起来、先强 baseline、再逐步深入；顶层优先 | baseline 先行；pilot 短跑；不先造框架 | 不提供严格的选择卫生 |

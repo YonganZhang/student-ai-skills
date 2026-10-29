@@ -17,11 +17,11 @@
 
 | 上游位置 | 内容 | 状态 |
 |---|---|---|
-| `disco/skills/recover-paper-result/SKILL.md:16-43` | 恢复时的硬来源边界：只许读论文、模块文档和数据，禁止读原仓库 | 逐字副本 `vendor/arex-recover-paper-result.md`；规则本身备选，未接入（`mlgain/references/paper-port-fidelity.md`（本包未包含） 只链接该副本，没有写入来源边界；其第 3 节反而鼓励拿到作者实现时做等价测试） |
-| `disco/skills/recover-paper-result/SKILL.md:44-64`、`100-148` | 预检与时间预算、结果 schema、验收标准、最小恢复运行 | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 5 节：先最小可运行、缩减版与完整训练分开、结果 JSON 由脚本生成）；预检与时间预算、验收标准备选，未接入 |
-| `disco/skills/recover-paper-result/scripts/validate_recovery_experiment.py`（191 行；`params_changed` 32、`existing_training_trace` 24） | 校验恢复实验真的训练过（有训练轨迹、参数确实变了、命令成功） | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 5 节"声称训练过就要证明参数前后不同"）；`train_sanity_checks.py` 没有对应检查，脚本层面备选，未接入 |
-| `disco/skills/plan-paper-skill-modules/SKILL.md:56-97` | 跨模块契约检查与模块计划 schema | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 2 节对应表与覆盖门、第 5 节复现计划） |
-| `disco/skills/analyze-paper-recovery/SKILL.md:47-96` | 恢复结果判定：接受（来源边界有效、指标为数值、有可执行命令证据、核心模块确实被调用、差距在容差内）或 refine（跳过核心组件、依赖原仓库代码、差距大且无解释、证据文件缺失等） | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含），只含其中两条：第 2 节缺组件记"移植未完成"、第 4 节模块确实进入 forward）；来源边界与差距容差判定备选，未接入 |
+| `disco/skills/recover-paper-result/SKILL.md:16-43` | 恢复时的硬来源边界：只许读论文、模块文档和数据，禁止读原仓库 | 逐字副本 `vendor/arex-recover-paper-result.md`；规则本身备选，未接入（`../mlgain-integrate-component/references/paper-port-fidelity.md` 只链接该副本，没有写入来源边界；其第 3 节反而鼓励拿到作者实现时做等价测试） |
+| `disco/skills/recover-paper-result/SKILL.md:44-64`、`100-148` | 预检与时间预算、结果 schema、验收标准、最小恢复运行 | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 5 节：先最小可运行、缩减版与完整训练分开、结果 JSON 由脚本生成）；预检与时间预算、验收标准备选，未接入 |
+| `disco/skills/recover-paper-result/scripts/validate_recovery_experiment.py`（191 行；`params_changed` 32、`existing_training_trace` 24） | 校验恢复实验真的训练过（有训练轨迹、参数确实变了、命令成功） | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 5 节"声称训练过就要证明参数前后不同"）；`train_sanity_checks.py` 没有对应检查，脚本层面备选，未接入 |
+| `disco/skills/plan-paper-skill-modules/SKILL.md:56-97` | 跨模块契约检查与模块计划 schema | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 2 节对应表与覆盖门、第 5 节复现计划） |
+| `disco/skills/analyze-paper-recovery/SKILL.md:47-96` | 恢复结果判定：接受（来源边界有效、指标为数值、有可执行命令证据、核心模块确实被调用、差距在容差内）或 refine（跳过核心组件、依赖原仓库代码、差距大且无解释、证据文件缺失等） | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md`，只含其中两条：第 2 节缺组件记"移植未完成"、第 4 节模块确实进入 forward）；来源边界与差距容差判定备选，未接入 |
 | `skills/repositories/repo-skills-router/SKILL.md`（48 行） | 分层路由：先按领域分区再进具体技能；技能记录固定来源 commit | 备选，未接入（只记在本卡片） |
 
 ## 没拿什么及原因

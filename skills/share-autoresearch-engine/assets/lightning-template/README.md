@@ -6,34 +6,23 @@
 2. 换模型/head：只换 `config.model`，训练循环不动；
 3. 选点/test 有可见产物：`best.ckpt`、`manifest.yaml`、`budget_guard.json`、`curve_audit.json`。
 
-## 依赖与 GPU
+## 依赖
 
 ```bash
-python -c "import torch, lightning, yaml, numpy; assert torch.cuda.is_available()"
-nvidia-smi
+python -c "import torch, lightning, yaml, numpy"
 ```
 
 按你的实际环境替换解释器；全局文档不绑定某个 env。
-**深度学习训练默认 `accelerator: gpu`；无 CUDA 时入口以 `CUDA_REQUIRED` 退出。** CPU 只用于 `tests/` 的单测和 wiring 检查，命令必须显式写 `--accelerator cpu`，输出带 `CPU_WIRING_ONLY` 警告，不能当作训练验收。
 没有 Hydra 也能跑；配置用 YAML + argparse。Hydra 是可选的上层，用于多实验组合与 multirun；参考 https://hydra.cc/docs/intro/
-
-**test 使用边界**：项目所有者可给长期授权，授权后直接对冻结模型做 evaluation，不再逐次申请/封存；test 不得用于训练、调参、阈值/checkpoint/集成选择或伪标签。每次评价写不可覆盖回执；详见 `references/experiment-protocol.md` 第 7 节。
 
 ## 快速开始
 
 ```bash
 cd <skill>/assets/lightning-template
-# 单测：CPU wiring only
 python tests/smoke.py
-# 真实 GPU：同一份数据，走默认 Lightning GPU 路径
-python -m pipeline.train --config configs/points.yaml \
-  --data-path /tmp/points.npz --output-dir /tmp/runs/points-gpu \
-  --max-steps 20 --accelerator gpu --devices 1
 ```
 
-GPU 跑完必须检查 `accelerator_receipt.json`：`status: GPU`、`device: cuda:0`、非零 `peak_allocated_bytes`，并记录 GPU 名称和显存。没有这个回执的 run 不能当 GPU 验收。
-
-`tests/smoke.py` 生成图像、时序、多任务三个 `.npz`，各跑 20 步，检查产物、`last.ckpt`、strict reload、多任务逐任务日志列，并确认 `BEST_AT_CAP` 会被 `check_run.py` 拦住；它显式走 CPU，目的是不依赖本机显卡。
+smoke 会生成图像、时序、多任务三个 `.npz`，各跑 20 步，检查产物、`last.ckpt`、strict reload、多任务逐任务日志列，并确认 `BEST_AT_CAP` 会被 `check_run.py` 拦住。
 门禁与多任务单测：
 
 ```bash
@@ -107,7 +96,7 @@ x_train, y_train_<task>, x_val, y_val_<task>, y_test_<task>...
 
 `data.tasks` 声明任务；`data.target_dtypes` 可逐任务覆盖 dtype（默认 float32）。所有任务必须共用同一输入与同一批样本；缺标签、异步任务采样不在首版范围。详见 `references/multi-task.md`。
 
-test 必须放在**单独文件**，并显式传 `--test-path` + `--allow-test`。`--allow-test` 是技术防误触开关，不是逐次用户授权：项目合同若已给长期 test 授权，直接在命令里传，不再申请，也不要求 `TEST_SEALED`。test 只用于冻结模型评价，不得用于训练/调参/选择。例如：
+test 必须放在**单独文件**，并显式传 `--test-path` + `--allow-test`；默认封存。例如：
 
 ```bash
 python -m pipeline.train --config configs/points.yaml \
@@ -115,7 +104,7 @@ python -m pipeline.train --config configs/points.yaml \
   --max-steps 2000 --test --allow-test --test-path /path/to/test.npz
 ```
 
-`--test` 会在训练结束后用 `best.ckpt` 评价 test；`test_dataloader()` 要求显式 `test_read_flag`，用独占创建写 `test_read.flag`，同一对象第二次调用、并发第二个进程、训练入口见到既有 flag、以及 `check_run.py` 见到该文件都会阻断。这个 flag 防止同一 run 内重复读和误读，不是用户授权门；项目长期授权下可以新建 run 重新评价。test 文件还必须与训练文件不是同一 inode（含硬链接）；这是人工合同 + flag，不是密码学证明。
+`--test` 会在训练结束后用 `best.ckpt` 读一次 test；`test_dataloader()` 要求显式 `test_read_flag`，用独占创建写 `test_read.flag`，同一对象第二次调用、并发第二个进程、训练入口见到既有 flag、以及 `check_run.py` 见到该文件都会阻断。test 文件还必须与训练文件不是同一 inode（含硬链接）；这是人工合同 + flag，不是密码学证明。
 
 ## 换模型 / 换 head
 
@@ -167,7 +156,7 @@ python ../../scripts/check_run.py runs/points
 
 - 不提供业务检测器、阈值或集成适配；
 - 不证明分布式 metric 正确；val 已加 `sync_dist=True`，但 2 卡只做过冒烟，不宣称生产正确；
-- `test_read` 是独占 flag + inode 检查，不是密码学证明；同一 run 内防重复，跨 run 允许在长期授权下重评，但 test 结果不得回流选择；
+- `test_read` 是独占 flag + inode 检查，不是密码学证明；跨 run 的一次性仍靠冻结协议登记；
 - 没有自动 HPO、没有 Hydra multirun；
 - 多任务只实现首版最小 contract，不支持缺标签、异步采样、PCGrad/GradNorm、每任务 best checkpoint；见 `references/multi-task.md`；
 - 没有生产 Serving、没有数据版本管理；

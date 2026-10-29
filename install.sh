@@ -13,6 +13,7 @@ BIN_DIR="${PLAN_BIN_DIR:-$HOME/.local/bin}"
 
 TARGET="both"; ONLY=""; MODE="copy"; FORCE=0; DRY=0
 WITH_PLAN=1; SP_MODE="official"   # official (fallback vendored) | vendored | skip
+REQUIRED_SKILLS=(dev-pr-self-check)   # 必装：任何 --only 选择都会带上
 WITH_PW=0; PW_PKG="@playwright/cli"   # npm package that provides the playwright-cli command
 
 usage() {
@@ -25,7 +26,7 @@ playwright-cli 技能需要的 playwright-cli 命令（npm 包 @playwright/cli�
 
 选项:
   --target claude|codex|both   安装到哪个宿主（默认 both）
-  --only a,b,c                 只装这些技能（用 --list 看名字）；不影响 plan / Superpowers 开关
+  --only a,b,c                 只装这些技能（用 --list 看名字）；必装技能 dev-pr-self-check 不在其中时也会一并安装；不影响 plan / Superpowers 开关
   --link                       用软链接代替复制（适合 git pull 后自动生效；仓库不能删除或移动）
   --force                      目标已有同名目录/文件时先删除再安装（默认跳过并提示）
   --no-plan                    不安装 plan 命令
@@ -34,7 +35,7 @@ playwright-cli 技能需要的 playwright-cli 命令（npm 包 @playwright/cli�
   --no-superpowers             等同 --superpowers skip
   --with-playwright            缺 playwright-cli 命令时执行 npm install -g @playwright/cli（需要 Node.js 18+ 与 npm）
   --dry-run                    只打印将要执行的动作，不改任何文件
-  --list                       列出可安装的技能后退出
+  --list                       列出可安装的技能（必装的标“必装”）后退出
   -h, --help                   显示本帮助
 
 环境变量: CLAUDE_SKILLS_DIR、CODEX_SKILLS_DIR、PLAN_BIN_DIR 可覆盖默认目录。
@@ -53,6 +54,7 @@ EOF
 die_usage() { echo "install.sh: $*" >&2; echo "运行 bash install.sh --help 查看用法" >&2; exit 2; }
 
 list_skills() { for d in "$SKILLS_SRC"/*/; do [[ -f "$d/SKILL.md" ]] && basename "$d"; done; }
+is_required() { local r; for r in "${REQUIRED_SKILLS[@]}"; do [[ "$r" == "$1" ]] && return 0; done; return 1; }
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -70,7 +72,7 @@ while [[ $# -gt 0 ]]; do
     --no-superpowers) SP_MODE="skip"; shift ;;
     --with-playwright) WITH_PW=1; shift ;;
     --dry-run) DRY=1; shift ;;
-    --list) list_skills; exit 0 ;;
+    --list) while IFS= read -r s; do if is_required "$s"; then echo "$s（必装）"; else echo "$s"; fi; done < <(list_skills); exit 0 ;;
     -h|--help) usage; exit 0 ;;
     *) die_usage "未知参数: $1" ;;
   esac
@@ -93,6 +95,11 @@ if [[ -n "$ONLY" ]]; then
 else
   SELECTED=("${ALL_SKILLS[@]}")
 fi
+for req in "${REQUIRED_SKILLS[@]}"; do
+  [[ -f "$SKILLS_SRC/$req/SKILL.md" ]] || die_usage "必装技能缺失: $SKILLS_SRC/$req"
+  found=0; for s in "${SELECTED[@]}"; do [[ "$s" == "$req" ]] && found=1; done
+  if [[ $found -eq 0 ]]; then SELECTED+=("$req"); echo "$req 为必装，已一并安装"; fi
+done
 
 HOSTS=()
 [[ "$TARGET" == claude || "$TARGET" == both ]] && HOSTS+=("claude")

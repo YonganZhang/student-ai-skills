@@ -13,10 +13,10 @@
 
 | 上游位置 | 内容 | 状态 |
 |---|---|---|
-| `prompts/code_prompts.py:122-287`（`PAPER_ALGORITHM_ANALYSIS_PROMPT`；`location_references` 在 250、`missing_but_critical` 在 281） | 从论文抽取实现细节时，每项带出处位置（节/式/表/附录），并单列"论文没写但实现必需"的缺口 | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 1 节） |
-| `prompts/code_prompts.py:463-642`（`CODE_PLANNING_PROMPT`；自检清单在 503） | 复现计划五部分（文件结构、实现组件、验证、环境、实施策略）+ 交出前的自检 | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 5 节五部分）；交出前自检清单备选，未接入 |
-| `prompts/code_prompts.py:19-121`（`PAPER_REFERENCE_ANALYZER_PROMPT`、`GITHUB_DOWNLOAD_PROMPT`）+ `tools/code_reference_indexer.py` | 先找官方或参考实现再动手写 | 备选，未接入（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 3 节只写"能拿到作者实现时"做等价测试，没有"先找参考实现"这一步） |
-| `workflows/code_implementation_workflow.py:893-1011`（`get_unimplemented_files`、`_map_run_status`） | 计划里列出的文件全部实现才算完成，否则状态为 `incomplete`，不报成功 | 已写进文档（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 2 节覆盖门，署名 DeepCode） |
+| `prompts/code_prompts.py:122-287`（`PAPER_ALGORITHM_ANALYSIS_PROMPT`；`location_references` 在 250、`missing_but_critical` 在 281） | 从论文抽取实现细节时，每项带出处位置（节/式/表/附录），并单列"论文没写但实现必需"的缺口 | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 1 节） |
+| `prompts/code_prompts.py:463-642`（`CODE_PLANNING_PROMPT`；自检清单在 503） | 复现计划五部分（文件结构、实现组件、验证、环境、实施策略）+ 交出前的自检 | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 5 节五部分）；交出前自检清单备选，未接入 |
+| `prompts/code_prompts.py:19-121`（`PAPER_REFERENCE_ANALYZER_PROMPT`、`GITHUB_DOWNLOAD_PROMPT`）+ `tools/code_reference_indexer.py` | 先找官方或参考实现再动手写 | 备选，未接入（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 3 节只写"能拿到作者实现时"做等价测试，没有"先找参考实现"这一步） |
+| `workflows/code_implementation_workflow.py:893-1011`（`get_unimplemented_files`、`_map_run_status`） | 计划里列出的文件全部实现才算完成，否则状态为 `incomplete`，不报成功 | 已写进文档（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 2 节覆盖门，署名 DeepCode） |
 | `workflows/plan_review_runtime.py`（`save_plan_version` 72、`append_plan_review_event` 62） | 计划每次修改存版本并记事件，人工审阅可追溯 | 备选，未接入 |
 | `utils/loop_detector.py`（`LoopDetector` 12、`ProgressTracker` 186） | 检测智能体重复调用同一工具/无进展并中止 | 备选，未接入 |
 

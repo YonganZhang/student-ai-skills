@@ -26,7 +26,7 @@ trainer:
   max_steps: 100
   max_epochs: -1
   val_check_interval: 0.25
-  accelerator: gpu
+  accelerator: auto
   devices: 1
   precision: 32-true
   gradient_clip_val: 0.0

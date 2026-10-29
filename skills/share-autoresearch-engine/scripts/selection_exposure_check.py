@@ -10,8 +10,8 @@ and "value" (lower is better; default) or "score" (higher is better; with --high
 best one by (value, step) -- rows may come in any order, ties go to the earliest step -- and all tied steps are
 listed.
 
-The verdict is 'untested' when any of these holds (the same rules as `selection_exposure` in the
-author's mlgain-integrate-component library, not included in this package):
+The verdict is 'untested' when any of these holds (the same rules as
+mlgain-integrate-component/scripts/module_probe.py `selection_exposure`):
   - the selected step is at or before the first eligible validation (--first-eligible);
   - the selected step precedes the step at which the branch was unlocked (--unlock-step);
   - the selected row's "effective" is below --min-effective (default 1e-3; checked only when the row has "effective",

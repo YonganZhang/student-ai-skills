@@ -9,7 +9,6 @@ import subprocess
 from pathlib import Path
 
 import lightning as L
-import torch
 import yaml
 
 
@@ -283,34 +282,3 @@ class ManifestCallback(L.Callback):
             "notes": "template manifest; fill deployment metric after frozen validation",
         }
         _atomic_write(path, yaml.safe_dump(manifest, sort_keys=False, allow_unicode=True))
-
-
-class GPUReceipt(L.Callback):
-    """Write proof that training actually ran on an accelerator.
-
-    CPU is allowed only by an explicit test entry; the receipt marks that as
-    ``CPU_WIRING_ONLY`` so a smoke cannot be mistaken for a training result.
-    """
-
-    def __init__(self, out_dir: str | Path):
-        super().__init__()
-        self.out_dir = Path(out_dir)
-
-    def on_train_end(self, trainer: L.Trainer, pl_module: L.LightningModule) -> None:
-        if not trainer.is_global_zero:
-            return
-        device = str(getattr(trainer.strategy, "root_device", "unknown"))
-        cuda = device.startswith("cuda") and torch.cuda.is_available()
-        payload = {
-            "schema": "accelerator-receipt/v1",
-            "device": device,
-            "accelerator": type(trainer.accelerator).__name__,
-            "gpu_name": torch.cuda.get_device_name(torch.cuda.current_device()) if cuda else None,
-            "total_memory_bytes": int(torch.cuda.get_device_properties(torch.cuda.current_device()).total_memory) if cuda else None,
-            "peak_allocated_bytes": int(torch.cuda.max_memory_allocated()) if cuda else 0,
-            "global_step": int(trainer.global_step),
-            "torch": torch.__version__,
-            "lightning": L.__version__,
-            "status": "GPU" if cuda else "CPU_WIRING_ONLY",
-        }
-        _atomic_json(self.out_dir / "accelerator_receipt.json", payload)

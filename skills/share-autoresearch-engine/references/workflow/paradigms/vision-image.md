@@ -69,14 +69,14 @@
 | eval 模式 | 同一批数据，batch=1 与 batch=64 的预测一致 | 故意留在 train 模式，两者必须不一致 |
 | 错标扫描 | 用交叉验证的 OOF 概率跑 cleanlab，人工复核排名靠前的样本 | 人为翻转 2% 标签，应大部分被排在前面 |
 
-S6 逐格检查按接线门禁（mlgain 组件接入参考库，可选，本包未包含）。
+S6 逐格检查按[接线门禁](../../../../mlgain-integrate-component/references/integration-sanity-checks.md)。
 
 ## 8. 常见模块与放置
 
 - 先试改动小、收益常见的：换更强/更合适的预训练 backbone、提高输入分辨率、换头（池化方式、检索用 GeM 池化或 margin 类损失头）。
-- 通道/空间注意力（SE、CBAM 类）一般放在 stage 末的残差分支内；新分支零初始化接入：残差门控（mlgain 组件接入参考库，可选，本包未包含）、函数保持插座（mlgain 组件接入参考库，可选，本包未包含）。
-- 放在哪、为什么：放置理论（mlgain 组件接入参考库，可选，本包未包含）、框架惯例（mlgain 组件接入参考库，可选，本包未包含）；timm 的换件方式见 pipeline 包目录（mlgain 组件接入参考库，可选，本包未包含） C1。
-- 同容量对照与配对 seed：受控比较（mlgain 组件接入参考库，可选，本包未包含）。
+- 通道/空间注意力（SE、CBAM 类）一般放在 stage 末的残差分支内；新分支零初始化接入：[残差门控](../../../../mlgain-integrate-component/references/residual-gating-safe-integration.md)、[函数保持插座](../../../../mlgain-integrate-component/references/function-preserving-socket-protocol.md)。
+- 放在哪、为什么：[放置理论](../../../../mlgain-integrate-component/references/architecture-placement-theory.md)、[框架惯例](../../../../mlgain-integrate-component/references/framework-placement-conventions.md)；timm 的换件方式见 [pipeline 包目录](../../../../mlgain-integrate-component/references/pipeline-package-catalog.md) C1。
+- 同容量对照与配对 seed：[受控比较](../../../../mlgain-integrate-component/references/controlled-comparison.md)。
 
 ## 9. 调参起点
 

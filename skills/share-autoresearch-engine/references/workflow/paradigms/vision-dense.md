@@ -71,7 +71,7 @@
 | 滑窗拼接 | 整图滑窗推理与单块推理在块中心区域一致 | 关掉拼接权重，边缘处应出现可见接缝 |
 | 坐标单位 | 坐标经重采样再还原，往返误差 < 0.1 px | 故意少乘一次缩放比，误差必须报警 |
 
-S6 的逐格检查（第 0 步等价、优化器成员、有效贡献、强制关闭等）按接线门禁（mlgain 组件接入参考库，可选，本包未包含）执行。
+S6 的逐格检查（第 0 步等价、优化器成员、有效贡献、强制关闭等）按[接线门禁](../../../../mlgain-integrate-component/references/integration-sanity-checks.md)执行。
 
 ## 8. 常见模块与放置
 
@@ -79,7 +79,7 @@ S6 的逐格检查（第 0 步等价、优化器成员、有效贡献、强制�
 - **头**：热图 + 偏移头给亚像素；也可做无锚点的点检测头（CZII 第 1 名仿 PP-YOLO 损失，用关键点相似度 `exp(-d²/2r²)` 代替 IoU）。
 - **解码器跳连**：注意力门、多尺度融合常对小目标有用；换更强的预训练编码器常比加模块收益大。
 - **输入侧**：2.5D 把相邻切片当通道。
-- 新分支以零初始化残差或门控接入：残差门控（mlgain 组件接入参考库，可选，本包未包含）、函数保持插座（mlgain 组件接入参考库，可选，本包未包含）；放在哪：放置理论（mlgain 组件接入参考库，可选，本包未包含）、框架惯例（mlgain 组件接入参考库，可选，本包未包含）；包的换件位置见 pipeline 包目录（mlgain 组件接入参考库，可选，本包未包含） C1/C2 与 MONAI。每个模块配同容量对照：受控比较（mlgain 组件接入参考库，可选，本包未包含）。
+- 新分支以零初始化残差或门控接入：[残差门控](../../../../mlgain-integrate-component/references/residual-gating-safe-integration.md)、[函数保持插座](../../../../mlgain-integrate-component/references/function-preserving-socket-protocol.md)；放在哪：[放置理论](../../../../mlgain-integrate-component/references/architecture-placement-theory.md)、[框架惯例](../../../../mlgain-integrate-component/references/framework-placement-conventions.md)；包的换件位置见 [pipeline 包目录](../../../../mlgain-integrate-component/references/pipeline-package-catalog.md) C1/C2 与 MONAI。每个模块配同容量对照：[受控比较](../../../../mlgain-integrate-component/references/controlled-comparison.md)。
 
 ## 9. 调参起点
 

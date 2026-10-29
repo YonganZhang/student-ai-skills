@@ -18,10 +18,10 @@
 | `sweep.py:851-974` `Lock` / `JobState` | 文件锁 + 每个作业的状态文件，多进程不重复领同一作业 | 备选，未接入（`scripts/hpo_study.py` 不用文件锁，多 worker 分配交给 Optuna RDB 存储） |
 | `sweep.py:1543` `aggregate_repeats` | 同配置多 seed 结果聚合（均值、方差、次数） | 已写进文档（`references/tuning/README.md`"训练过程里的保护"） |
 | `timm/utils/checkpoint_saver.py:32`（`CheckpointSaver`；`:188` top-N、`:264` `save_recovery`、`:282` `find_recovery`） | 按指标保留前 N 个检查点 + 周期性恢复点 | 已写进文档（`references/tuning/README.md`"训练过程里的保护"） |
-| `timm/models/_helpers.py:186-229` `load_checkpoint` | `strict` 加载并返回不匹配的键，不吞掉 | 已实现（`mlgain/scripts/train_sanity_checks.py`（本包未包含）:`strict_reload_roundtrip`，docstring 署名，代码自写） |
-| `timm/optim/_param_groups.py:19-38` `param_groups_weight_decay` | 构建优化器时跳过 `requires_grad=False` 的参数：之后再解冻，这些参数永远不会被优化 | 已实现（`mlgain/scripts/train_sanity_checks.py`（本包未包含）:`optimizer_covers_trainable`，docstring 署名；`mlgain/scripts/module_probe.py`（本包未包含）:`optimizer_membership` 做同类检查） |
-| `timm/utils/model.py:110-217` `freeze` / `unfreeze`；`timm/layers/norm_act.py:278` `freeze_batch_norm_2d` | 冻结时连 BN 统计量一起冻（转成 torchvision `FrozenBatchNorm2d`） | 备选，未接入（`mlgain/references/paper-port-fidelity.md`（本包未包含） 第 4 节只写"冻结层"要检查，没写 BN 统计量） |
-| `timm/layers/layer_scale.py:5`、`timm/layers/drop.py:178` `DropPath`、`timm/utils/model_ema.py:178` `ModelEmaV3`、`timm/utils/agc.py:30` `adaptive_clip_grad` | 新分支小初值缩放、随机深度、EMA、自适应梯度裁剪 | 备选，未接入（`mlgain/references/paper-port-fidelity.md`（本包未包含） 与 `references/tuning/README.md` 都未提及这四项；后者的 EMA 指 Lightning 回调，梯度裁剪是按范数分位数，不是 AGC） |
+| `timm/models/_helpers.py:186-229` `load_checkpoint` | `strict` 加载并返回不匹配的键，不吞掉 | 已实现（`../mlgain-integrate-component/scripts/train_sanity_checks.py`:`strict_reload_roundtrip`，docstring 署名，代码自写） |
+| `timm/optim/_param_groups.py:19-38` `param_groups_weight_decay` | 构建优化器时跳过 `requires_grad=False` 的参数：之后再解冻，这些参数永远不会被优化 | 已实现（`../mlgain-integrate-component/scripts/train_sanity_checks.py`:`optimizer_covers_trainable`，docstring 署名；`../mlgain-integrate-component/scripts/module_probe.py`:`optimizer_membership` 做同类检查） |
+| `timm/utils/model.py:110-217` `freeze` / `unfreeze`；`timm/layers/norm_act.py:278` `freeze_batch_norm_2d` | 冻结时连 BN 统计量一起冻（转成 torchvision `FrozenBatchNorm2d`） | 备选，未接入（`../mlgain-integrate-component/references/paper-port-fidelity.md` 第 4 节只写"冻结层"要检查，没写 BN 统计量） |
+| `timm/layers/layer_scale.py:5`、`timm/layers/drop.py:178` `DropPath`、`timm/utils/model_ema.py:178` `ModelEmaV3`、`timm/utils/agc.py:30` `adaptive_clip_grad` | 新分支小初值缩放、随机深度、EMA、自适应梯度裁剪 | 备选，未接入（`../mlgain-integrate-component/references/paper-port-fidelity.md` 与 `references/tuning/README.md` 都未提及这四项；后者的 EMA 指 Lightning 回调，梯度裁剪是按范数分位数，不是 AGC） |
 
 2D 预训练编码器的用法另见 `references/workflow/paradigms/vision-dense.md`。
 

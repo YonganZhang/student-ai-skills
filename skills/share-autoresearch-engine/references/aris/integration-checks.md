@@ -14,7 +14,7 @@
 
 `interface`、`training_path`、`data_semantics` 不可整体跳过；内部哪些子项不适用，要在测试/报告写理由。`baseline_control`、`checkpoint` 仅在确实不适用的任务可用 `not_applicable` 说明，交独立审查判断，不能填空。不要创建全是 `print('PASS')` 的探针。
 
-复用兄弟技能 `mlgain/scripts/probe_hooks.py`（本包未包含） 的参数注册、梯度及真实更新函数；接入模板位于 `mlgain/assets/pytorch-component-socket.py`（本包未包含）。这些是辅助工具，不能替代宿主训练入口的测试。按当前执行器技能目录定位，不跨用另一个执行器的配置目录。
+复用兄弟技能 `mlgain-integrate-component/scripts/probe_hooks.py` 的参数注册、梯度及真实更新函数；接入模板位于 `mlgain-integrate-component/assets/pytorch-component-socket.py`。这些是辅助工具，不能替代宿主训练入口的测试。按当前执行器技能目录定位，不跨用另一个执行器的配置目录。
 
 零初始化分支可在首步出现零梯度，应检查若干步后预期的解锁和更新；BatchNorm、batch 对比损失等依赖批次组成，不要求拆批前后机械相等；非确定算子采用事先声明的合理容差。数据语义断言应尽可能由索引/时间戳/已知小样本得出，不能只检查张量大小或用同一个错误变换生成“标准答案”。
 

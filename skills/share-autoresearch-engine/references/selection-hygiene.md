@@ -59,7 +59,7 @@ top-k 跨度（k≈10）
 
 为什么：零初始化分支在头几百步几乎不贡献；若 select 指标在第一个验证点就最优，比较的其实是"父模型 + 未训练分支"。硬性规定最晚可选步会制造另一种偏差（被迫选在门槛上），优先用"按主指标选点 + 记录选中步与有效贡献"判断。
 
-工具：`scripts/selection_exposure_check.py`（读验证曲线与有效贡献，返回 tested/untested）；插座与有效贡献钩子见 `mlgain/scripts/module_probe.py`（本包未包含）。
+工具：`scripts/selection_exposure_check.py`（读验证曲线与有效贡献，返回 tested/untested）；插座与有效贡献钩子见 `~/.claude/skills/mlgain-integrate-component/scripts/module_probe.py`。
 
 ## 边界
 
